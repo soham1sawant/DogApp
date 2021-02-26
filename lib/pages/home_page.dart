@@ -8,9 +8,24 @@ class HomePage extends StatelessWidget {
       backgroundColor: MyTheme.creamColor,
       body: SafeArea(
         child: Container(
+          padding: EdgeInsets.all(32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [],
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Dog App",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: MyTheme.darkBluishColor,
+                    ),
+                    textScaleFactor: 3,
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),

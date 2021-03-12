@@ -1,3 +1,4 @@
+import 'package:dog_app/widgets/home_widgets/catalog_header.dart';
 import 'package:dog_app/widgets/themes.dart';
 import 'package:flutter/material.dart';
 
@@ -12,19 +13,7 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Dog App",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: MyTheme.darkBluishColor,
-                    ),
-                    textScaleFactor: 3,
-                  ),
-                ],
-              ),
+              CatalogHeader(),
             ],
           ),
         ),

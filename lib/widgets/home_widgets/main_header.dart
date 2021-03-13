@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../themes.dart';
 
-class CatalogHeader extends StatelessWidget {
+class MainHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(

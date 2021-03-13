@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dog_app/widgets/home_widgets/catalog_header.dart';
-import 'package:dog_app/widgets/home_widgets/catalog_list.dart';
+import 'package:dog_app/widgets/home_widgets/main_header.dart';
+import 'package:dog_app/widgets/home_widgets/main_list.dart';
 import 'package:dog_app/widgets/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -40,8 +40,8 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CatalogHeader(),
-              CatalogList(),
+              MainHeader(),
+              MainList(),
             ],
           ),
         ),

@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
     BreedsList.items = List.from(decodedjson)
         .map<BreedsModel>((item) => BreedsModel.fromJson(item))
         .toList();
+    setState(() {});
   }
 
   @override
@@ -41,7 +42,10 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               MainHeader(),
-              MainList(),
+              if (BreedsList.items != null && BreedsList.items.isNotEmpty)
+                MainList()
+              else
+                Center(child: CircularProgressIndicator()),
             ],
           ),
         ),

@@ -1,5 +1,5 @@
 class BreedsList {
-  static List<BreedsModel> items;
+  static List<BreedsModel > items;
 }
 
 class BreedsModel {

@@ -12,15 +12,32 @@ class MainList extends StatelessWidget {
         final breed = BreedsList.items[index];
         return InkWell(
           onTap: () {},
-          child: Container(
-            height: 50.0,
-            width: 200.0,
-            child: Row(
+          child: Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CachedNetworkImage(
-                  imageUrl: breed.image.url,
-                  placeholder: (context, url) => CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                Text(
+                  breed.name,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+                      height: 50,
+                      width: 100,
+                      child: CachedNetworkImage(
+                        imageUrl: breed.image.url,
+                        placeholder: (context, url) =>
+                            CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
+                    ),
+                    Icon(Icons.favorite_border)
+                  ],
                 ),
               ],
             ),

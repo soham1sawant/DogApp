@@ -7,7 +7,7 @@ class BreedsModel {
   final String breedGroup;
   final Height height;
   final String id;
-  final Image image;
+  final DogImage image;
   final String lifeSpan;
   final String name;
   final String origin;
@@ -34,7 +34,7 @@ class BreedsModel {
       breedGroup: json['breed_group'],
       height: Height.fromJson(json['height']),
       id: json['id'].toString(),
-      image: Image.fromJson(json['image']),
+      image: DogImage.fromJson(json['image']),
       lifeSpan: json['life_span'],
       name: json['name'],
       origin: json['origin'],
@@ -59,16 +59,16 @@ class Height {
   }
 }
 
-class Image {
+class DogImage {
   final String height;
   final String id;
   final String url;
   final String width;
 
-  Image({this.height, this.id, this.url, this.width});
+  DogImage({this.height, this.id, this.url, this.width});
 
-  factory Image.fromJson(Map<String, dynamic> json) {
-    return Image(
+  factory DogImage.fromJson(Map<String, dynamic> json) {
+    return DogImage(
       height: json['height'].toString(),
       id: json['id'],
       url: json['url'],

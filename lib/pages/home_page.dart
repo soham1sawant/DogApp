@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:dog_app/widgets/home_widgets/main_header.dart';
 import 'package:dog_app/widgets/home_widgets/main_list.dart';
-import 'package:dog_app/widgets/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:dog_app/models/breeds.dart';
@@ -22,7 +20,7 @@ class _HomePageState extends State<HomePage> {
 
   loaddata() async {
     final String key = "00af7d92-3d1c-4860-b0a3-fd060f0eb807";
-    final breedsjson = await get("https://api.thedogapi.com/v1/breeds",
+    final breedsjson = await get(Uri.parse("https://api.thedogapi.com/v1/breeds"),
         headers: {HttpHeaders.authorizationHeader: key});
     final decodedjson = jsonDecode(breedsjson.body);
     BreedsList.items = List.from(decodedjson)
@@ -34,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyTheme.creamColor,
+      backgroundColor: Theme.of(context).canvasColor,
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.all(29),
@@ -43,7 +41,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               MainHeader(),
               if (BreedsList.items != null && BreedsList.items.isNotEmpty)
-                MainList()
+                Expanded(child: MainList())
               else
                 Center(child: CircularProgressIndicator()),
             ],

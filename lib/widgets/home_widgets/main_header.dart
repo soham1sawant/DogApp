@@ -9,7 +9,7 @@ class MainHeader extends StatelessWidget {
       "Dog App",
       style: TextStyle(
         fontWeight: FontWeight.bold,
-        color: MyTheme.darkBluishColor,
+        color: Theme.of(context).accentColor,
       ),
       textScaleFactor: 3,
     );

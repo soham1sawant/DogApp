@@ -39,7 +39,7 @@ class BreedsModel {
       name: json['name'],
       origin: json['origin'],
       referenceImageId: json['reference_image_id'],
-      temperement: json['temperement'],
+      temperement: json['temperament'],
       weight: Weight.fromJson(json['weight']),
     );
   }

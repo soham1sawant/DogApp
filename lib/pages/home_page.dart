@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:dog_app/widgets/home_widgets/main_header.dart';
-import 'package:dog_app/widgets/home_widgets/main_list.dart';
+import 'package:dog_app/widgets/home_page/main_header.dart';
+import 'package:dog_app/widgets/home_page/main_list.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:dog_app/models/breeds.dart';

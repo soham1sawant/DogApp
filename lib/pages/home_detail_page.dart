@@ -27,6 +27,7 @@ class HomeDetailPage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
+            flex: 2,
             child: Container(
               color: Theme.of(context).canvasColor,
               child: CachedNetworkImage(
@@ -37,8 +38,11 @@ class HomeDetailPage extends StatelessWidget {
               ),
             ),
           ),
-          Description(
-            theBreed: theBreed,
+          Expanded(
+            flex: 3,
+            child: Description(
+              theBreed: theBreed,
+            ),
           ),
         ],
       ),

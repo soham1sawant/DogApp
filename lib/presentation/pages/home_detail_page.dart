@@ -1,5 +1,5 @@
 import 'package:dog_app/models/breeds.dart';
-import 'package:dog_app/widgets/home_detail_page/description.dart';
+import 'package:dog_app/presentation/widgets/home_detail_page/description.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';

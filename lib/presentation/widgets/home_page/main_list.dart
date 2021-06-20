@@ -1,4 +1,4 @@
-import 'package:dog_app/pages/home_detail_page.dart';
+import 'package:dog_app/presentation/pages/home_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:dog_app/models/breeds.dart';
 

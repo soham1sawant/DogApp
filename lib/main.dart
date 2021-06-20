@@ -1,5 +1,5 @@
-import 'package:dog_app/pages/home_page.dart';
-import 'package:dog_app/widgets/themes.dart';
+import 'package:dog_app/presentation/pages/home_page.dart';
+import 'package:dog_app/presentation/themes.dart';
 import 'package:flutter/material.dart';
 
 void main() {

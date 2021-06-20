@@ -1,34 +1,10 @@
-import 'dart:convert';
-import 'dart:io';
-import 'package:dog_app/presentation/widgets/home_page/main_header.dart';
-import 'package:dog_app/presentation/widgets/home_page/main_list.dart';
+import '../../logic/bloc/data_bloc.dart';
+import '../widgets/home_page/main_header.dart';
+import '../widgets/home_page/main_list.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:dog_app/models/breeds.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    super.initState();
-    loaddata();
-  }
-
-  loaddata() async {
-    final String key = "00af7d92-3d1c-4860-b0a3-fd060f0eb807";
-    final breedsjson = await get(Uri.parse("https://api.thedogapi.com/v1/breeds"),
-        headers: {HttpHeaders.authorizationHeader: key});
-    final decodedjson = jsonDecode(breedsjson.body);
-    BreedsList.items = List.from(decodedjson)
-        .map<BreedsModel>((item) => BreedsModel.fromJson(item))
-        .toList();
-    setState(() {});
-  }
-
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,10 +16,19 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               MainHeader(),
-              if (BreedsList.items != null && BreedsList.items.isNotEmpty)
-                Expanded(child: MainList())
-              else
-                Center(child: CircularProgressIndicator()),
+              BlocBuilder<DataBloc, DataState>(
+                builder: (context, state) {
+                  if (state is DataInProgress) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (state is DataLoadSuccess) {
+                    return Expanded(child: MainList(breeds: state.breeds));
+                  } else if (state is DataLoadFailure) {
+                    return Icon(Icons.error);
+                  } else {
+                    return Icon(Icons.error);
+                  }
+                },
+              ),
             ],
           ),
         ),

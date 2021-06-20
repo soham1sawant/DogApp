@@ -1,7 +1,3 @@
-class BreedsList {
-  static List<BreedsModel > items;
-}
-
 class BreedsModel {
   final String bredFor;
   final String breedGroup;

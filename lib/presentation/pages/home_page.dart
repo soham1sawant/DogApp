@@ -1,6 +1,6 @@
 import '../../logic/bloc/data_bloc.dart';
-import '../widgets/home_page/main_header.dart';
-import '../widgets/home_page/main_list.dart';
+import '../widgets/main_header.dart';
+import '../widgets/main_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              MainHeader(),
+              MainHeader(header: "Dog App", icon: true),
               BlocBuilder<DataBloc, DataState>(
                 builder: (context, state) {
                   if (state is DataInProgress) {

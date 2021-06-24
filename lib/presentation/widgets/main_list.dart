@@ -1,5 +1,5 @@
-import '../../../data/models/breeds.dart';
-import '../../pages/home_detail_page.dart';
+import '../../data/models/breeds.dart';
+import '../pages/home_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class MainList extends StatelessWidget {
@@ -15,11 +15,11 @@ class MainList extends StatelessWidget {
       itemBuilder: (context, index) {
         return InkWell(
           onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => HomeDetailPage(
-                        theBreed: breeds[index],
-                      ))),
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomeDetailPage(theBreed: breeds[index]),
+            ),
+          ),
           child: Container(
             padding: EdgeInsets.symmetric(vertical: 5.0),
             child: Text(

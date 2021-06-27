@@ -1,3 +1,7 @@
+import 'package:dog_app/logic/bloc/favourite_button/favouritebutton_cubit.dart';
+import 'package:dog_app/presentation/pages/favourites_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../data/models/breeds.dart';
 import '../widgets/description.dart';
 import 'package:flutter/material.dart';
@@ -18,10 +22,11 @@ class HomeDetailPage extends StatelessWidget {
         title: Text(
           theBreed.name,
           style: TextStyle(
-              color: Theme.of(context).accentColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 20.0,
-              fontFamily: GoogleFonts.poppins().fontFamily),
+            color: Theme.of(context).accentColor,
+            fontWeight: FontWeight.bold,
+            fontSize: 20.0,
+            fontFamily: GoogleFonts.poppins().fontFamily,
+          ),
         ),
       ),
       body: Column(
@@ -45,6 +50,35 @@ class HomeDetailPage extends StatelessWidget {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: BlocBuilder<FavouriteButtonCubit, FavouriteButtonState>(
+          builder: (context, state) {
+            if (FavouritesPage.likedList.contains(theBreed)) {
+              context
+                  .read<FavouriteButtonCubit>()
+                  .emit(FavouriteButtonPressed());
+            }
+            if (state is FavouriteButtonPressed) {
+              return Icon(Icons.favorite, color: Colors.red);
+            } else if (state is FavouriteButtonDepressed) {
+              return Icon(Icons.favorite_border_outlined);
+            } else {
+              return Icon(Icons.error_sharp);
+            }
+          },
+        ),
+        onPressed: () {
+          if (context.read<FavouriteButtonCubit>().state == FavouriteButtonPressed()) {
+            FavouritesPage.likedList.remove(theBreed);
+            context.read<FavouriteButtonCubit>().removeFromFavourites();
+            print(FavouritesPage.likedList);
+          } else if (context.read<FavouriteButtonCubit>().state == FavouriteButtonDepressed()) {
+            FavouritesPage.likedList.add(theBreed);
+            context.read<FavouriteButtonCubit>().addToFavourites();
+            print(FavouritesPage.likedList);
+          }
+        },
       ),
     );
   }

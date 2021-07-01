@@ -1,4 +1,4 @@
-import 'package:dog_app/logic/bloc/favourite_button/favouritebutton_cubit.dart';
+import 'package:dog_app/logic/bloc/favourite_button/favourite_cubit.dart';
 import 'package:dog_app/presentation/pages/favourites_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -52,31 +52,23 @@ class HomeDetailPage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        child: BlocBuilder<FavouriteButtonCubit, FavouriteButtonState>(
+        child: BlocBuilder<FavouriteCubit, FavouriteState>(
           builder: (context, state) {
-            if (FavouritesPage.likedList.contains(theBreed)) {
-              context
-                  .read<FavouriteButtonCubit>()
-                  .emit(FavouriteButtonPressed());
-            }
-            if (state is FavouriteButtonPressed) {
+            if (state is FavouriteAdded && FavouritesPage.likedList.contains(theBreed)) {
               return Icon(Icons.favorite, color: Colors.red);
-            } else if (state is FavouriteButtonDepressed) {
+            } else if ((state is FavouriteRemoved && (FavouritesPage.likedList.contains(theBreed) == false)) || state is FavouriteEmpty) {
               return Icon(Icons.favorite_border_outlined);
             } else {
-              return Icon(Icons.error_sharp);
+              return Icon(Icons.favorite_border_outlined);
             }
           },
         ),
         onPressed: () {
-          if (context.read<FavouriteButtonCubit>().state == FavouriteButtonPressed()) {
-            FavouritesPage.likedList.remove(theBreed);
-            context.read<FavouriteButtonCubit>().removeFromFavourites();
-            print(FavouritesPage.likedList);
-          } else if (context.read<FavouriteButtonCubit>().state == FavouriteButtonDepressed()) {
-            FavouritesPage.likedList.add(theBreed);
-            context.read<FavouriteButtonCubit>().addToFavourites();
-            print(FavouritesPage.likedList);
+          if (context.read<FavouriteCubit>().state is FavouriteAdded) {
+            context.read<FavouriteCubit>().removeFromFavourite(theBreed);
+          } else if (context.read<FavouriteCubit>().state is FavouriteRemoved ||
+              context.read<FavouriteCubit>().state is FavouriteEmpty) {
+            context.read<FavouriteCubit>().addToFavourite(theBreed);
           }
         },
       ),

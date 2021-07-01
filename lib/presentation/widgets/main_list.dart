@@ -1,4 +1,4 @@
-import 'package:dog_app/logic/bloc/favourite_button/favouritebutton_cubit.dart';
+import 'package:dog_app/logic/bloc/favourite_button/favourite_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/models/breeds.dart';
@@ -13,43 +13,48 @@ class MainList extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-      itemCount: breeds.length,
-      itemBuilder: (context, index) {
-        return InkWell(
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => BlocProvider(
-                create: (context) => FavouriteButtonCubit(),
-                child: HomeDetailPage(theBreed: breeds[index]),
+    return BlocBuilder<FavouriteCubit, FavouriteState>(
+      builder: (context, state) {
+        return ListView.builder(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          itemCount: breeds.length,
+          itemBuilder: (context, index) {
+            return InkWell(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomeDetailPage(theBreed: breeds[index]),
+                ),
               ),
-            ),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 5.0),
-                child: Text(
-                  breeds[index].name,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 5.0),
+                    child: Text(
+                      breeds[index].name,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
-                ),
+                  if (removeButton)
+                    IconButton(
+                      icon: Icon(Icons.cancel_outlined),
+                      color: Theme.of(context).accentColor,
+                      iconSize: 27.0,
+                      onPressed: () {
+                        context
+                            .read<FavouriteCubit>()
+                            .removeFromFavourite(breeds[index]);
+                      },
+                    ),
+                ],
               ),
-              if (removeButton)
-                IconButton(
-                  icon: Icon(Icons.cancel_outlined),
-                  color: Theme.of(context).accentColor,
-                  iconSize: 27.0,
-                  onPressed: () => {},
-                ),
-            ],
-          ),
+            );
+          },
         );
       },
     );

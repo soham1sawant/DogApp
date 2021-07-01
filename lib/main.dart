@@ -1,5 +1,4 @@
-import 'package:dog_app/logic/bloc/favourite_button/favouritebutton_cubit.dart';
-
+import 'package:dog_app/logic/bloc/favourite_button/favourite_cubit.dart';
 import 'data/repository/data_repository.dart';
 import 'logic/simple_bloc_observer.dart';
 import 'presentation/pages/home_page.dart';
@@ -27,6 +26,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider<DataBloc>(
           create: (context) => DataBloc(dataRepository)..add(DataRequested()),
+        ),
+        BlocProvider<FavouriteCubit>(
+          create: (context) => FavouriteCubit(),
         ),
       ],
       child: MaterialApp(

@@ -54,20 +54,27 @@ class HomeDetailPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: BlocBuilder<FavouriteCubit, FavouriteState>(
           builder: (context, state) {
-            if (state is FavouriteAdded && FavouritesPage.likedList.contains(theBreed)) {
-              return Icon(Icons.favorite, color: Colors.red);
-            } else if ((state is FavouriteRemoved && (FavouritesPage.likedList.contains(theBreed) == false)) || state is FavouriteEmpty) {
-              return Icon(Icons.favorite_border_outlined);
+            if (state is FavouriteAdded) {
+              if (FavouritesPage.likedList.contains(theBreed)) {
+                return Icon(Icons.favorite, color: Colors.red);
+              } else {
+                return Icon(Icons.favorite_border_outlined);
+              }
+            } else if (state is FavouriteRemoved) {
+              if (FavouritesPage.likedList.contains(theBreed)) {
+                return Icon(Icons.favorite, color: Colors.red);
+              } else {
+                return Icon(Icons.favorite_border_outlined);
+              }
             } else {
               return Icon(Icons.favorite_border_outlined);
             }
           },
         ),
         onPressed: () {
-          if (context.read<FavouriteCubit>().state is FavouriteAdded) {
+          if (FavouritesPage.likedList.contains(theBreed)) {
             context.read<FavouriteCubit>().removeFromFavourite(theBreed);
-          } else if (context.read<FavouriteCubit>().state is FavouriteRemoved ||
-              context.read<FavouriteCubit>().state is FavouriteEmpty) {
+          } else if (FavouritesPage.likedList.contains(theBreed) == false) {
             context.read<FavouriteCubit>().addToFavourite(theBreed);
           }
         },

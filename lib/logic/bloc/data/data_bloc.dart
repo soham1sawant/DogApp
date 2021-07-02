@@ -1,10 +1,11 @@
 import 'dart:async';
 
-import '../../../data/models/breeds.dart';
-import '../../../data/repository/data_repository.dart';
+import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:bloc/bloc.dart';
+
+import '../../../data/models/breeds.dart';
+import '../../../data/repository/data_repository.dart';
 
 part 'data_event.dart';
 part 'data_state.dart';

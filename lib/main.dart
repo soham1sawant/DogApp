@@ -1,4 +1,4 @@
-import 'package:dog_app/logic/bloc/favourite_button/favourite_cubit.dart';
+import 'logic/bloc/favourite_button/favourite_cubit.dart';
 import 'data/repository/data_repository.dart';
 import 'logic/simple_bloc_observer.dart';
 import 'presentation/pages/home_page.dart';

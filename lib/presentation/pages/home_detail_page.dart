@@ -1,5 +1,5 @@
-import 'package:dog_app/logic/bloc/favourite_button/favourite_cubit.dart';
-import 'package:dog_app/presentation/pages/favourites_page.dart';
+import '../../logic/bloc/favourite_button/favourite_cubit.dart';
+import 'favourites_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../data/models/breeds.dart';

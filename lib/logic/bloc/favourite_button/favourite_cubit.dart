@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:dog_app/presentation/pages/favourites_page.dart';
+import '../../../presentation/pages/favourites_page.dart';
 import 'package:equatable/equatable.dart';
 
 part 'favourite_state.dart';

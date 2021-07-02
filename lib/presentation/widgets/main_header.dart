@@ -1,4 +1,4 @@
-import 'package:dog_app/presentation/pages/favourites_page.dart';
+import '../pages/favourites_page.dart';
 import 'package:flutter/material.dart';
 
 class MainHeader extends StatelessWidget {

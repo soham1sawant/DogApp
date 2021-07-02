@@ -1,6 +1,6 @@
-import 'package:dog_app/data/models/breeds.dart';
-import 'package:dog_app/presentation/widgets/main_header.dart';
-import 'package:dog_app/presentation/widgets/main_list.dart';
+import '../../data/models/breeds.dart';
+import '../widgets/main_header.dart';
+import '../widgets/main_list.dart';
 import 'package:flutter/material.dart';
 
 class FavouritesPage extends StatelessWidget {

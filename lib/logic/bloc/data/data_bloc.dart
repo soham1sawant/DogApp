@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import '../../data/models/breeds.dart';
-import '../../data/repository/data_repository.dart';
+import '../../../data/models/breeds.dart';
+import '../../../data/repository/data_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';

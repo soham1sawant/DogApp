@@ -1,3 +1,5 @@
+import 'package:google_fonts/google_fonts.dart';
+
 import '../../logic/bloc/favourite_button/favourite_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,8 +37,10 @@ class MainList extends StatelessWidget {
                     child: Text(
                       breeds[index].name,
                       style: TextStyle(
+                        color: Theme.of(context).accentColor,
                         fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                        fontSize: 20.0,
+                        fontFamily: GoogleFonts.poppins().fontFamily,
                       ),
                     ),
                   ),

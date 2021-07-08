@@ -9,9 +9,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class HomeDetailPage extends StatelessWidget {
-  const HomeDetailPage({Key key, this.theBreed}) : super(key: key);
+  const HomeDetailPage({Key key, @required this.theBreeds, @required this.index}) : super(key: key);
 
-  final BreedsModel theBreed;
+  final List<BreedsModel> theBreeds;
+  final index;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class HomeDetailPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: false,
         title: Text(
-          theBreed.name,
+          theBreeds[index].name,
           style: TextStyle(
             color: Theme.of(context).accentColor,
             fontWeight: FontWeight.bold,
@@ -36,7 +37,7 @@ class HomeDetailPage extends StatelessWidget {
             child: Container(
               color: Theme.of(context).canvasColor,
               child: CachedNetworkImage(
-                imageUrl: theBreed.image.url,
+                imageUrl: theBreeds[index].image.url,
                 placeholder: (context, url) =>
                     Center(child: CircularProgressIndicator()),
                 errorWidget: (context, url, error) => Icon(Icons.error),
@@ -46,7 +47,7 @@ class HomeDetailPage extends StatelessWidget {
           Expanded(
             flex: 3,
             child: Description(
-              theBreed: theBreed,
+              theBreed: theBreeds[index],
             ),
           ),
         ],
@@ -55,13 +56,13 @@ class HomeDetailPage extends StatelessWidget {
         child: BlocBuilder<FavouriteCubit, FavouriteState>(
           builder: (context, state) {
             if (state is FavouriteAdded) {
-              if (FavouritesPage.likedList.contains(theBreed)) {
+              if (FavouritesPage.likedList.contains(theBreeds[index])) {
                 return Icon(Icons.favorite, color: Colors.red);
               } else {
                 return Icon(Icons.favorite_border_outlined);
               }
             } else if (state is FavouriteRemoved) {
-              if (FavouritesPage.likedList.contains(theBreed)) {
+              if (FavouritesPage.likedList.contains(theBreeds[index])) {
                 return Icon(Icons.favorite, color: Colors.red);
               } else {
                 return Icon(Icons.favorite_border_outlined);
@@ -72,10 +73,10 @@ class HomeDetailPage extends StatelessWidget {
           },
         ),
         onPressed: () {
-          if (FavouritesPage.likedList.contains(theBreed)) {
-            context.read<FavouriteCubit>().removeFromFavourite(theBreed);
-          } else if (FavouritesPage.likedList.contains(theBreed) == false) {
-            context.read<FavouriteCubit>().addToFavourite(theBreed);
+          if (FavouritesPage.likedList.contains(theBreeds[index])) {
+            context.read<FavouriteCubit>().removeFromFavourite(theBreeds[index]);
+          } else if (FavouritesPage.likedList.contains(theBreeds[index]) == false) {
+            context.read<FavouriteCubit>().addToFavourite(theBreeds[index]);
           }
         },
       ),

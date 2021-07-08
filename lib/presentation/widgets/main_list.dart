@@ -24,7 +24,7 @@ class MainList extends StatelessWidget {
               onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HomeDetailPage(theBreed: breeds[index]),
+                  builder: (context) => HomeDetailPage(theBreeds: breeds, index: index ),
                 ),
               ),
               child: Row(

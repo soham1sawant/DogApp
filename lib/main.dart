@@ -5,13 +5,17 @@ import 'presentation/pages/home_page.dart';
 import 'presentation/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 import 'logic/bloc/data/data_bloc.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   Bloc.observer = SimpleBlocObserver();
+  HydratedBloc.storage = await HydratedStorage.build(storageDirectory: await getApplicationDocumentsDirectory());
 
   final DataRepository dataRepository = DataRepository();
-
   runApp(MyApp(dataRepository: dataRepository));
 }
 

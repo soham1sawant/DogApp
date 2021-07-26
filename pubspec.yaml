@@ -30,6 +30,8 @@ dependencies:
   flutter_bloc: ^7.0.1
   google_fonts: ^2.1.0
   http: ^0.13.3
+  hydrated_bloc: ^7.0.1
+  path_provider: ^2.0.2
 
 dev_dependencies:
   flutter_test:

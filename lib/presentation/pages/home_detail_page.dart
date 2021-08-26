@@ -1,7 +1,6 @@
 import '../../logic/bloc/favourite_button/favourite_cubit.dart';
 import 'favourites_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../data/models/breeds.dart';
 import '../widgets/description.dart';
 import 'package:flutter/material.dart';

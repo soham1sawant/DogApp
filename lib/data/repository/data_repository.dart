@@ -7,7 +7,7 @@ class DataRepository {
   Future<List<BreedsModel>> getDogData() async{
     final decodedJson = await _dataProvider.getData() as List;
     List<BreedsModel> breeds = List.from(decodedJson)
-        .map<BreedsModel>((item) => BreedsModel.fromJson(item))
+        .map<BreedsModel>((item) => BreedsModel.fromMap(item))
         .toList();
 
     return breeds;

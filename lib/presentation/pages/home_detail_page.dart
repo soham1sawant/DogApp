@@ -1,5 +1,5 @@
-import 'favourites_page.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../logic/favourite_breeds.dart';
+import 'package:provider/provider.dart';
 import '../../data/models/breeds.dart';
 import '../widgets/description.dart';
 import 'package:flutter/material.dart';
@@ -49,27 +49,23 @@ class HomeDetailPage extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        child: BlocBuilder<FavouriteCubit, FavouriteState>(
-          builder: (context, state) {
-            if (state is FavouriteAdded) {
-              if (FavouritesPage.likedList.contains(theBreed)) {
-                return Icon(Icons.favorite, color: Colors.red);
-              } else {
-                return Icon(Icons.favorite_border_outlined);
-              }
-            } else if (state is FavouriteRemoved) {
-              if (FavouritesPage.likedList.contains(theBreed)) {
-                return Icon(Icons.favorite, color: Colors.red);
-              } else {
-                return Icon(Icons.favorite_border_outlined);
-              }
-            } else {
-              return Icon(Icons.favorite_border_outlined);
-            }
-          },
-        ),
-        onPressed: () {
+      floatingActionButton: Consumer<FavouriteBreeds>(
+        builder: (context, favouritesClass, child) {
+          if (favouritesClass.favouriteBreeds.contains(theBreed)) {
+            return FloatingActionButton(
+              child: Icon(Icons.favorite, color: Colors.red),
+              onPressed: () {
+                favouritesClass.addBreed(theBreed);
+              },
+            );
+          } else {
+            return FloatingActionButton(
+              child: Icon(Icons.favorite_border_outlined),
+              onPressed: () {
+                favouritesClass.removeBreed(theBreed);
+              },
+            );
+          }
         },
       ),
     );

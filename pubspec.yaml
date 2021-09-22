@@ -21,12 +21,13 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  flutter:
-    sdk: flutter
   cached_network_image: ^3.0.0
   cupertino_icons: ^1.0.0
+  flutter:
+    sdk: flutter
   google_fonts: ^2.1.0
   http: ^0.13.3
+  provider: ^6.0.0
 
 dev_dependencies:
   flutter_test:

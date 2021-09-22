@@ -1,4 +1,3 @@
-import '../../logic/bloc/favourite_button/favourite_cubit.dart';
 import 'favourites_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/models/breeds.dart';
@@ -71,11 +70,6 @@ class HomeDetailPage extends StatelessWidget {
           },
         ),
         onPressed: () {
-          if (FavouritesPage.likedList.contains(theBreed)) {
-            context.read<FavouriteCubit>().removeFromFavourite(theBreed);
-          } else if (FavouritesPage.likedList.contains(theBreed) == false) {
-            context.read<FavouriteCubit>().addToFavourite(theBreed);
-          }
         },
       ),
     );

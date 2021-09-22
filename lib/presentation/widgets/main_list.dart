@@ -1,6 +1,3 @@
-import '../../logic/bloc/favourite_button/favourite_cubit.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../data/models/breeds.dart';
 import '../pages/home_detail_page.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +10,7 @@ class MainList extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FavouriteCubit, FavouriteState>(
-      builder: (context, state) {
-        return ListView.builder(
+    return ListView.builder(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           itemCount: breeds.length,
@@ -46,9 +41,6 @@ class MainList extends StatelessWidget {
                       color: Theme.of(context).colorScheme.secondary,
                       iconSize: 27.0,
                       onPressed: () {
-                        context
-                            .read<FavouriteCubit>()
-                            .removeFromFavourite(breeds[index]);
                       },
                     ),
                 ],
@@ -56,7 +48,5 @@ class MainList extends StatelessWidget {
             );
           },
         );
-      },
-    );
   }
 }

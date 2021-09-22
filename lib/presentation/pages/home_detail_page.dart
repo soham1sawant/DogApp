@@ -21,7 +21,7 @@ class HomeDetailPage extends StatelessWidget {
         title: Text(
           theBreed.name,
           style: TextStyle(
-            color: Theme.of(context).accentColor,
+            color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.bold,
             fontSize: 20.0,
             fontFamily: GoogleFonts.poppins().fontFamily,

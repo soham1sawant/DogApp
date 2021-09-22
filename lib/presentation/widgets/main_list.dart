@@ -43,7 +43,7 @@ class MainList extends StatelessWidget {
                   if (removeButton)
                     IconButton(
                       icon: Icon(Icons.cancel_outlined),
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).colorScheme.secondary,
                       iconSize: 27.0,
                       onPressed: () {
                         context

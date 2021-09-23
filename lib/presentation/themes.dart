@@ -12,7 +12,6 @@ class MyTheme {
         cardColor: Colors.white,
         canvasColor: creamColor,
         buttonTheme: ButtonThemeData(buttonColor: darkBluishColor),
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple).copyWith(secondary: darkBluishColor),
         appBarTheme: AppBarTheme(
           color: Colors.white,
           elevation: 0.0,
@@ -26,7 +25,6 @@ class MyTheme {
         cardColor: Colors.black,
         canvasColor: darkCreamColor,
         buttonTheme: ButtonThemeData(buttonColor: lightBluishColor),
-        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.white),
         appBarTheme: AppBarTheme(
           color: Colors.black,
           elevation: 0.0,

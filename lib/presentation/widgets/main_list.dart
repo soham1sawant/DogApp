@@ -1,5 +1,4 @@
 import '../../logic/favourite_breeds.dart';
-
 import '../../data/models/breeds.dart';
 import '../pages/home_detail_page.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:dog_app/data/models/breeds.dart';
+import '../data/models/breeds.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 

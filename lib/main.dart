@@ -1,4 +1,4 @@
-import 'package:dog_app/logic/dog_data.dart';
+import 'logic/dog_data.dart';
 import 'logic/favourite_breeds.dart';
 import 'package:provider/provider.dart';
 import 'presentation/pages/home_page.dart';

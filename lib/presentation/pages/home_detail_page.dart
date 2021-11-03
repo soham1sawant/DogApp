@@ -49,22 +49,19 @@ class HomeDetailPage extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: Consumer<FavouriteBreeds>(
-        builder: (context, favouritesClass, child) {
-          if (favouritesClass.favouriteBreeds.contains(theBreed)) {
-            return FloatingActionButton(
-              child: Icon(Icons.favorite, color: Colors.red),
-              onPressed: () {
-                favouritesClass.addBreed(theBreed);
-              },
-            );
+      floatingActionButton: FloatingActionButton(
+        child: (Provider.of<FavouriteBreeds>(context)
+                .favouriteBreeds
+                .contains(theBreed))
+            ? Icon(Icons.favorite, color: Colors.red)
+            : Icon(Icons.favorite_border_outlined),
+        onPressed: () {
+          if (Provider.of<FavouriteBreeds>(context, listen: false)
+              .favouriteBreeds
+              .contains(theBreed)) {
+            Provider.of<FavouriteBreeds>(context, listen: false).removeBreed(theBreed);
           } else {
-            return FloatingActionButton(
-              child: Icon(Icons.favorite_border_outlined),
-              onPressed: () {
-                favouritesClass.removeBreed(theBreed);
-              },
-            );
+            Provider.of<FavouriteBreeds>(context, listen: false).addBreed(theBreed);
           }
         },
       ),

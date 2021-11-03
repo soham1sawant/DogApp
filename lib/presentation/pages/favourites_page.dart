@@ -1,11 +1,10 @@
-import '../../data/models/breeds.dart';
+import 'package:dog_app/logic/favourite_breeds.dart';
+import 'package:provider/provider.dart';
 import '../widgets/main_header.dart';
 import '../widgets/main_list.dart';
 import 'package:flutter/material.dart';
 
 class FavouritesPage extends StatelessWidget {
-  static List<BreedsModel> likedList = [];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +16,12 @@ class FavouritesPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               MainHeader(header: "Favourites", icon: false),
-              Expanded(child: MainList(breeds: likedList, removeButton: true,)),
+              Expanded(
+                  child: MainList(
+                breeds: Provider.of<FavouriteBreeds>(context, listen: true)
+                    .favouriteBreeds,
+                removeButton: true,
+              )),
             ],
           ),
         ),

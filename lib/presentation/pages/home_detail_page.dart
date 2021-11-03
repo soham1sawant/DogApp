@@ -1,6 +1,5 @@
-import '../../logic/bloc/favourite_button/favourite_cubit.dart';
-import 'favourites_page.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../logic/favourite_breeds.dart';
+import 'package:provider/provider.dart';
 import '../../data/models/breeds.dart';
 import '../widgets/description.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +20,7 @@ class HomeDetailPage extends StatelessWidget {
         title: Text(
           theBreed.name,
           style: TextStyle(
-            color: Theme.of(context).accentColor,
+            color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.bold,
             fontSize: 20.0,
             fontFamily: GoogleFonts.poppins().fontFamily,
@@ -51,30 +50,18 @@ class HomeDetailPage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        child: BlocBuilder<FavouriteCubit, FavouriteState>(
-          builder: (context, state) {
-            if (state is FavouriteAdded) {
-              if (FavouritesPage.likedList.contains(theBreed)) {
-                return Icon(Icons.favorite, color: Colors.red);
-              } else {
-                return Icon(Icons.favorite_border_outlined);
-              }
-            } else if (state is FavouriteRemoved) {
-              if (FavouritesPage.likedList.contains(theBreed)) {
-                return Icon(Icons.favorite, color: Colors.red);
-              } else {
-                return Icon(Icons.favorite_border_outlined);
-              }
-            } else {
-              return Icon(Icons.favorite_border_outlined);
-            }
-          },
-        ),
+        child: (Provider.of<FavouriteBreeds>(context)
+                .favouriteBreeds
+                .contains(theBreed))
+            ? Icon(Icons.favorite, color: Colors.red)
+            : Icon(Icons.favorite_border_outlined),
         onPressed: () {
-          if (FavouritesPage.likedList.contains(theBreed)) {
-            context.read<FavouriteCubit>().removeFromFavourite(theBreed);
-          } else if (FavouritesPage.likedList.contains(theBreed) == false) {
-            context.read<FavouriteCubit>().addToFavourite(theBreed);
+          if (Provider.of<FavouriteBreeds>(context, listen: false)
+              .favouriteBreeds
+              .contains(theBreed)) {
+            Provider.of<FavouriteBreeds>(context, listen: false).removeBreed(theBreed);
+          } else {
+            Provider.of<FavouriteBreeds>(context, listen: false).addBreed(theBreed);
           }
         },
       ),

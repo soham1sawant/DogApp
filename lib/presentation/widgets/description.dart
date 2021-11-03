@@ -18,7 +18,7 @@ class Description extends StatelessWidget {
             style: TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.bold,
-              color: Theme.of(context).accentColor,
+              color: Theme.of(context).colorScheme.secondary,
               fontFamily: GoogleFonts.poppins().fontFamily,
             ),
           ),
@@ -28,7 +28,7 @@ class Description extends StatelessWidget {
                 second + unit,
                 style: TextStyle(
                   fontSize: 20.0,
-                  color: Theme.of(context).accentColor,
+                  color: Theme.of(context).colorScheme.secondary,
                   fontFamily: GoogleFonts.poppins().fontFamily,
                 ),
               ),

@@ -17,14 +17,14 @@ class MainHeader extends StatelessWidget {
           header,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Theme.of(context).colorScheme.secondary,
+            color: Theme.of(context).primaryColor,
           ),
           textScaleFactor: 3,
         ),
         if (icon)
           IconButton(
             icon: Icon(Icons.favorite),
-            color: Theme.of(context).colorScheme.secondary,
+            color: Theme.of(context).primaryColor,
             iconSize: 30.0,
             onPressed: () => Navigator.push(
               context,

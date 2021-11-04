@@ -40,7 +40,7 @@ class MainList extends StatelessWidget {
               if (removeButton)
                 IconButton(
                   icon: Icon(Icons.cancel_outlined),
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Theme.of(context).primaryColor,
                   iconSize: 27.0,
                   onPressed: () {
                     Provider.of<FavouriteBreeds>(context, listen: false)

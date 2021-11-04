@@ -7,8 +7,31 @@ class Description extends StatelessWidget {
 
   final BreedsModel theBreed;
 
-  Widget descriptions(
-      BuildContext context, String first, String second, String unit) {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          SubDescription(first: "Origin : ", second: theBreed.origin, unit: ""),
+          SubDescription(first: "Bred For : ", second: theBreed.bredFor, unit: ""),
+          SubDescription(first: "Weight : ", second: theBreed.weight.metric, unit: " kg"),
+          SubDescription(first: "Height : ", second: theBreed.height.metric,unit: " inches"),
+          SubDescription(first: "Life Span : ",second: theBreed.lifeSpan, unit: ""),
+        ],
+      ),
+    );
+  }
+}
+
+class SubDescription extends StatelessWidget {
+  final first;
+  final second;
+  final unit;
+
+  const SubDescription({Key key, this.first, this.second, this.unit}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Row(
@@ -18,7 +41,7 @@ class Description extends StatelessWidget {
             style: TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.bold,
-              color: Theme.of(context).colorScheme.secondary,
+              color: Theme.of(context).primaryColor,
               fontFamily: GoogleFonts.poppins().fontFamily,
             ),
           ),
@@ -28,28 +51,13 @@ class Description extends StatelessWidget {
                 second + unit,
                 style: TextStyle(
                   fontSize: 20.0,
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Theme.of(context).primaryColor,
                   fontFamily: GoogleFonts.poppins().fontFamily,
                 ),
               ),
             )
           else
             Text("-"),
-        ],
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          descriptions(context, "Origin : ", theBreed.origin, ""),
-          descriptions(context, "Bred For : ", theBreed.bredFor, ""),
-          descriptions(context, "Weight : ", theBreed.weight.metric, " kg"),
-          descriptions(context, "Height : ", theBreed.height.metric, " inches"),
-          descriptions(context, "Life Span : ", theBreed.lifeSpan, ""),
         ],
       ),
     );

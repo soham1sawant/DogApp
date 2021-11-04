@@ -8,6 +8,8 @@ class MyTheme {
   static Color lightBluishColor = Colors.blue[200];
 
   static ThemeData lightTheme(BuildContext context) => ThemeData(
+        brightness: Brightness.light,
+        primaryColor: darkBluishColor,
         fontFamily: GoogleFonts.poppins().fontFamily,
         cardColor: Colors.white,
         canvasColor: creamColor,
@@ -22,6 +24,7 @@ class MyTheme {
   static ThemeData darkTheme(BuildContext context) => ThemeData(
         brightness: Brightness.dark,
         fontFamily: GoogleFonts.poppins().fontFamily,
+        primaryColor: Colors.white,
         cardColor: Colors.black,
         canvasColor: darkCreamColor,
         buttonTheme: ButtonThemeData(buttonColor: lightBluishColor),

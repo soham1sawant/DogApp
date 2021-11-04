@@ -11,7 +11,7 @@ class FavouritesPage extends StatelessWidget {
       backgroundColor: Theme.of(context).canvasColor,
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(29),
+          padding: EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

@@ -20,7 +20,7 @@ class HomeDetailPage extends StatelessWidget {
         title: Text(
           theBreed.name,
           style: TextStyle(
-            color: Theme.of(context).colorScheme.secondary,
+            color: Theme.of(context).primaryColor,
             fontWeight: FontWeight.bold,
             fontSize: 20.0,
             fontFamily: GoogleFonts.poppins().fontFamily,
@@ -50,6 +50,7 @@ class HomeDetailPage extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).primaryColor,
         child: (Provider.of<FavouriteBreeds>(context)
                 .favouriteBreeds
                 .contains(theBreed))
@@ -59,9 +60,11 @@ class HomeDetailPage extends StatelessWidget {
           if (Provider.of<FavouriteBreeds>(context, listen: false)
               .favouriteBreeds
               .contains(theBreed)) {
-            Provider.of<FavouriteBreeds>(context, listen: false).removeBreed(theBreed);
+            Provider.of<FavouriteBreeds>(context, listen: false)
+                .removeBreed(theBreed);
           } else {
-            Provider.of<FavouriteBreeds>(context, listen: false).addBreed(theBreed);
+            Provider.of<FavouriteBreeds>(context, listen: false)
+                .addBreed(theBreed);
           }
         },
       ),

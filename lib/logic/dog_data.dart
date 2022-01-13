@@ -1,10 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 import '../data/models/breeds.dart';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 
-class DogData extends ChangeNotifier {
+class DogData{
   List<BreedsModel> breeds;
 
   Future<List<BreedsModel>> fetchBreeds() async {

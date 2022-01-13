@@ -1,4 +1,3 @@
-import 'logic/dog_data.dart';
 import 'logic/favourite_breeds.dart';
 import 'package:provider/provider.dart';
 import 'presentation/pages/home_page.dart';
@@ -15,7 +14,6 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => FavouriteBreeds()),
-        ChangeNotifierProvider(create: (context) => DogData()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

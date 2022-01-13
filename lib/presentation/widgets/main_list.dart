@@ -45,6 +45,13 @@ class MainList extends StatelessWidget {
                   onPressed: () {
                     Provider.of<FavouriteBreeds>(context, listen: false)
                         .removeBreed(breeds[index]);
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Removed from Favourites"),
+                        duration: Duration(milliseconds: 900),
+                      ),
+                    );
                   },
                 ),
             ],

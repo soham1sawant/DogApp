@@ -62,9 +62,23 @@ class HomeDetailPage extends StatelessWidget {
               .contains(theBreed)) {
             Provider.of<FavouriteBreeds>(context, listen: false)
                 .removeBreed(theBreed);
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text("Removed from Favourites"),
+                duration: Duration(milliseconds: 900),
+              ),
+            );
           } else {
             Provider.of<FavouriteBreeds>(context, listen: false)
                 .addBreed(theBreed);
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text("Added to Favourites"),
+                duration: Duration(milliseconds: 900),
+              ),
+            );
           }
         },
       ),

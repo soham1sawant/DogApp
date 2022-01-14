@@ -1,7 +1,7 @@
-import 'logic/favourite_breeds.dart';
+import '1view/pages/home page/home_page.dart';
+import '1view/themes.dart';
+import '2viewmodel/favourite_breeds_viewmodel.dart';
 import 'package:provider/provider.dart';
-import 'presentation/pages/home_page.dart';
-import 'presentation/themes.dart';
 import 'package:flutter/material.dart';
 
 void main() {

@@ -1,6 +1,6 @@
-import '../../logic/favourite_breeds.dart';
-import '../../data/models/breeds.dart';
-import '../pages/home_detail_page.dart';
+import 'package:dog_app/3model/models/breeds.dart';
+import '../../2viewmodel/favourite_breeds_viewmodel.dart';
+import '../pages/home detail page/home_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
-import '../data/models/breeds.dart';
+import 'package:dog_app/3model/models/breeds.dart';
 import 'package:http/http.dart';
 
-class DogData{
+class DogDataService {
   List<BreedsModel> breeds;
 
   Future<List<BreedsModel>> fetchBreeds() async {
@@ -19,12 +19,12 @@ class DogData{
         breeds = List.from(rawData)
             .map<BreedsModel>((item) => BreedsModel.fromMap(item))
             .toList();
-      } else {
-        return null;
       }
     } catch (e) {
       print(e);
-      return null;
+      
+      breeds = [];
+      return breeds;
     }
     return breeds;
   }

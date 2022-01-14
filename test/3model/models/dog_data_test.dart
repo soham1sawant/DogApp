@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:dog_app/data/models/breeds.dart';
+import 'package:dog_app/3model/models/breeds.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test("Testing Dog Model", () async {
     final String response =
-        File("test/data/models/data_dog.json").readAsStringSync();
+        File("test/3model/models/data_dog.json").readAsStringSync();
     List rawData = jsonDecode(response) as List;
     List<BreedsModel> breeds = List.from(rawData)
         .map<BreedsModel>((item) => BreedsModel.fromMap(item))

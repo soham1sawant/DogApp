@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:dog_app/data/models/breeds.dart';
-import 'package:dog_app/logic/favourite_breeds.dart';
+import 'package:dog_app/2viewmodel/favourite_breeds_viewmodel.dart';
+import 'package:dog_app/3model/models/breeds.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -10,7 +9,7 @@ void main() {
     var favs = FavouriteBreeds();
 
     final String response =
-        File("test/data/models/data_dog.json").readAsStringSync();
+        File("test/3model/models/data_dog.json").readAsStringSync();
     List rawData = jsonDecode(response) as List;
     List<BreedsModel> breeds = List.from(rawData)
         .map<BreedsModel>((item) => BreedsModel.fromMap(item))

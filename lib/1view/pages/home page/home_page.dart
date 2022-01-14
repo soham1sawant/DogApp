@@ -1,8 +1,8 @@
-import 'package:dog_app/data/models/breeds.dart';
+import 'package:dog_app/3model/models/breeds.dart';
+import 'package:dog_app/3model/repository/dog_data_repository.dart';
 import 'package:flutter/material.dart';
-import '../../logic/dog_data.dart';
-import '../widgets/main_header.dart';
-import '../widgets/main_list.dart';
+import '../../widgets/main_header.dart';
+import '../../widgets/main_list.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -16,8 +16,8 @@ class _HomePageState extends State<HomePage> {
     if (this.breedsList != null) {
       return this.breedsList;
     } else {
-      final dogData = DogData();
-      this.breedsList = await dogData.fetchBreeds();
+      final dogData = DogDataRepository();
+      this.breedsList = await dogData.forwardData();
       return this.breedsList;
     }
   }

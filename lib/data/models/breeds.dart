@@ -1,6 +1,7 @@
 // To parse this JSON data, do
 //
-//     final breedsModel = breedsModelFromMap(jsonString);
+//  final breedsModel = breedsModelFromMap(jsonString);
+//  String breedsModelToJson(List<BreedsModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class BreedsModel {
     BreedsModel({

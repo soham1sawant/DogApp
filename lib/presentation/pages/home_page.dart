@@ -1,6 +1,5 @@
 import 'package:dog_app/data/models/breeds.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../logic/dog_data.dart';
 import '../widgets/main_header.dart';
 import '../widgets/main_list.dart';

@@ -1,7 +1,7 @@
-import '../../logic/favourite_breeds.dart';
+import 'package:dog_app/features/dog_data/models/breeds.dart';
+import '../../../features/favourite_breeds/viewmodel/favourite_breeds_viewmodel.dart';
 import 'package:provider/provider.dart';
-import '../../data/models/breeds.dart';
-import '../widgets/description.dart';
+import 'widgets/description.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';

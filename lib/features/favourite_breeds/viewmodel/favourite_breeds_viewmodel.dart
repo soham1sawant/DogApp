@@ -1,6 +1,5 @@
 import 'dart:convert';
-
-import '../data/models/breeds.dart';
+import 'package:dog_app/features/dog_data/models/breeds.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

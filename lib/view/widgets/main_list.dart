@@ -1,8 +1,9 @@
-import 'package:dog_app/features/dog_data/models/breeds.dart';
-import '../../features/favourite_breeds/viewmodel/favourite_breeds_viewmodel.dart';
-import '../pages/home detail page/home_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../features/dog_data/models/breeds.dart';
+import '../../features/favourite_breeds/viewmodel/favourite_breeds_viewmodel.dart';
+import '../pages/home detail page/home_detail_page.dart';
 
 class MainList extends StatelessWidget {
   final List<BreedsModel> breeds;

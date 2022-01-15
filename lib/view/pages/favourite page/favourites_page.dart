@@ -1,5 +1,5 @@
-import 'package:dog_app/view/widgets/main_header.dart';
-import 'package:dog_app/view/widgets/main_list.dart';
+import '../../widgets/main_header.dart';
+import '../../widgets/main_list.dart';
 import '../../../features/favourite_breeds/viewmodel/favourite_breeds_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,7 @@
-import 'package:dog_app/features/dog_data/viewmodel/dog_data_viewmodel.dart';
+import 'features/dog_data/viewmodel/dog_data_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'features/dog_data/viewmodel/dog_data_viewmodel.dart';
 import 'features/favourite_breeds/viewmodel/favourite_breeds_viewmodel.dart';
 import 'view/pages/home page/home_page.dart';
 import 'view/themes.dart';

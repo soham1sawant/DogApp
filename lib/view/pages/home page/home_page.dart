@@ -1,4 +1,4 @@
-import 'package:dog_app/features/dog_data/viewmodel/dog_data_viewmodel.dart';
+import '../../../features/dog_data/viewmodel/dog_data_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/main_header.dart';

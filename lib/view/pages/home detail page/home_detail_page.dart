@@ -1,4 +1,4 @@
-import 'package:dog_app/features/dog_data/models/breeds.dart';
+import '../../../features/dog_data/models/breeds.dart';
 import '../../../features/favourite_breeds/viewmodel/favourite_breeds_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'widgets/description.dart';

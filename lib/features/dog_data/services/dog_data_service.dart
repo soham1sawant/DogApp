@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:dog_app/features/dog_data/models/breeds.dart';
+import '../models/breeds.dart';
 import 'package:http/http.dart';
 
 class DogDataService {

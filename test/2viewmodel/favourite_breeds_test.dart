@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:dog_app/2viewmodel/favourite_breeds_viewmodel.dart';
-import 'package:dog_app/3model/models/breeds.dart';
+import 'package:dog_app/features/favourite_breeds/viewmodel/favourite_breeds_viewmodel.dart';
+import 'package:dog_app/features/dog_data/models/breeds.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

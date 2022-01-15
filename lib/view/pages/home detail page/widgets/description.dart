@@ -1,4 +1,4 @@
-import 'package:dog_app/3model/models/breeds.dart';
+import 'package:dog_app/features/dog_data/models/breeds.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

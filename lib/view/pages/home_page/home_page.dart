@@ -4,12 +4,8 @@ import 'package:provider/provider.dart';
 import '../../widgets/main_header.dart';
 import '../../widgets/main_list.dart';
 
-class HomePage extends StatefulWidget {
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
+class HomePage extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

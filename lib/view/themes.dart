@@ -9,6 +9,7 @@ class MyTheme {
 
   static ThemeData lightTheme(BuildContext context) => ThemeData(
         brightness: Brightness.light,
+        focusColor: Colors.white,
         primaryColor: darkBluishColor,
         fontFamily: GoogleFonts.poppins().fontFamily,
         cardColor: Colors.white,
@@ -23,6 +24,7 @@ class MyTheme {
 
   static ThemeData darkTheme(BuildContext context) => ThemeData(
         brightness: Brightness.dark,
+        focusColor: Colors.black,
         fontFamily: GoogleFonts.poppins().fontFamily,
         primaryColor: Colors.white,
         cardColor: Colors.black,

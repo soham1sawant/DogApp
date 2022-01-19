@@ -1,9 +1,9 @@
-import 'package:dog_app/view/pages/login_page/login_page.dart';
+import 'package:dog_app/presentation/pages/home_page/home_page.dart';
 import 'features/dog_data/viewmodel/dog_data_viewmodel.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'features/favourite_breeds/viewmodel/favourite_breeds_viewmodel.dart';
-import 'view/themes.dart';
+import 'presentation/themes.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         theme: MyTheme.lightTheme(context),
         darkTheme: MyTheme.darkTheme(context),
         routes: {
-          '/': (context) => LoginPage(),
+          '/': (context) => HomePage(),
         },
       ),
     );

@@ -1,4 +1,4 @@
-import '../models/breeds.dart';
+import '../../../data/models/breeds.dart';
 import '../services/dog_data_service.dart';
 import 'package:flutter/foundation.dart';
 

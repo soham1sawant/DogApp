@@ -1,6 +1,4 @@
 import '../../../data/models/breeds.dart';
-import '../../../features/favourite_breeds/viewmodel/favourite_breeds_viewmodel.dart';
-import 'package:provider/provider.dart';
 import 'widgets/description.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -49,39 +47,39 @@ class HomeDetailPage extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).primaryColor,
-        child: (Provider.of<FavouriteBreeds>(context)
-                .favouriteBreeds
-                .contains(theBreed))
-            ? Icon(Icons.favorite, color: Colors.red)
-            : Icon(Icons.favorite_border_outlined),
-        onPressed: () {
-          if (Provider.of<FavouriteBreeds>(context, listen: false)
-              .favouriteBreeds
-              .contains(theBreed)) {
-            Provider.of<FavouriteBreeds>(context, listen: false)
-                .removeBreed(theBreed);
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: Theme.of(context).primaryColor,
+      //   child: (Provider.of<FavouriteBreeds>(context)
+      //           .favouriteBreeds
+      //           .contains(theBreed))
+      //       ? Icon(Icons.favorite, color: Colors.red)
+      //       : Icon(Icons.favorite_border_outlined),
+      //   onPressed: () {
+      //     if (Provider.of<FavouriteBreeds>(context, listen: false)
+      //         .favouriteBreeds
+      //         .contains(theBreed)) {
+      //       Provider.of<FavouriteBreeds>(context, listen: false)
+      //           .removeBreed(theBreed);
 
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text("Removed from Favourites"),
-                duration: Duration(milliseconds: 900),
-              ),
-            );
-          } else {
-            Provider.of<FavouriteBreeds>(context, listen: false)
-                .addBreed(theBreed);
+      //       ScaffoldMessenger.of(context).showSnackBar(
+      //         SnackBar(
+      //           content: Text("Removed from Favourites"),
+      //           duration: Duration(milliseconds: 900),
+      //         ),
+      //       );
+      //     } else {
+      //       Provider.of<FavouriteBreeds>(context, listen: false)
+      //           .addBreed(theBreed);
 
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text("Added to Favourites"),
-                duration: Duration(milliseconds: 900),
-              ),
-            );
-          }
-        },
-      ),
+      //       ScaffoldMessenger.of(context).showSnackBar(
+      //         SnackBar(
+      //           content: Text("Added to Favourites"),
+      //           duration: Duration(milliseconds: 900),
+      //         ),
+      //       );
+      //     }
+      //   },
+      // ),
     );
   }
 }

@@ -1,7 +1,5 @@
 import '../../widgets/main_header.dart';
 import '../../widgets/main_list.dart';
-import '../../../features/favourite_breeds/viewmodel/favourite_breeds_viewmodel.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 
@@ -20,8 +18,7 @@ class FavouritesPage extends StatelessWidget {
               MainHeader(header: "Favourites", icon: false),
               Expanded(
                   child: MainList(
-                breeds: Provider.of<FavouriteBreeds>(context, listen: true)
-                    .favouriteBreeds,
+                breeds: ,
                 removeButton: true,
                 hasData: true,
               )),

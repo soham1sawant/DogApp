@@ -28,8 +28,8 @@ dependencies:
   google_fonts: ^2.1.0
   http: ^0.13.3
   provider: ^6.0.0
-  shared_preferences: ^2.0.12
-  form_field_validator: ^1.1.0
+  bloc: ^8.0.2
+  flutter_bloc: ^8.0.1
 
 dev_dependencies:
   flutter_test:

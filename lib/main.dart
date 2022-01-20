@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => DogBreedsBloc()),
-        BlocProvider(create: (context) => FavouriteBreedsBloc()),
+        BlocProvider(create: (context) => DogBreedsBloc()..add(DogBreedsRequest())),
+        BlocProvider(create: (context) => FavouriteBreedsBloc()..add(FavouriteBreedsEventRequest())),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

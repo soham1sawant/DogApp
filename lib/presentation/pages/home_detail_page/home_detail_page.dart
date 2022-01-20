@@ -1,8 +1,9 @@
 import 'package:dog_app/bloc/favourite_breeds/favouritebreeds_bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../data/models/breeds.dart';
 import 'widgets/description.dart';
-import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -51,15 +52,24 @@ class HomeDetailPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
-        child: BlocProvider.of<FavouriteBreedsBloc>()
-            ? Icon(Icons.favorite, color: Colors.red)
-            : Icon(Icons.favorite_border_outlined),
+        child: BlocBuilder<FavouriteBreedsBloc, FavouriteBreedsState>(
+          builder: (context, state) {
+            if (state.favouriteBreeds.contains(theBreed)) {
+              return Icon(Icons.favorite, color: Colors.red);
+            } else {
+              return Icon(Icons.favorite_border_outlined);
+            }
+          },
+        ),
         onPressed: () {
-          if (Provider.of<FavouriteBreeds>(context, listen: false)
+          if (BlocProvider.of<FavouriteBreedsBloc>(context)
+              .state
               .favouriteBreeds
               .contains(theBreed)) {
-            Provider.of<FavouriteBreeds>(context, listen: false)
-                .removeBreed(theBreed);
+            BlocProvider.of<FavouriteBreedsBloc>(context)
+                .state
+                .favouriteBreeds
+                .remove(theBreed);
 
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -68,8 +78,10 @@ class HomeDetailPage extends StatelessWidget {
               ),
             );
           } else {
-            Provider.of<FavouriteBreeds>(context, listen: false)
-                .addBreed(theBreed);
+            BlocProvider.of<FavouriteBreedsBloc>(context)
+                .state
+                .favouriteBreeds
+                .add(theBreed);
 
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(

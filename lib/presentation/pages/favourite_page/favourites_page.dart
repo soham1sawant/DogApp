@@ -18,12 +18,24 @@ class FavouritesPage extends StatelessWidget {
               MainHeader(header: "Favourites", icon: false),
               BlocBuilder<FavouriteBreedsBloc, FavouriteBreedsState>(
                 builder: (context, state) {
-                  if (state is FavouritebreedsInitial) {
+                  if (state is FavouriteBreedsLoading) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (state is FavouriteBreedsLoadSuccess) {
                     return Expanded(
                         child: MainList(
                       breeds: state.favouriteBreeds,
                       removeButton: true,
                     ));
+                  } else if (state is FavouriteBreedsEmpty) {
+                    return Center(
+                      child: Text("No Favorites"),
+                    );
+                  } else if (state is FavouriteBreedsLoadFailure) {
+                    return Center(
+                      child: Icon(Icons.error),
+                    );
                   } else {
                     return Center(
                       child: Icon(Icons.error),

@@ -5,11 +5,21 @@ import 'package:meta/meta.dart';
 part 'favouritebreeds_event.dart';
 part 'favouritebreeds_state.dart';
 
-class FavouriteBreedsBloc extends Bloc<FavouriteBreedsEvent, FavouriteBreedsState> {
-
-  FavouriteBreedsBloc() : super(FavouritebreedsInitial()) {
+class FavouriteBreedsBloc
+    extends Bloc<FavouriteBreedsEvent, FavouriteBreedsState> {
+  FavouriteBreedsBloc() : super(FavouriteBreedsLoading()) {
     on<FavouriteBreedsEvent>((event, emit) {
-      // TODO: implement event handler
+      if (event is FavouriteBreedsEventRequest) {
+        emit(FavouriteBreedsLoading());
+
+        if (state.favouriteBreeds.isEmpty) {
+          emit(FavouriteBreedsEmpty());
+        } else if (state.favouriteBreeds.isNotEmpty) {
+          emit(FavouriteBreedsLoadSuccess());
+        } else {
+          emit(FavouriteBreedsLoadFailure());
+        }
+      }
     });
   }
 }

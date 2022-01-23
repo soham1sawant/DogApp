@@ -1,5 +1,4 @@
-import 'package:dog_app/bloc/favourite_breeds/favouritebreeds_bloc.dart';
-import 'package:flutter/material.dart';
+import 'package:dog_app/bloc/favourites/favourites_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../data/models/breeds.dart';
@@ -52,24 +51,38 @@ class HomeDetailPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
-        child: BlocBuilder<FavouriteBreedsBloc, FavouriteBreedsState>(
+        child: BlocBuilder<FavouritesCubit, FavouritesState>(
           builder: (context, state) {
-            if (state.favouriteBreeds.contains(theBreed)) {
+            if(state is FavouritesAdded) {
+              if (state.favouriteBreeds.contains(theBreed)) {
               return Icon(Icons.favorite, color: Colors.red);
             } else {
               return Icon(Icons.favorite_border_outlined);
             }
+            }
+            else if (state is FavouritesRemoved) {
+              if (state.favouriteBreeds.contains(theBreed)) {
+              return Icon(Icons.favorite, color: Colors.red);
+            } else {
+              return Icon(Icons.favorite_border_outlined);
+            }
+            }
+            else {
+              if (state.favouriteBreeds.contains(theBreed)) {
+              return Icon(Icons.favorite, color: Colors.red);
+            } else {
+              return Icon(Icons.favorite_border_outlined);
+            }
+            }
+            
           },
         ),
         onPressed: () {
-          if (BlocProvider.of<FavouriteBreedsBloc>(context)
-              .state
-              .favouriteBreeds
+          if (BlocProvider.of<FavouritesCubit>(context)
+              .getfavouriteBreeds
               .contains(theBreed)) {
-            BlocProvider.of<FavouriteBreedsBloc>(context)
-                .state
-                .favouriteBreeds
-                .remove(theBreed);
+            BlocProvider.of<FavouritesCubit>(context)
+                .removeFromFavourites(theBreed);
 
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -78,10 +91,7 @@ class HomeDetailPage extends StatelessWidget {
               ),
             );
           } else {
-            BlocProvider.of<FavouriteBreedsBloc>(context)
-                .state
-                .favouriteBreeds
-                .add(theBreed);
+            BlocProvider.of<FavouritesCubit>(context).addToFavourites(theBreed);
 
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(

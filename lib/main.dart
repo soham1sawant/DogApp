@@ -1,5 +1,5 @@
 import 'package:dog_app/bloc/dog_breeds/dogbreeds_bloc.dart';
-import 'package:dog_app/bloc/favourite_breeds/favouritebreeds_bloc.dart';
+import 'package:dog_app/bloc/favourites/favourites_cubit.dart';
 import 'package:dog_app/presentation/pages/home_page/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => DogBreedsBloc()..add(DogBreedsRequest())),
-        BlocProvider(create: (context) => FavouriteBreedsBloc()..add(FavouriteBreedsEventRequest())),
+        BlocProvider(create: (context) => FavouritesCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

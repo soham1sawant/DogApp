@@ -1,4 +1,4 @@
-import 'package:dog_app/bloc/favourites/favourites_cubit.dart';
+import 'package:dog_app/bloc/favourites/favourites_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../data/models/breeds.dart';
@@ -13,6 +13,7 @@ class HomeDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool containsBreed = false;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -51,52 +52,41 @@ class HomeDetailPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
-        child: BlocBuilder<FavouritesCubit, FavouritesState>(
+        child: BlocBuilder<FavouritesBloc, FavouritesState>(
           builder: (context, state) {
-            if(state is FavouritesAdded) {
-              if (state.favouriteBreeds.contains(theBreed)) {
-              return Icon(Icons.favorite, color: Colors.red);
-            } else {
+            if (state is FavouritesLoading) {
               return Icon(Icons.favorite_border_outlined);
-            }
-            }
-            else if (state is FavouritesRemoved) {
-              if (state.favouriteBreeds.contains(theBreed)) {
-              return Icon(Icons.favorite, color: Colors.red);
+            } else if (state is FavouritesLoaded) {
+              if (state.favouritesList.favourites.contains(theBreed)) {
+                containsBreed = true;
+                return Icon(Icons.favorite, color: Colors.red);
+              } else {
+                return Icon(Icons.favorite_border_outlined);
+              }
+            } else if (state is FavouritesLoadingError) {
+              return Icon(Icons.error_outline);
             } else {
-              return Icon(Icons.favorite_border_outlined);
+              return Icon(Icons.error_outline);
             }
-            }
-            else {
-              if (state.favouriteBreeds.contains(theBreed)) {
-              return Icon(Icons.favorite, color: Colors.red);
-            } else {
-              return Icon(Icons.favorite_border_outlined);
-            }
-            }
-            
           },
         ),
         onPressed: () {
-          if (BlocProvider.of<FavouritesCubit>(context)
-              .getfavouriteBreeds
-              .contains(theBreed)) {
-            BlocProvider.of<FavouritesCubit>(context)
-                .removeFromFavourites(theBreed);
+          if (containsBreed) {
+            context.read<FavouritesBloc>().add(FavouritesRemoved(theBreed));
 
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text("Removed from Favourites"),
-                duration: Duration(seconds: 1),
+                duration: Duration(milliseconds: 900),
               ),
             );
           } else {
-            BlocProvider.of<FavouritesCubit>(context).addToFavourites(theBreed);
+            context.read<FavouritesBloc>().add(FavouritesAdded(theBreed));
 
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text("Added to Favourites"),
-                duration: Duration(seconds: 1),
+                duration: Duration(milliseconds: 900),
               ),
             );
           }

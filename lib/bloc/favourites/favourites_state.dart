@@ -1,12 +1,23 @@
-part of 'favourites_cubit.dart';
+part of 'favourites_bloc.dart';
 
 @immutable
-abstract class FavouritesState {
-  final List<BreedsModel> favouriteBreeds = [];
+abstract class FavouritesState extends Equatable {}
+
+class FavouritesLoading extends FavouritesState {
+  @override
+  List<Object> get props => [];
 }
 
-class FavouritesInitial extends FavouritesState {}
+class FavouritesLoaded extends FavouritesState {
+  final FavouritesList favouritesList;
 
-class FavouritesAdded extends FavouritesState {}
+  FavouritesLoaded({this.favouritesList = const FavouritesList()});
 
-class FavouritesRemoved extends FavouritesState {}
+  @override
+  List<Object> get props => [favouritesList];
+}
+
+class FavouritesLoadingError extends FavouritesState {
+  @override
+  List<Object> get props => [];
+}

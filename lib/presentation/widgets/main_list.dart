@@ -1,4 +1,4 @@
-import 'package:dog_app/bloc/favourites/favourites_cubit.dart';
+import 'package:dog_app/bloc/favourites/favourites_bloc.dart';
 import 'package:dog_app/presentation/pages/home_detail_page/home_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,26 +43,16 @@ class MainList extends StatelessWidget {
                   color: Theme.of(context).primaryColor,
                   iconSize: 27.0,
                   onPressed: () {
-                    if (BlocProvider.of<FavouritesCubit>(context).getfavouriteBreeds.contains(breeds[index])) {
-                      
-                      BlocProvider.of<FavouritesCubit>(context).removeFromFavourites(breeds[index]);
+                    context
+                        .read<FavouritesBloc>()
+                        .add(FavouritesRemoved(breeds[index]));
 
-                      ScaffoldMessenger.of(context).showSnackBar(
+                    ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text("Removed from Favourites"),
-                          duration: Duration(seconds: 1),
+                          duration: Duration(milliseconds: 900),
                         ),
                       );
-                    } else {
-                      BlocProvider.of<FavouritesCubit>(context).addToFavourites(breeds[index]);
-
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("Added to Favourites"),
-                          duration: Duration(seconds: 1),
-                        ),
-                      );
-                    }
                   },
                 ),
             ],

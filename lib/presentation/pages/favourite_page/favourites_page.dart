@@ -1,4 +1,4 @@
-import 'package:dog_app/bloc/favourites/favourites_cubit.dart';
+import 'package:dog_app/bloc/favourites/favourites_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../widgets/main_header.dart';
 import '../../widgets/main_list.dart';
@@ -16,35 +16,20 @@ class FavouritesPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               MainHeader(header: "Favourites", icon: false),
-              BlocBuilder<FavouritesCubit, FavouritesState>(
+              BlocBuilder<FavouritesBloc, FavouritesState>(
                 builder: (context, state) {
-                  if (state is FavouritesAdded) {
+                  if (state is FavouritesLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state is FavouritesLoaded) {
                     return Expanded(
                         child: MainList(
-                      breeds: state.favouriteBreeds,
+                      breeds: state.favouritesList.favourites,
                       removeButton: true,
                     ));
-                  }
-                  else if (state is FavouritesRemoved) {
-                    return Expanded(
-                        child: MainList(
-                      breeds: state.favouriteBreeds,
-                      removeButton: true,
-                    ));
-                  }
-                  else if (state is FavouritesInitial) {
-                    return Expanded(
-                        child: MainList(
-                      breeds: state.favouriteBreeds,
-                      removeButton: true,
-                    ));
-                  }
-                  else {
-                    return Expanded(
-                        child: MainList(
-                      breeds: state.favouriteBreeds,
-                      removeButton: true,
-                    ));
+                  } else if (state is FavouritesLoadingError) {
+                    return const Center(child: Icon(Icons.error_outline));
+                  } else {
+                    return const Center(child: Icon(Icons.error_outline));
                   }
                 },
               ),

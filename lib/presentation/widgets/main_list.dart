@@ -6,9 +6,15 @@ import '../../data/models/breeds.dart';
 
 class MainList extends StatelessWidget {
   final List<BreedsModel> breeds;
-  final removeButton;
+  final bool removeButton;
+  final bool isFavouritesPage;
 
-  const MainList({Key key, this.breeds, this.removeButton}) : super(key: key);
+  const MainList({
+    Key key,
+    this.breeds,
+    @required this.removeButton,
+    @required this.isFavouritesPage,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,45 +32,48 @@ class MainList extends StatelessWidget {
               builder: (context) => HomeDetailPage(theBreed: breeds[index]),
             ),
           ),
-          child: Expanded(
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                0,
-                size.height * 0.007,
-                0,
-                size.height * 0.007,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
+          child: Container(
+            padding: (isFavouritesPage)
+                ? EdgeInsets.all(0)
+                : EdgeInsets.fromLTRB(
+                    0,
+                    size.height * 0.004,
+                    0,
+                    size.height * 0.004,
+                  ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: Text(
                     breeds[index].name,
-                    overflow: TextOverflow.fade,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: size.height * 0.032,
                     ),
                   ),
-                  if (removeButton)
-                    IconButton(
-                      icon: const Icon(Icons.cancel_outlined),
-                      color: Theme.of(context).primaryColor,
-                      iconSize: size.height * 0.04,
-                      onPressed: () {
-                        context
-                            .read<FavouritesBloc>()
-                            .add(FavouritesRemoved(breeds[index]));
+                ),
+                if (removeButton)
+                  IconButton(
+                    icon: const Icon(Icons.cancel_outlined),
+                    color: Theme.of(context).primaryColor,
+                    iconSize: size.height * 0.035,
+                    onPressed: () {
+                      context
+                          .read<FavouritesBloc>()
+                          .add(FavouritesRemoved(breeds[index]));
 
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text("Removed from Favourites"),
-                            duration: Duration(milliseconds: 900),
-                          ),
-                        );
-                      },
-                    ),
-                ],
-              ),
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Removed from Favourites"),
+                          duration: Duration(milliseconds: 900),
+                        ),
+                      );
+                    },
+                  ),
+              ],
             ),
           ),
         );

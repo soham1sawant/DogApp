@@ -30,6 +30,7 @@ class FavouritesPage extends StatelessWidget {
                         child: MainList(
                       breeds: state.favouritesList.favourites,
                       removeButton: true,
+                      isFavouritesPage: true,
                     ));
                   } else if (state is FavouritesLoadingError) {
                     return const Center(child: Icon(Icons.error_outline));

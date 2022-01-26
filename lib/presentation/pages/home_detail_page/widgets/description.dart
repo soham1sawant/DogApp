@@ -12,17 +12,31 @@ class Description extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          SubDescription(first: "Origin : ", second: theBreed.origin, unit: ""),
           SubDescription(
-              first: "Bred For : ", second: theBreed.bredFor, unit: ""),
+            first: "Origin : ",
+            second: theBreed.origin,
+            unit: "",
+          ),
           SubDescription(
-              first: "Weight : ", second: theBreed.weight.metric, unit: " kg"),
+            first: "Bred For : ",
+            second: theBreed.bredFor,
+            unit: "",
+          ),
           SubDescription(
-              first: "Height : ",
-              second: theBreed.height.metric,
-              unit: " inches"),
+            first: "Weight : ",
+            second: theBreed.weight.metric,
+            unit: " kg",
+          ),
           SubDescription(
-              first: "Life Span : ", second: theBreed.lifeSpan, unit: ""),
+            first: "Height : ",
+            second: theBreed.height.metric,
+            unit: " inches",
+          ),
+          SubDescription(
+            first: "Life Span : ",
+            second: theBreed.lifeSpan,
+            unit: "",
+          ),
         ],
       ),
     );

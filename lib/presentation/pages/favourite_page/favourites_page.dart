@@ -7,11 +7,16 @@ import 'package:flutter/material.dart';
 class FavouritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: Theme.of(context).canvasColor,
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.symmetric(
+            horizontal: size.height * 0.032,
+            vertical: size.width * 0.03,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

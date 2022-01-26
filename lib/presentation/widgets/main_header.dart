@@ -9,6 +9,8 @@ class MainHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -18,14 +20,14 @@ class MainHeader extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: Theme.of(context).primaryColor,
           ),
-          textScaleFactor: 3,
+          textScaleFactor: size.height * 0.0045,
         ),
         if (icon)
           IconButton(
             icon: Icon(Icons.favorite),
             color: Theme.of(context).primaryColor,
-            iconSize: 30.0,
-            onPressed: () => Navigator.of(context).pushNamed("/favourites")
+            iconSize: size.height * 0.05,
+            onPressed: () => Navigator.of(context).pushNamed("/favourites"),
           ),
       ],
     );

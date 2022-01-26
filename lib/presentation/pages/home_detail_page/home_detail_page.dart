@@ -13,7 +13,9 @@ class HomeDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     bool containsBreed = false;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -23,7 +25,7 @@ class HomeDetailPage extends StatelessWidget {
           style: TextStyle(
             color: Theme.of(context).primaryColor,
             fontWeight: FontWeight.bold,
-            fontSize: 20.0,
+            fontSize: size.height * 0.04,
             fontFamily: GoogleFonts.poppins().fontFamily,
           ),
         ),

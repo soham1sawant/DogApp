@@ -12,6 +12,8 @@ class MainList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return ListView.builder(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
@@ -24,38 +26,46 @@ class MainList extends StatelessWidget {
               builder: (context) => HomeDetailPage(theBreed: breeds[index]),
             ),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 5.0),
-                child: Text(
-                  breeds[index].name,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
+          child: Expanded(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(
+                0,
+                size.height * 0.007,
+                0,
+                size.height * 0.007,
               ),
-              if (removeButton)
-                IconButton(
-                  icon: Icon(Icons.cancel_outlined),
-                  color: Theme.of(context).primaryColor,
-                  iconSize: 27.0,
-                  onPressed: () {
-                    context
-                        .read<FavouritesBloc>()
-                        .add(FavouritesRemoved(breeds[index]));
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    breeds[index].name,
+                    overflow: TextOverflow.fade,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: size.height * 0.032,
+                    ),
+                  ),
+                  if (removeButton)
+                    IconButton(
+                      icon: const Icon(Icons.cancel_outlined),
+                      color: Theme.of(context).primaryColor,
+                      iconSize: size.height * 0.04,
+                      onPressed: () {
+                        context
+                            .read<FavouritesBloc>()
+                            .add(FavouritesRemoved(breeds[index]));
 
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("Removed from Favourites"),
-                          duration: Duration(milliseconds: 900),
-                        ),
-                      );
-                  },
-                ),
-            ],
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("Removed from Favourites"),
+                            duration: Duration(milliseconds: 900),
+                          ),
+                        );
+                      },
+                    ),
+                ],
+              ),
+            ),
           ),
         );
       },

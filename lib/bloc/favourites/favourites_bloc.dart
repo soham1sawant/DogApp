@@ -3,13 +3,13 @@ import 'package:dog_app/data/models/favourites_list.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 import 'package:dog_app/data/models/breeds.dart';
-import 'package:dog_app/data/repositories/dog_data_repository.dart';
+import 'package:dog_app/data/repositories/dog_repository.dart';
 
 part 'favourites_event.dart';
 part 'favourites_state.dart';
 
 class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
-  final DogDataRepository _dogDataRepository;
+  final DogRepository _dogDataRepository;
 
   FavouritesBloc(this._dogDataRepository) : super(FavouritesLoading()) {
     on<FavouritesStarted>(_onStarted);

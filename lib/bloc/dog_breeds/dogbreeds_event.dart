@@ -1,6 +1,10 @@
 part of 'dogbreeds_bloc.dart';
 
 @immutable
-class DogBreedsEvent {}
+abstract class DogBreedsEvent extends Equatable {}
 
-class DogBreedsRequest extends DogBreedsEvent {}
+class DogBreedsRequest extends DogBreedsEvent {
+  
+  @override
+  List<Object> get props => [];
+}

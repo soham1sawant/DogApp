@@ -1,14 +1,27 @@
 part of 'dogbreeds_bloc.dart';
 
 @immutable
-class DogBreedsState {}
-
-class DogBreedsLoadInProgress extends DogBreedsState {}
-
-class DogBreedsLoadSuccess extends DogBreedsState {
-  final List<BreedsModel> breeds;
-
-  DogBreedsLoadSuccess(this.breeds);
+class DogBreedsState extends Equatable {
+  @override
+  List<Object> get props => [];
 }
 
-class DogBreedsLoadFailure extends DogBreedsState {}
+class DogBreedsLoadInProgress extends DogBreedsState {
+  @override
+  List<Object> get props => [];
+}
+
+class DogBreedsLoadSuccess extends DogBreedsState {
+  final BreedsCatalog breedsCatalog;
+
+  DogBreedsLoadSuccess(this.breedsCatalog);
+
+  @override
+  List<Object> get props => [breedsCatalog];
+}
+
+class DogBreedsLoadFailure extends DogBreedsState {
+  
+  @override
+  List<Object> get props => [];
+}

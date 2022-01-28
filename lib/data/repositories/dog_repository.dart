@@ -1,10 +1,9 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:dog_app/data/data_providers/dog_data_provider.dart';
 import 'package:dog_app/data/models/breeds.dart';
 
-class DogDataRepository {
+class DogRepository {
   final DogDataProvider _dogDataProvider = DogDataProvider();
   final List<BreedsModel> _favouriteBreeds = [];
 

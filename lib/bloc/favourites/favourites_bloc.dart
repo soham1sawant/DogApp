@@ -9,9 +9,9 @@ part 'favourites_event.dart';
 part 'favourites_state.dart';
 
 class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
-  final DogRepository _dogDataRepository;
+  final DogRepository dogDataRepository;
 
-  FavouritesBloc(this._dogDataRepository) : super(FavouritesLoading()) {
+  FavouritesBloc({@required this.dogDataRepository}) : super(FavouritesLoading()) {
     on<FavouritesStarted>(_onStarted);
     on<FavouritesAdded>(_onBreedAdded);
     on<FavouritesRemoved>(_onBreedRemoved);
@@ -22,7 +22,7 @@ class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
     emit(FavouritesLoading());
 
     try {
-      final favouriteItems = await _dogDataRepository.loadFavourites();
+      final favouriteItems = await dogDataRepository.loadFavourites();
       emit(FavouritesLoaded(
           favouritesList: FavouritesList(favourites: [...favouriteItems])));
     } catch (_) {
@@ -35,7 +35,7 @@ class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
 
     if (state is FavouritesLoaded) {
       try {
-        _dogDataRepository.addBreedToFavourites(event.breed);
+        dogDataRepository.addBreedToFavourites(event.breed);
         emit(FavouritesLoaded(
             favouritesList: FavouritesList(favourites: [
           ...state.favouritesList.favourites,
@@ -52,7 +52,7 @@ class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
 
     if (state is FavouritesLoaded) {
       try {
-        _dogDataRepository.removeBreedFromFavourites(event.breed);
+        dogDataRepository.removeBreedFromFavourites(event.breed);
         emit(FavouritesLoaded(
             favouritesList: FavouritesList(
                 favourites: [...state.favouritesList.favourites]

@@ -30,7 +30,7 @@ class App extends StatelessWidget {
                   ..add(DogBreedsRequest())),
         BlocProvider(
             create: (context) =>
-                FavouritesBloc(dogDataRepository)..add(FavouritesStarted())),
+                FavouritesBloc(dogDataRepository: dogDataRepository)..add(FavouritesStarted())),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

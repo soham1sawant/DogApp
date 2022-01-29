@@ -42,7 +42,7 @@ class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
           event.breed
         ])));
       } catch (_) {
-        FavouritesLoadingError();
+        emit(FavouritesLoadingError());
       }
     }
   }
@@ -55,10 +55,9 @@ class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
         dogDataRepository.removeBreedFromFavourites(event.breed);
         emit(FavouritesLoaded(
             favouritesList: FavouritesList(
-                favourites: [...state.favouritesList.favourites]
-                  ..remove(event.breed))));
+                favourites: [...state.favouritesList.favourites]..remove(event.breed))));
       } catch (_) {
-        FavouritesLoadingError();
+        emit(FavouritesLoadingError());
       }
     }
   }

@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:dog_app/bloc/favourites/favourites_bloc.dart';
 import 'package:dog_app/data/models/breeds.dart';
+import 'package:dog_app/data/models/favourites_list.dart';
 import 'package:dog_app/data/repositories/dog_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -135,5 +137,120 @@ void main() {
       expect(FavouritesBloc(dogDataRepository: dogRepository).state,
           FavouritesLoading());
     });
+
+    blocTest<FavouritesBloc, FavouritesState>(
+      "emits [FavouritesLoading, FavouritesLoaded]"
+      "when favourites is loaded successfullly",
+      setUp: () {
+        when(dogRepository.loadFavourites).thenAnswer((_) async => []);
+      },
+      build: () => FavouritesBloc(dogDataRepository: dogRepository),
+      act: (bloc) => bloc.add(FavouritesStarted()),
+      expect: () => <FavouritesState>[
+        FavouritesLoading(),
+        FavouritesLoaded(favouritesList: FavouritesList(favourites: []))
+      ],
+      verify: (_) => verify(dogRepository.loadFavourites).called(1),
+    );
+
+    blocTest<FavouritesBloc, FavouritesState>(
+      "emits [FavouritesLoading, FavouritesLoadingError]"
+      "when favourites is loaded successfullly",
+      setUp: () {
+        when(dogRepository.loadFavourites).thenThrow(Exception("Error"));
+      },
+      build: () => FavouritesBloc(dogDataRepository: dogRepository),
+      act: (bloc) => bloc.add(FavouritesStarted()),
+      expect: () =>
+          <FavouritesState>[FavouritesLoading(), FavouritesLoadingError()],
+      verify: (_) => verify(dogRepository.loadFavourites).called(1),
+    );
+
+    blocTest<FavouritesBloc, FavouritesState>(
+      "emits [] when favourites is not loaded and breed is added",
+      setUp: () {
+        when(dogRepository.loadFavourites).thenAnswer((_) async {});
+      },
+      build: () => FavouritesBloc(dogDataRepository: dogRepository),
+      act: (bloc) => bloc.add(FavouritesAdded(mockBreedToAdd)),
+      expect: () => <FavouritesState>[],
+    );
+
+    blocTest<FavouritesBloc, FavouritesState>(
+      "emits [FavouritesLoaded] when breed is added successfully",
+      setUp: () {
+        when(() => dogRepository.addBreedToFavourites(mockBreedToAdd))
+            .thenAnswer((_) async {});
+      },
+      build: () => FavouritesBloc(dogDataRepository: dogRepository),
+      seed: () => FavouritesLoaded(
+          favouritesList: FavouritesList(favourites: mockFavouriteBreeds)),
+      act: (bloc) => bloc.add(FavouritesAdded(mockBreedToAdd)),
+      expect: () => <FavouritesState>[
+        FavouritesLoaded(
+          favouritesList: FavouritesList(
+              favourites: [...mockFavouriteBreeds, mockBreedToAdd]),
+        )
+      ],
+      verify: (_) {
+        verify(() => dogRepository.addBreedToFavourites(mockBreedToAdd))
+            .called(1);
+      },
+    );
+
+    blocTest<FavouritesBloc, FavouritesState>(
+      "emits [FavouritesLoadingError] when breed is not added successfully",
+      setUp: () {
+        when(() => dogRepository.addBreedToFavourites(mockBreedToAdd))
+            .thenThrow(Exception("Error"));
+      },
+      build: () => FavouritesBloc(dogDataRepository: dogRepository),
+      seed: () => FavouritesLoaded(
+          favouritesList: FavouritesList(favourites: mockFavouriteBreeds)),
+      act: (bloc) => bloc.add(FavouritesAdded(mockBreedToAdd)),
+      expect: () => <FavouritesState>[FavouritesLoadingError()],
+      verify: (_) {
+        verify(() => dogRepository.addBreedToFavourites(mockBreedToAdd))
+            .called(1);
+      },
+    );
+
+    blocTest<FavouritesBloc, FavouritesState>(
+      "emits [FavouritesLoaded] when breed is removed successfully",
+      setUp: () {
+        when(() => dogRepository.removeBreedFromFavourites(mockBreedToRemove))
+            .thenAnswer((_) async {});
+      },
+      build: () => FavouritesBloc(dogDataRepository: dogRepository),
+      seed: () => FavouritesLoaded(
+          favouritesList: FavouritesList(favourites: mockFavouriteBreeds)),
+      act: (bloc) => bloc.add(FavouritesRemoved(mockBreedToRemove)),
+      expect: () => <FavouritesState>[
+        FavouritesLoaded(
+          favouritesList: FavouritesList(
+              favourites: [...mockFavouriteBreeds]..remove(mockBreedToRemove)),
+        )
+      ],
+      verify: (_) {
+        verify(() => dogRepository.removeBreedFromFavourites(mockBreedToRemove))
+            .called(1);
+      },
+    );
+
+    blocTest<FavouritesBloc, FavouritesState>(
+      "emits [FavouritesLoadingError] when item is not removed successfully",
+      setUp: () {
+        when(() => dogRepository.removeBreedFromFavourites(mockBreedToRemove)).thenThrow(Exception("Error"));
+      },
+      build: () => FavouritesBloc(dogDataRepository: dogRepository),
+      seed: () => FavouritesLoaded(
+          favouritesList: FavouritesList(favourites: mockFavouriteBreeds)),
+      act: (bloc) => bloc.add(FavouritesRemoved(mockBreedToRemove)),
+      expect: () => <FavouritesState>[FavouritesLoadingError()],
+      verify: (_) {
+        verify(() => dogRepository.removeBreedFromFavourites(mockBreedToRemove))
+            .called(1);
+      },
+    );
   });
 }

@@ -21,15 +21,7 @@ class DogRepository {
     return Future.delayed(Duration(milliseconds: 800), () => _favouriteBreeds);
   }
 
-  void addBreedToFavourites(BreedsModel breed) {
-    if (_favouriteBreeds.contains(breed) == false) {
-      _favouriteBreeds.add(breed);
-    }
-  }
+  void addBreedToFavourites(BreedsModel breed) => _favouriteBreeds.add(breed);
 
-  void removeBreedFromFavourites(BreedsModel breed) {
-    if (_favouriteBreeds.contains(breed)) {
-      _favouriteBreeds.remove(breed);
-    }
-  }
+  void removeBreedFromFavourites(BreedsModel breed) => _favouriteBreeds.remove(breed);
 }

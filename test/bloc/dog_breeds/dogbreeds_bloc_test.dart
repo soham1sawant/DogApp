@@ -22,7 +22,7 @@ void main() {
           DogBreedsLoadInProgress());
     });
 
-    blocTest(
+    blocTest<DogBreedsBloc, DogBreedsState>(
       "emits [DogBreedsLoadInProgress, DogBreedsLoadedSuccess]"
       "when dog breeds is loaded successfully",
       setUp: () {
@@ -37,7 +37,7 @@ void main() {
       verify: (_) => verify(dogRepository.getDogData).called(1),
     );
 
-    blocTest(
+    blocTest<DogBreedsBloc, DogBreedsState>(
       "emites [DogBreedsLoadInProgress, DogBreedsLoadFailure"
       "when loading dog breeds throws an error",
       setUp: () {

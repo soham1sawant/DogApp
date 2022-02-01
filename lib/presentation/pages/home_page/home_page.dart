@@ -30,6 +30,7 @@ class HomePage extends StatelessWidget {
                   } else if (state is DogBreedsLoadSuccess) {
                     return Expanded(
                       child: MainList(
+                        key: const Key("main_list"),
                         breeds: state.breedsCatalog.loadedBreeds,
                         removeButton: false,
                         isFavouritesPage: false,

@@ -7,7 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class HomeDetailPage extends StatelessWidget {
-  const HomeDetailPage({Key key, this.theBreed}) : super(key: key);
+  const HomeDetailPage({Key key, @required this.theBreed}) : super(key: key);
 
   final BreedsModel theBreed;
 

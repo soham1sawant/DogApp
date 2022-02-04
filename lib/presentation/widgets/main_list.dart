@@ -19,6 +19,7 @@ class MainList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    Orientation orientation = MediaQuery.of(context).orientation;
 
     return Scrollbar(
       interactive: true,
@@ -53,7 +54,9 @@ class MainList extends StatelessWidget {
                       maxLines: 1,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: size.height * 0.032,
+                        fontSize: orientation == Orientation.portrait
+                            ? size.height * 0.032
+                            : size.height * 0.055,
                       ),
                     ),
                   ),
@@ -61,12 +64,14 @@ class MainList extends StatelessWidget {
                     IconButton(
                       icon: const Icon(Icons.cancel_outlined),
                       color: Theme.of(context).primaryColor,
-                      iconSize: size.height * 0.035,
+                      iconSize: orientation == Orientation.portrait
+                          ? size.height * 0.035
+                          : size.height * 0.055,
                       onPressed: () {
                         context
                             .read<FavouritesBloc>()
                             .add(FavouritesRemoved(breeds[index]));
-    
+
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text("Removed from Favourites"),

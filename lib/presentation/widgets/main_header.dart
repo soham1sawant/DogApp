@@ -10,6 +10,7 @@ class MainHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    Orientation orientation = MediaQuery.of(context).orientation;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -20,13 +21,17 @@ class MainHeader extends StatelessWidget {
             fontWeight: FontWeight.bold,
             color: Theme.of(context).primaryColor,
           ),
-          textScaleFactor: size.height * 0.0045,
+          textScaleFactor: orientation == Orientation.portrait
+              ? size.height * 0.0045
+              : size.height * 0.007,
         ),
         if (icon)
           IconButton(
             icon: Icon(Icons.favorite),
             color: Theme.of(context).primaryColor,
-            iconSize: size.height * 0.05,
+            iconSize: orientation == Orientation.portrait
+                ? size.height * 0.05
+                : size.height * 0.075,
             onPressed: () => Navigator.of(context).pushNamed("/favourites"),
           ),
       ],

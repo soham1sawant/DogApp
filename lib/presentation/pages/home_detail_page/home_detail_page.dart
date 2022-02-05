@@ -14,6 +14,7 @@ class HomeDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    Orientation orientation = MediaQuery.of(context).orientation;
     bool containsBreed = false;
 
     return Scaffold(
@@ -25,33 +26,16 @@ class HomeDetailPage extends StatelessWidget {
           style: TextStyle(
             color: Theme.of(context).primaryColor,
             fontWeight: FontWeight.bold,
-            fontSize: size.height * 0.04,
+            fontSize: orientation == Orientation.portrait
+                ? size.height * 0.04
+                : size.height * 0.06,
             fontFamily: GoogleFonts.poppins().fontFamily,
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Container(
-              color: Theme.of(context).canvasColor,
-              child: CachedNetworkImage(
-                imageUrl: theBreed.image.url,
-                placeholder: (context, url) =>
-                    Center(child: CircularProgressIndicator()),
-                errorWidget: (context, url, error) => Icon(Icons.error),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 3,
-            child: Description(
-              theBreed: theBreed,
-            ),
-          ),
-        ],
-      ),
+      body: orientation == Orientation.portrait
+          ? VerticalView(theBreed: theBreed)
+          : HorizontalView(theBreed: theBreed),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
         child: BlocBuilder<FavouritesBloc, FavouritesState>(
@@ -94,6 +78,76 @@ class HomeDetailPage extends StatelessWidget {
           }
         },
       ),
+    );
+  }
+}
+
+class VerticalView extends StatelessWidget {
+  const VerticalView({
+    Key key,
+    @required this.theBreed,
+  }) : super(key: key);
+
+  final BreedsModel theBreed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(
+          flex: 2,
+          child: Container(
+            color: Theme.of(context).canvasColor,
+            child: CachedNetworkImage(
+              imageUrl: theBreed.image.url,
+              placeholder: (context, url) =>
+                  Center(child: CircularProgressIndicator()),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: Description(
+            theBreed: theBreed,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class HorizontalView extends StatelessWidget {
+  const HorizontalView({
+    Key key,
+    @required this.theBreed,
+  }) : super(key: key);
+
+  final BreedsModel theBreed;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          flex: 2,
+          child: Container(
+            color: Theme.of(context).canvasColor,
+            child: CachedNetworkImage(
+              imageUrl: theBreed.image.url,
+              placeholder: (context, url) =>
+                  Center(child: CircularProgressIndicator()),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 3,
+          child: Description(
+            theBreed: theBreed,
+          ),
+        ),
+      ],
     );
   }
 }

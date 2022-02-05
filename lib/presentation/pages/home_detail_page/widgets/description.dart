@@ -54,6 +54,7 @@ class SubDescription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    Orientation orientation = MediaQuery.of(context).orientation;
 
     return Padding(
       padding: EdgeInsets.all(size.height * 0.02),
@@ -62,7 +63,9 @@ class SubDescription extends StatelessWidget {
           Text(
             first,
             style: TextStyle(
-              fontSize: size.height * 0.032,
+              fontSize: orientation == Orientation.portrait
+                  ? size.height * 0.032
+                  : size.height * 0.05,
               fontWeight: FontWeight.bold,
               color: Theme.of(context).primaryColor,
               fontFamily: GoogleFonts.poppins().fontFamily,
@@ -73,7 +76,9 @@ class SubDescription extends StatelessWidget {
               child: Text(
                 second + unit,
                 style: TextStyle(
-                  fontSize: size.height * 0.032,
+                  fontSize: orientation == Orientation.portrait
+                      ? size.height * 0.032
+                      : size.height * 0.05,
                   color: Theme.of(context).primaryColor,
                   fontFamily: GoogleFonts.poppins().fontFamily,
                 ),
@@ -83,7 +88,9 @@ class SubDescription extends StatelessWidget {
             Text(
               "-",
               style: TextStyle(
-                fontSize: size.height * 0.032,
+                fontSize: orientation == Orientation.portrait
+                    ? size.height * 0.032
+                    : size.height * 0.05,
               ),
             ),
         ],

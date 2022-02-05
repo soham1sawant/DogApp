@@ -1,16 +1,20 @@
 import 'dart:convert';
 
-import 'package:dog_app/app.dart';
+import 'package:dog_app/bloc/dog_breeds/dogbreeds_bloc.dart';
+import 'package:dog_app/bloc/favourites/favourites_bloc.dart';
 import 'package:dog_app/data/models/breeds.dart';
-import 'package:dog_app/data/repositories/dog_repository.dart';
+import 'package:dog_app/data/models/breeds_catalog.dart';
 import 'package:dog_app/presentation/pages/home_page/home_page.dart';
+import 'package:dog_app/presentation/widgets/main_list.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockDogRepository extends Mock implements DogRepository {}
+import '../../../helper.dart';
 
 void main() {
-  DogRepository dogRepository;
+  DogBreedsBloc dogBreedsBloc;
+  FavouritesBloc favouritesBloc;
 
   final String mockString = '''
     [
@@ -68,12 +72,59 @@ void main() {
   final List<BreedsModel> mockBreeds = List.from(mockJson)
       .map<BreedsModel>((item) => BreedsModel.fromMap(item))
       .toList();
-  final mockHomeDetailBreed = mockBreeds[0];
 
-  group("HomeDetailPage", () {
-    testWidgets("renders HomePage", (tester) async {
-      await tester.pumpWidget(App(dogDataRepository: dogRepository));
-      expect(find.byType(HomePage), findsOneWidget);
-    });
+  setUp(() {
+    dogBreedsBloc = MockDogBreedsBloc();
+    favouritesBloc = MockFavouritesBloc();
+  });
+
+  group("HomePage", () {
+    testWidgets(
+      "renders CircularProgressIndicator when dog breeds is loading",
+      (tester) async {
+        when(() => dogBreedsBloc.state).thenReturn(DogBreedsLoadInProgress());
+        await tester.pumpApp(
+          dogBreedsBloc: dogBreedsBloc,
+          child: HomePage(),
+        );
+
+        expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      "renders list with items when dog breeds is loaded",
+      (tester) async {
+        final breedsCatalog = BreedsCatalog(mockBreeds);
+        when(() => dogBreedsBloc.state)
+            .thenReturn(DogBreedsLoadSuccess(breedsCatalog));
+        await tester.pumpApp(
+          dogBreedsBloc: dogBreedsBloc,
+          child: HomePage(),
+        );
+
+        expect(find.byType(MainList), findsOneWidget);
+        expect(
+          find.descendant(
+            of: find.byType(MainList),
+            matching: find.byType(InkWell),
+          ),
+          findsNWidgets(2),
+        );
+      },
+    );
+
+    testWidgets(
+      "renders Error when dog breeds fails to load",
+      (tester) async {
+        when(() => dogBreedsBloc.state).thenReturn(DogBreedsLoadFailure());
+        await tester.pumpApp(
+          dogBreedsBloc: dogBreedsBloc,
+          child: HomePage(),
+        );
+
+        expect(find.byIcon(Icons.error), findsOneWidget);
+      },
+    );
   });
 }

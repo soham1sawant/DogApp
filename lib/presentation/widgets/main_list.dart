@@ -36,6 +36,7 @@ class MainList extends StatelessWidget {
               ),
             ),
             child: Container(
+              key: Key(breeds[index].id.toString()),
               padding: (isFavouritesPage)
                   ? EdgeInsets.all(0)
                   : EdgeInsets.fromLTRB(
@@ -62,6 +63,7 @@ class MainList extends StatelessWidget {
                   ),
                   if (removeButton)
                     IconButton(
+                      key: Key("remove-${breeds[index].name}"),
                       icon: const Icon(Icons.cancel_outlined),
                       color: Theme.of(context).primaryColor,
                       iconSize: orientation == Orientation.portrait

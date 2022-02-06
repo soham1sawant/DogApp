@@ -33,9 +33,7 @@ class HomeDetailPage extends StatelessWidget {
           ),
         ),
       ),
-      body: orientation == Orientation.portrait
-          ? VerticalView(theBreed: theBreed)
-          : HorizontalView(theBreed: theBreed),
+      body: VerticalView(theBreed: theBreed),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
         child: BlocBuilder<FavouritesBloc, FavouritesState>(
@@ -93,41 +91,6 @@ class VerticalView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        Expanded(
-          flex: 2,
-          child: Container(
-            color: Theme.of(context).canvasColor,
-            child: CachedNetworkImage(
-              imageUrl: theBreed.image.url,
-              placeholder: (context, url) =>
-                  Center(child: CircularProgressIndicator()),
-              errorWidget: (context, url, error) => Icon(Icons.error),
-            ),
-          ),
-        ),
-        Expanded(
-          flex: 3,
-          child: Description(
-            theBreed: theBreed,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class HorizontalView extends StatelessWidget {
-  const HorizontalView({
-    Key key,
-    @required this.theBreed,
-  }) : super(key: key);
-
-  final BreedsModel theBreed;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
       children: [
         Expanded(
           flex: 2,

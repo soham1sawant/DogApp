@@ -11,7 +11,7 @@ class MockDogRepository extends Mock implements DogRepository {}
 void main() {
   group("DogBreedsBloc", () {
     List<BreedsModel> mockDogsList = [];
-    DogRepository dogRepository;
+    late DogRepository dogRepository;
 
     setUp(() async {
       dogRepository = MockDogRepository();

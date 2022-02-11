@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 class BreedsCatalog extends Equatable {
   final List<BreedsModel> loadedBreeds;
 
-  BreedsCatalog(this.loadedBreeds);
+  const BreedsCatalog(this.loadedBreeds);
 
   @override
   List<Object> get props => [loadedBreeds];

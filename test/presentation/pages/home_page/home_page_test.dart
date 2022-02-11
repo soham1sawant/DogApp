@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dog_app/bloc/dog_breeds/dogbreeds_bloc.dart';
-import 'package:dog_app/bloc/favourites/favourites_bloc.dart';
 import 'package:dog_app/data/models/breeds.dart';
 import 'package:dog_app/data/models/breeds_catalog.dart';
 import 'package:dog_app/presentation/pages/home_page/home_page.dart';
@@ -13,10 +12,9 @@ import 'package:mocktail/mocktail.dart';
 import '../../../helper.dart';
 
 void main() {
-  DogBreedsBloc dogBreedsBloc;
-  FavouritesBloc favouritesBloc;
+  late DogBreedsBloc dogBreedsBloc;
 
-  final String mockString = '''
+  const String mockString = '''
     [
     {
         "weight": {
@@ -75,7 +73,6 @@ void main() {
 
   setUp(() {
     dogBreedsBloc = MockDogBreedsBloc();
-    favouritesBloc = MockFavouritesBloc();
   });
 
   group("HomePage", () {
@@ -85,7 +82,7 @@ void main() {
         when(() => dogBreedsBloc.state).thenReturn(DogBreedsLoadInProgress());
         await tester.pumpApp(
           dogBreedsBloc: dogBreedsBloc,
-          child: HomePage(),
+          child: const HomePage(),
         );
 
         expect(find.byType(CircularProgressIndicator), findsOneWidget);
@@ -100,7 +97,7 @@ void main() {
             .thenReturn(DogBreedsLoadSuccess(breedsCatalog));
         await tester.pumpApp(
           dogBreedsBloc: dogBreedsBloc,
-          child: HomePage(),
+          child: const HomePage(),
         );
 
         expect(find.byType(MainList), findsOneWidget);
@@ -120,7 +117,7 @@ void main() {
         when(() => dogBreedsBloc.state).thenReturn(DogBreedsLoadFailure());
         await tester.pumpApp(
           dogBreedsBloc: dogBreedsBloc,
-          child: HomePage(),
+          child: const HomePage(),
         );
 
         expect(find.byIcon(Icons.error), findsOneWidget);

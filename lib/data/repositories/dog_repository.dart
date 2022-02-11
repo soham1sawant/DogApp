@@ -18,7 +18,7 @@ class DogRepository {
   }
 
   Future<List<BreedsModel>> loadFavourites() {
-    return Future.delayed(Duration(milliseconds: 800), () => _favouriteBreeds);
+    return Future.delayed(const Duration(milliseconds: 800), () => _favouriteBreeds);
   }
 
   void addBreedToFavourites(BreedsModel breed) => _favouriteBreeds.add(breed);

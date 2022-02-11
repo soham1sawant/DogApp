@@ -12,7 +12,7 @@ class MockDogRepository extends Mock implements DogRepository {}
 void main() {
   group("FavouritesBloc", () {
     // loading and creating the mock favourite breeds
-    final String mockString = '''
+    const String mockString = '''
     [
     {
         "weight": {
@@ -69,7 +69,7 @@ void main() {
         .map<BreedsModel>((item) => BreedsModel.fromMap(item))
         .toList();
 
-    final String mockRemovedString = '''
+    const String mockRemovedString = '''
     [
     {
         "weight": {
@@ -102,7 +102,7 @@ void main() {
         .toList();
 
     //loading and creating the breed to add
-    final String mockAddString = '''
+    const String mockAddString = '''
     {
     "weight": {
       "imperial": "38 - 50",
@@ -130,7 +130,7 @@ void main() {
     final BreedsModel mockBreedToAdd = BreedsModel.fromMap(mockAddJson);
 
     //loading and creating the breed to remove
-    final String mockRemoveString = '''
+    const String mockRemoveString = '''
     {
     "weight": {
       "imperial": "50 - 60",
@@ -159,7 +159,7 @@ void main() {
     final mockRemoveJson = jsonDecode(mockRemoveString);
     final BreedsModel mockBreedToRemove = BreedsModel.fromMap(mockRemoveJson);
 
-    DogRepository dogRepository;
+    late DogRepository dogRepository;
 
     setUp(() {
       dogRepository = MockDogRepository();
@@ -180,7 +180,7 @@ void main() {
       act: (bloc) => bloc.add(FavouritesStarted()),
       expect: () => <FavouritesState>[
         FavouritesLoading(),
-        FavouritesLoaded(favouritesList: FavouritesList(favourites: []))
+        FavouritesLoaded(favouritesList: const FavouritesList(favourites: []))
       ],
       verify: (_) => verify(dogRepository.loadFavourites).called(1),
     );

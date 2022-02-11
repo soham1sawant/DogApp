@@ -10,10 +10,10 @@ class MainList extends StatelessWidget {
   final bool isFavouritesPage;
 
   const MainList({
-    Key key,
-    this.breeds,
-    @required this.removeButton,
-    @required this.isFavouritesPage,
+    Key? key,
+    required this.breeds,
+    required this.removeButton,
+    required this.isFavouritesPage,
   }) : super(key: key);
 
   @override
@@ -38,7 +38,7 @@ class MainList extends StatelessWidget {
             child: Container(
               key: Key(breeds[index].id.toString()),
               padding: (isFavouritesPage)
-                  ? EdgeInsets.all(0)
+                  ? const EdgeInsets.all(0)
                   : EdgeInsets.fromLTRB(
                       0,
                       size.height * 0.004,
@@ -75,7 +75,7 @@ class MainList extends StatelessWidget {
                             .add(FavouritesRemoved(breeds[index]));
 
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             content: Text("Removed from Favourites"),
                             duration: Duration(milliseconds: 900),
                           ),

@@ -14,7 +14,7 @@ void main() {
 
   group("DogBreedsLoadSuccess", () {
     test("supports value comparison", () {
-      final breedsCatalog = BreedsCatalog(<BreedsModel>[]);
+      const breedsCatalog = BreedsCatalog(<BreedsModel>[]);
       expect(DogBreedsLoadSuccess(breedsCatalog),
           DogBreedsLoadSuccess(breedsCatalog));
     });

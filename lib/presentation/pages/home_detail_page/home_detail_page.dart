@@ -7,9 +7,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class HomeDetailPage extends StatelessWidget {
-  const HomeDetailPage({Key key, @required this.theBreed}) : super(key: key);
 
   final BreedsModel theBreed;
+
+  const HomeDetailPage({Key? key, required this.theBreed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,18 +40,18 @@ class HomeDetailPage extends StatelessWidget {
         child: BlocBuilder<FavouritesBloc, FavouritesState>(
           builder: (context, state) {
             if (state is FavouritesLoading) {
-              return Icon(Icons.favorite_border_outlined);
+              return const Icon(Icons.favorite_border_outlined);
             } else if (state is FavouritesLoaded) {
               if (state.favouritesList.favourites.contains(theBreed)) {
                 containsBreed = true;
-                return Icon(Icons.favorite, color: Colors.red);
+                return const Icon(Icons.favorite, color: Colors.red);
               } else {
-                return Icon(Icons.favorite_border_outlined);
+                return const Icon(Icons.favorite_border_outlined);
               }
             } else if (state is FavouritesLoadingError) {
-              return Icon(Icons.error_outline);
+              return const Icon(Icons.error_outline);
             } else {
-              return Icon(Icons.error_outline);
+              return const Icon(Icons.error_outline);
             }
           },
         ),
@@ -59,7 +60,7 @@ class HomeDetailPage extends StatelessWidget {
             context.read<FavouritesBloc>().add(FavouritesRemoved(theBreed));
 
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
+              const SnackBar(
                 content: Text("Removed from Favourites"),
                 duration: Duration(milliseconds: 900),
               ),
@@ -68,7 +69,7 @@ class HomeDetailPage extends StatelessWidget {
             context.read<FavouritesBloc>().add(FavouritesAdded(theBreed));
 
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
+              const SnackBar(
                 content: Text("Added to Favourites"),
                 duration: Duration(milliseconds: 900),
               ),
@@ -82,8 +83,8 @@ class HomeDetailPage extends StatelessWidget {
 
 class VerticalView extends StatelessWidget {
   const VerticalView({
-    Key key,
-    @required this.theBreed,
+    Key? key,
+    required this.theBreed,
   }) : super(key: key);
 
   final BreedsModel theBreed;
@@ -99,8 +100,8 @@ class VerticalView extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: theBreed.image.url,
               placeholder: (context, url) =>
-                  Center(child: CircularProgressIndicator()),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+                  const Center(child: CircularProgressIndicator()),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
         ),

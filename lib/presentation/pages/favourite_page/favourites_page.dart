@@ -5,6 +5,8 @@ import '../../widgets/main_list.dart';
 import 'package:flutter/material.dart';
 
 class FavouritesPage extends StatelessWidget {
+  const FavouritesPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -20,7 +22,7 @@ class FavouritesPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              MainHeader(header: "Favourites", icon: false),
+              const MainHeader(header: "Favourites", icon: false),
               BlocBuilder<FavouritesBloc, FavouritesState>(
                 builder: (context, state) {
                   if (state is FavouritesLoading) {

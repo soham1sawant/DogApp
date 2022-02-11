@@ -5,6 +5,8 @@ import '../../widgets/main_header.dart';
 import '../../widgets/main_list.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -25,11 +27,11 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              MainHeader(header: "Dog App", icon: true),
+              const MainHeader(header: "Dog App", icon: true),
               BlocBuilder<DogBreedsBloc, DogBreedsState>(
                 builder: (context, state) {
                   if (state is DogBreedsLoadInProgress) {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   } else if (state is DogBreedsLoadSuccess) {
@@ -42,12 +44,12 @@ class HomePage extends StatelessWidget {
                       ),
                     );
                   } else if (state is DogBreedsLoadFailure) {
-                    return Center(
-                      child: const Icon(Icons.error),
+                    return const Center(
+                      child: Icon(Icons.error),
                     );
                   } else {
-                    return Center(
-                      child: const Icon(Icons.error),
+                    return const Center(
+                      child: Icon(Icons.error),
                     );
                   }
                 },

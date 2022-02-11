@@ -9,7 +9,7 @@ import 'presentation/pages/home_page/home_page.dart';
 import 'presentation/themes.dart';
 
 class App extends StatelessWidget {
-  App({Key key, @required this.dogDataRepository}) : super(key: key);
+  const App({Key? key, required this.dogDataRepository}) : super(key: key);
 
   final DogRepository dogDataRepository;
 
@@ -33,8 +33,8 @@ class App extends StatelessWidget {
         darkTheme: MyTheme.darkTheme(context),
         initialRoute: '/',
         routes: {
-          '/': (_) => HomePage(),
-          '/favourites': (_) => FavouritesPage(),
+          '/': (_) => const HomePage(),
+          '/favourites': (_) => const FavouritesPage(),
         },
       ),
     );

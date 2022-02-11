@@ -11,7 +11,7 @@ part 'favourites_state.dart';
 class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
   final DogRepository dogDataRepository;
 
-  FavouritesBloc({@required this.dogDataRepository}) : super(FavouritesLoading()) {
+  FavouritesBloc({required this.dogDataRepository}) : super(FavouritesLoading()) {
     on<FavouritesStarted>(_onStarted);
     on<FavouritesAdded>(_onBreedAdded);
     on<FavouritesRemoved>(_onBreedRemoved);

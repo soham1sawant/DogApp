@@ -4,7 +4,7 @@ class MainHeader extends StatelessWidget {
   final header;
   final icon;
 
-  const MainHeader({Key key, @required this.header, @required this.icon})
+  const MainHeader({Key? key, required this.header, required this.icon})
       : super(key: key);
 
   @override
@@ -27,7 +27,7 @@ class MainHeader extends StatelessWidget {
         ),
         if (icon)
           IconButton(
-            icon: Icon(Icons.favorite),
+            icon: const Icon(Icons.favorite),
             color: Theme.of(context).primaryColor,
             iconSize: orientation == Orientation.portrait
                 ? size.height * 0.05

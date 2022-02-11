@@ -11,7 +11,7 @@ part 'dogbreeds_state.dart';
 class DogBreedsBloc extends Bloc<DogBreedsEvent, DogBreedsState> {
   final DogRepository dogDataRepository;
 
-  DogBreedsBloc({@required this.dogDataRepository}) : super(DogBreedsLoadInProgress()) {
+  DogBreedsBloc({required this.dogDataRepository}) : super(DogBreedsLoadInProgress()) {
     on<DogBreedsEvent>((event, emit) async {
       if (event is DogBreedsRequest) {
         emit(DogBreedsLoadInProgress());

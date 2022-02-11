@@ -13,9 +13,9 @@ class MockDogRepository extends Mock implements DogRepository {}
 
 void main() {
   group("App", () {
-    DogRepository dogRepository;
+    late DogRepository dogRepository;
 
-    final String mockString = '''
+    const String mockString = '''
     [
     {
         "weight": {

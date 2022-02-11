@@ -11,9 +11,9 @@ import 'package:mocktail/mocktail.dart';
 import '../../../helper.dart';
 
 void main() {
-  FavouritesBloc favouritesBloc;
+  late FavouritesBloc favouritesBloc;
 
-  final String mockString = '''
+  const String mockString = '''
     [
     {
         "weight": {
@@ -79,7 +79,7 @@ void main() {
       when(() => favouritesBloc.state).thenReturn(FavouritesLoading());
       await tester.pumpApp(
         favouritesBloc: favouritesBloc,
-        child: FavouritesPage(),
+        child: const FavouritesPage(),
       );
 
       expect(find.byType(FavouritesPage), findsOneWidget);
@@ -93,7 +93,7 @@ void main() {
         when(() => favouritesBloc.state).thenReturn(FavouritesLoading());
         await tester.pumpApp(
           favouritesBloc: favouritesBloc,
-          child: FavouritesPage(),
+          child: const FavouritesPage(),
         );
 
         expect(find.byType(CircularProgressIndicator), findsOneWidget);
@@ -107,7 +107,7 @@ void main() {
             favouritesList: FavouritesList(favourites: mockFavouriteBreeds)));
         await tester.pumpApp(
           favouritesBloc: favouritesBloc,
-          child: FavouritesPage(),
+          child: const FavouritesPage(),
         );
 
         expect(find.byType(InkWell), findsNWidgets(2));
@@ -120,7 +120,7 @@ void main() {
         when(() => favouritesBloc.state).thenReturn(FavouritesLoadingError());
         await tester.pumpApp(
           favouritesBloc: favouritesBloc,
-          child: FavouritesPage(),
+          child: const FavouritesPage(),
         );
 
         expect(find.byIcon(Icons.error_outline), findsOneWidget);
@@ -134,17 +134,17 @@ void main() {
             favouritesList: FavouritesList(favourites: mockFavouriteBreeds)));
         await tester.pumpApp(
           favouritesBloc: favouritesBloc,
-          child: FavouritesPage(),
+          child: const FavouritesPage(),
         );
 
-        expect(find.byKey(Key("remove-Affenpinscher")), findsOneWidget);
-        await tester.tap(find.byKey(Key("remove-Affenpinscher")));
+        expect(find.byKey(const Key("remove-Affenpinscher")), findsOneWidget);
+        await tester.tap(find.byKey(const Key("remove-Affenpinscher")));
         await tester.pumpAndSettle();
         expect(find.byType(SnackBar), findsOneWidget);
         expect(find.text("Removed from Favourites"), findsOneWidget);
 
-        expect(find.byKey(Key("remove-Afghan Hound")), findsOneWidget);
-        await tester.tap(find.byKey(Key("remove-Afghan Hound")));
+        expect(find.byKey(const Key("remove-Afghan Hound")), findsOneWidget);
+        await tester.tap(find.byKey(const Key("remove-Afghan Hound")));
         await tester.pumpAndSettle();
         expect(find.byType(SnackBar), findsOneWidget);
         expect(find.text("Removed from Favourites"), findsOneWidget);

@@ -13,9 +13,9 @@ class MockFavouritesBloc extends MockBloc<FavouritesEvent, FavouritesState>
 
 extension PumpApp on WidgetTester {
   Future<void> pumpApp({
-    DogBreedsBloc dogBreedsBloc,
-    FavouritesBloc favouritesBloc,
-    @required Widget child,
+    DogBreedsBloc? dogBreedsBloc,
+    FavouritesBloc? favouritesBloc,
+    required Widget child,
   }) {
     return pumpWidget(
       MaterialApp(

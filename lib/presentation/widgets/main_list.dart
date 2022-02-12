@@ -2,7 +2,7 @@ import 'package:dog_app/bloc/favourites/favourites_bloc.dart';
 import 'package:dog_app/presentation/pages/home_detail_page/home_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../data/models/breeds.dart';
+import '../../data/models/breeds/breeds_model.dart';
 
 class MainList extends StatelessWidget {
   final List<BreedsModel> breeds;

@@ -1,4 +1,4 @@
-import '../../../../data/models/breeds.dart';
+import '../../../../data/models/breeds/breeds_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -29,7 +29,7 @@ class Description extends StatelessWidget {
         ),
         SubDescription(
           first: "Height : ",
-          second: theBreed.height.metric,
+          second: theBreed.height?.metric,
           unit: " inches",
         ),
         SubDescription(

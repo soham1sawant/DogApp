@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dog_app/data/models/favourites_list.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
-import 'package:dog_app/data/models/breeds.dart';
+import 'package:dog_app/data/models/breeds/breeds_model.dart';
 import 'package:dog_app/data/repositories/dog_repository.dart';
 
 part 'favourites_event.dart';

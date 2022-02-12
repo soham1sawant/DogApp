@@ -1,4 +1,4 @@
-import 'package:dog_app/data/models/breeds.dart';
+import 'package:dog_app/data/models/breeds/breeds_model.dart';
 import 'package:equatable/equatable.dart';
 
 class FavouritesList extends Equatable {

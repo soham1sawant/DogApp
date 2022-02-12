@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:dog_app/data/data_providers/dog_data_provider.dart';
-import 'package:dog_app/data/models/breeds.dart';
+import 'package:dog_app/data/models/breeds/breeds_model.dart';
 
 class DogRepository {
   final DogDataProvider _dogDataProvider = DogDataProvider();
@@ -11,7 +11,7 @@ class DogRepository {
     final http.Response _rawDogData = await _dogDataProvider.getRawDogData();
     final json = jsonDecode(_rawDogData.body) as List;
     final List<BreedsModel> breeds = List.from(json)
-        .map<BreedsModel>((item) => BreedsModel.fromMap(item))
+        .map<BreedsModel>((item) => BreedsModel.fromJsom(item))
         .toList();
 
     return breeds;

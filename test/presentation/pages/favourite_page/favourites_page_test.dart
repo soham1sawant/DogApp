@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dog_app/bloc/favourites/favourites_bloc.dart';
-import 'package:dog_app/data/models/breeds.dart';
+import 'package:dog_app/data/models/breeds/breeds_model.dart';
 import 'package:dog_app/data/models/favourites_list.dart';
 import 'package:dog_app/presentation/pages/favourite_page/favourites_page.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +67,7 @@ void main() {
     ]''';
   final mockJson = jsonDecode(mockString) as List;
   final List<BreedsModel> mockFavouriteBreeds = List.from(mockJson)
-      .map<BreedsModel>((item) => BreedsModel.fromMap(item))
+      .map<BreedsModel>((item) => BreedsModel.fromJsom(item))
       .toList();
 
   setUp(() {

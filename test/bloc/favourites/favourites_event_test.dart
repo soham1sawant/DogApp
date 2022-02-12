@@ -1,5 +1,5 @@
 import 'package:dog_app/bloc/favourites/favourites_bloc.dart';
-import 'package:dog_app/data/models/breeds.dart';
+import 'package:dog_app/data/models/breeds/breeds_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class FakeBreedsModel extends Fake implements BreedsModel {}

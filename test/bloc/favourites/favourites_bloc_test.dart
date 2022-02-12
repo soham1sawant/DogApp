@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dog_app/bloc/favourites/favourites_bloc.dart';
-import 'package:dog_app/data/models/breeds.dart';
+import 'package:dog_app/data/models/breeds/breeds_model.dart';
 import 'package:dog_app/data/models/favourites_list.dart';
 import 'package:dog_app/data/repositories/dog_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -66,7 +66,7 @@ void main() {
     ]''';
     final mockJson = jsonDecode(mockString) as List;
     final List<BreedsModel> mockFavouriteBreeds = List.from(mockJson)
-        .map<BreedsModel>((item) => BreedsModel.fromMap(item))
+        .map<BreedsModel>((item) => BreedsModel.fromJsom(item))
         .toList();
 
     const String mockRemovedString = '''
@@ -97,9 +97,10 @@ void main() {
       }
     ]''';
     final mockRemovedJson = jsonDecode(mockRemovedString) as List;
-    final List<BreedsModel> mockRemovedFavouriteBreeds = List.from(mockRemovedJson)
-        .map<BreedsModel>((item) => BreedsModel.fromMap(item))
-        .toList();
+    final List<BreedsModel> mockRemovedFavouriteBreeds =
+        List.from(mockRemovedJson)
+            .map<BreedsModel>((item) => BreedsModel.fromJsom(item))
+            .toList();
 
     //loading and creating the breed to add
     const String mockAddString = '''
@@ -127,7 +128,7 @@ void main() {
     }
     }''';
     final mockAddJson = jsonDecode(mockAddString);
-    final BreedsModel mockBreedToAdd = BreedsModel.fromMap(mockAddJson);
+    final BreedsModel mockBreedToAdd = BreedsModel.fromJsom(mockAddJson);
 
     //loading and creating the breed to remove
     const String mockRemoveString = '''
@@ -157,7 +158,7 @@ void main() {
     }
     }''';
     final mockRemoveJson = jsonDecode(mockRemoveString);
-    final BreedsModel mockBreedToRemove = BreedsModel.fromMap(mockRemoveJson);
+    final BreedsModel mockBreedToRemove = BreedsModel.fromJsom(mockRemoveJson);
 
     late DogRepository dogRepository;
 
@@ -201,7 +202,9 @@ void main() {
     blocTest<FavouritesBloc, FavouritesState>(
       "emits [] when favourites is not loaded and breed is added",
       setUp: () {
-        when(dogRepository.loadFavourites).thenAnswer((_) async {});
+        when(dogRepository.loadFavourites).thenAnswer((_) async {
+          return <BreedsModel>[];
+        });
       },
       build: () => FavouritesBloc(dogDataRepository: dogRepository),
       act: (bloc) => bloc.add(FavouritesAdded(mockBreedToAdd)),
@@ -259,8 +262,8 @@ void main() {
       act: (bloc) => bloc.add(FavouritesRemoved(mockBreedToRemove)),
       expect: () => <FavouritesState>[
         FavouritesLoaded(
-          favouritesList: FavouritesList(
-              favourites: mockRemovedFavouriteBreeds),
+          favouritesList:
+              FavouritesList(favourites: mockRemovedFavouriteBreeds),
         )
       ],
       verify: (_) {

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:dog_app/data/models/breeds.dart';
+import 'package:dog_app/data/models/breeds/breeds_model.dart';
 import 'package:dog_app/data/models/breeds_catalog.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -60,7 +60,7 @@ void main() {
     ]''';
     final mockJson = jsonDecode(mockString) as List;
     final List<BreedsModel> mockBreeds = List.from(mockJson)
-        .map<BreedsModel>((item) => BreedsModel.fromMap(item))
+        .map<BreedsModel>((item) => BreedsModel.fromJsom(item))
         .toList();
 
     test("supports value comparison", () {

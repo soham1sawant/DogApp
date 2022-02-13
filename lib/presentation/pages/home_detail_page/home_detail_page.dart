@@ -7,7 +7,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class HomeDetailPage extends StatelessWidget {
-
   final BreedsModel theBreed;
 
   const HomeDetailPage({Key? key, required this.theBreed}) : super(key: key);
@@ -107,8 +106,10 @@ class VerticalView extends StatelessWidget {
         ),
         Expanded(
           flex: 3,
-          child: Description(
-            theBreed: theBreed,
+          child: SingleChildScrollView(
+            child: Description(
+              theBreed: theBreed,
+            ),
           ),
         ),
       ],

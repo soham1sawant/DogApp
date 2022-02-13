@@ -43,6 +43,8 @@ dependencies:
   equatable: ^2.0.3
   json_annotation: ^4.4.0
   badges: ^2.0.2
+  hydrated_bloc: ^8.0.0
+  path_provider: ^2.0.9
   
 
 dev_dependencies:

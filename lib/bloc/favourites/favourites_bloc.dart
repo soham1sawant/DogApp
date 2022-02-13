@@ -1,6 +1,8 @@
-import 'package:bloc/bloc.dart';
+import 'dart:convert';
+
 import 'package:dog_app/data/models/favourites_list.dart';
 import 'package:equatable/equatable.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:dog_app/data/models/breeds/breeds_model.dart';
 import 'package:dog_app/data/repositories/dog_repository.dart';
@@ -8,10 +10,11 @@ import 'package:dog_app/data/repositories/dog_repository.dart';
 part 'favourites_event.dart';
 part 'favourites_state.dart';
 
-class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
+class FavouritesBloc extends HydratedBloc<FavouritesEvent, FavouritesState> {
   final DogRepository dogDataRepository;
 
-  FavouritesBloc({required this.dogDataRepository}) : super(FavouritesLoading()) {
+  FavouritesBloc({required this.dogDataRepository})
+      : super(FavouritesLoading()) {
     on<FavouritesStarted>(_onStarted);
     on<FavouritesAdded>(_onBreedAdded);
     on<FavouritesRemoved>(_onBreedRemoved);
@@ -55,10 +58,34 @@ class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
         dogDataRepository.removeBreedFromFavourites(event.breed);
         emit(FavouritesLoaded(
             favouritesList: FavouritesList(
-                favourites: [...state.favouritesList.favourites]..remove(event.breed))));
+                favourites: [...state.favouritesList.favourites]
+                  ..remove(event.breed))));
       } catch (_) {
         emit(FavouritesLoadingError());
       }
+    }
+  }
+
+  @override
+  FavouritesState? fromJson(Map<String, dynamic> json) {
+    try {
+      final storedFavouriteBreeds = FavouritesLoaded.fromMap(json);
+      dogDataRepository.favouriteBreeds =
+          storedFavouriteBreeds.favouritesList.favourites;
+
+      return FavouritesLoaded(
+          favouritesList: storedFavouriteBreeds.favouritesList);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  @override
+  Map<String, dynamic>? toJson(FavouritesState state) {
+    if (state is FavouritesLoaded) {
+      return state.toMap();
+    } else {
+      return null;
     }
   }
 }

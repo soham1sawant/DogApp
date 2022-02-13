@@ -263,7 +263,7 @@ void main() {
       expect: () => <FavouritesState>[
         FavouritesLoaded(
           favouritesList:
-              FavouritesList(favourites: mockRemovedFavouriteBreeds),
+              FavouritesList(favourites: [...mockFavouriteBreeds]..remove(mockBreedToRemove)),
         )
       ],
       verify: (_) {

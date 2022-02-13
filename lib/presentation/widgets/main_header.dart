@@ -40,7 +40,8 @@ class MainHeader extends StatelessWidget {
                   ),
                   badgeColor: Theme.of(context).focusColor,
                   position: BadgePosition.topEnd(top: 0, end: 0),
-                  animationType: BadgeAnimationType.scale,
+                  animationType: BadgeAnimationType.fade,
+                  showBadge: state.favouritesList.favourites.isEmpty ? false : true,
                   child: IconButton(
                     icon: const Icon(Icons.favorite),
                     color: Theme.of(context).primaryColor,

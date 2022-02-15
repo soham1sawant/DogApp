@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import 'helpers/hydrated_bloc.dart';
+
 class MockDogRepository extends Mock implements DogRepository {}
 
 void main() {
@@ -86,9 +88,13 @@ void main() {
       "can navigate back and forth"
       "between HomePage and FavouritesPage",
       (tester) async {
-        await tester.pumpWidget(App(dogDataRepository: dogRepository));
+        await mockHydratedStorage(() async => {
+              await tester.pumpWidget(
+                App(dogDataRepository: dogRepository),
+              ),
+            });
 
-        await tester.tap(find.byIcon(Icons.favorite));
+        await tester.tap(find.byKey(const ValueKey("to-favourites-page")));
         await tester.pumpAndSettle();
 
         expect(find.byType(FavouritesPage), findsOneWidget);

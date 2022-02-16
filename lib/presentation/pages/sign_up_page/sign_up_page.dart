@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 import '../../widgets/authentication_button.dart';
@@ -47,7 +49,10 @@ class SignUpPage extends StatelessWidget {
                   AuthenticationButton(
                     size: size,
                     text: "Log In",
-                    onTapAction: () => Navigator.pushNamed(context, '/'),
+                    onTapAction: () {
+                      Navigator.pushNamed(context, '/');
+                      log("pushed /");
+                    },
                   ),
                 ],
               ),

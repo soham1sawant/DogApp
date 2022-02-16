@@ -4,9 +4,13 @@ class AuthenticationButton extends StatelessWidget {
   const AuthenticationButton({
     Key? key,
     required this.size,
+    required this.text,
+    required this.f,
   }) : super(key: key);
 
   final Size size;
+  final String text;
+  final Function f;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +18,7 @@ class AuthenticationButton extends StatelessWidget {
       child: Container(
         child: Center(
             child: Text(
-          "LOG IN",
+          text,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             color: Theme.of(context).focusColor,
@@ -29,7 +33,9 @@ class AuthenticationButton extends StatelessWidget {
           )),
         ),
       ),
-      onTap: () {},
+      onTap: () {
+        f;
+      },
     );
   }
 }

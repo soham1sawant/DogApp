@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../widgets/authentication_button.dart';
 import '../../widgets/credentials_header.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class LoginPage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const CredentialsHeader(heading: "Login In"),
+          const CredentialsHeader(heading: "Sign Up"),
           Form(
             key: const Key("login-page"),
             child: Padding(
@@ -40,14 +40,14 @@ class LoginPage extends StatelessWidget {
                   SizedBox(height: size.height * 0.02),
                   AuthenticationButton(
                     size: size,
-                    text: "LOG IN",
+                    text: "SIGN UP",
                     f: () {},
                   ),
                   SizedBox(height: size.height * 0.02),
                   AuthenticationButton(
                     size: size,
-                    text: "Sign Up",
-                    f: () => Navigator.pushNamed(context, '/signup'),
+                    text: "Login",
+                    f: () => Navigator.pushNamed(context, '/'),
                   ),
                 ],
               ),

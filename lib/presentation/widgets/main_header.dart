@@ -43,6 +43,7 @@ class MainHeader extends StatelessWidget {
                   animationType: BadgeAnimationType.fade,
                   showBadge: state.favouritesList.favourites.isEmpty ? false : true,
                   child: IconButton(
+                    key: const Key("to-favourites-page"),
                     icon: const Icon(Icons.favorite),
                     color: Theme.of(context).primaryColor,
                     iconSize: orientation == Orientation.portrait

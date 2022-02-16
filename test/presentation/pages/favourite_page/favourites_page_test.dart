@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../helper.dart';
+import '../../../helpers/helper.dart';
 
 void main() {
   late FavouritesBloc favouritesBloc;

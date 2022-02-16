@@ -13,6 +13,22 @@ class FavouritesLoaded extends FavouritesState {
 
   FavouritesLoaded({this.favouritesList = const FavouritesList()});
 
+ Map<String, dynamic> toMap() {
+    return {
+      'favouritesList': favouritesList.toMap(),
+    };
+  }
+
+  factory FavouritesLoaded.fromMap(Map<String, dynamic> map) {
+    return FavouritesLoaded(
+      favouritesList: FavouritesList.fromMap(map['favouritesList']),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory FavouritesLoaded.fromJson(String source) => FavouritesLoaded.fromMap(json.decode(source));
+
   @override
   List<Object> get props => [favouritesList];
 }

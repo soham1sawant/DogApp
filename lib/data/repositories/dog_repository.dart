@@ -5,7 +5,7 @@ import 'package:dog_app/data/models/breeds/breeds_model.dart';
 
 class DogRepository {
   final DogDataProvider _dogDataProvider = DogDataProvider();
-  final List<BreedsModel> _favouriteBreeds = [];
+  List<BreedsModel> favouriteBreeds = [];
 
   Future<List<BreedsModel>> getDogData() async {
     final http.Response _rawDogData = await _dogDataProvider.getRawDogData();
@@ -18,10 +18,10 @@ class DogRepository {
   }
 
   Future<List<BreedsModel>> loadFavourites() {
-    return Future.delayed(const Duration(milliseconds: 800), () => _favouriteBreeds);
+    return Future.delayed(const Duration(milliseconds: 800), () => favouriteBreeds);
   }
 
-  void addBreedToFavourites(BreedsModel breed) => _favouriteBreeds.add(breed);
+  void addBreedToFavourites(BreedsModel breed) => favouriteBreeds.add(breed);
 
-  void removeBreedFromFavourites(BreedsModel breed) => _favouriteBreeds.remove(breed);
+  void removeBreedFromFavourites(BreedsModel breed) => favouriteBreeds.remove(breed);
 }

@@ -1,3 +1,5 @@
+import 'package:dog_app/presentation/pages/login_page/login_page.dart';
+import 'package:dog_app/presentation/pages/sign_up_page/sign_up_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,8 +35,10 @@ class App extends StatelessWidget {
         darkTheme: MyTheme.darkTheme(context),
         initialRoute: '/',
         routes: {
-          '/': (_) => const HomePage(),
-          '/favourites': (_) => const FavouritesPage(),
+          '/': (context) => LoginPage(),
+          '/signup': (context) => const SignUpPage(),
+          '/home': (context) => const HomePage(),
+          '/favourites': (context) => const FavouritesPage(),
         },
       ),
     );

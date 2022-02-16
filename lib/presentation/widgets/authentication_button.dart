@@ -5,16 +5,17 @@ class AuthenticationButton extends StatelessWidget {
     Key? key,
     required this.size,
     required this.text,
-    required this.f,
+    required this.onTapAction,
   }) : super(key: key);
 
   final Size size;
   final String text;
-  final Function f;
+  final Function onTapAction;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
+      onTap: () => onTapAction(),
       child: Container(
         child: Center(
             child: Text(
@@ -33,9 +34,6 @@ class AuthenticationButton extends StatelessWidget {
           )),
         ),
       ),
-      onTap: () {
-        f;
-      },
     );
   }
 }

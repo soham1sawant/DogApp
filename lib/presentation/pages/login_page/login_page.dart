@@ -4,7 +4,9 @@ import '../../widgets/authentication_button.dart';
 import '../../widgets/credentials_header.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
+
+final _formkey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +17,9 @@ class LoginPage extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const CredentialsHeader(heading: "Login In"),
+          const CredentialsHeader(heading: "Log In"),
           Form(
-            key: const Key("login-page"),
+            key: _formkey,
             child: Padding(
               padding: EdgeInsets.symmetric(
                 vertical: 0.0,
@@ -41,13 +43,13 @@ class LoginPage extends StatelessWidget {
                   AuthenticationButton(
                     size: size,
                     text: "LOG IN",
-                    f: () {},
+                    onTapAction: () {},
                   ),
                   SizedBox(height: size.height * 0.02),
                   AuthenticationButton(
                     size: size,
                     text: "Sign Up",
-                    f: () => Navigator.pushNamed(context, '/signup'),
+                    onTapAction: () => Navigator.pushNamed(context, "/signup"),
                   ),
                 ],
               ),

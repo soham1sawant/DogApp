@@ -35,7 +35,7 @@ class App extends StatelessWidget {
         darkTheme: MyTheme.darkTheme(context),
         initialRoute: '/',
         routes: {
-          '/': (context) => const LoginPage(),
+          '/': (context) => LoginPage(),
           '/signup': (context) => const SignUpPage(),
           '/home': (context) => const HomePage(),
           '/favourites': (context) => const FavouritesPage(),

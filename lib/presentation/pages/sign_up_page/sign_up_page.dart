@@ -41,13 +41,13 @@ class SignUpPage extends StatelessWidget {
                   AuthenticationButton(
                     size: size,
                     text: "SIGN UP",
-                    f: () {},
+                    onTapAction: () {},
                   ),
                   SizedBox(height: size.height * 0.02),
                   AuthenticationButton(
                     size: size,
-                    text: "Login",
-                    f: () => Navigator.pushNamed(context, '/'),
+                    text: "Log In",
+                    onTapAction: () => Navigator.pushNamed(context, '/'),
                   ),
                 ],
               ),

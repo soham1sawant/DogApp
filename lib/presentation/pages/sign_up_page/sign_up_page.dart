@@ -1,12 +1,31 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 import '../../widgets/authentication_button.dart';
 import '../../widgets/credentials_header.dart';
 
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+  SignUpPage({Key? key}) : super(key: key);
+
+  final _formkey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController1 = TextEditingController();
+  final _passwordController2 = TextEditingController();
+
+  final passwordValidator = MultiValidator([
+    RequiredValidator(errorText: 'password is required'),
+    MinLengthValidator(8, errorText: 'password must be at least 8 digits long'),
+    PatternValidator(r'(?=.*?[#?!@$%^&*-])',
+        errorText: 'at least one special character required'),
+    PatternValidator(r'(?=.*?[0123456789])',
+        errorText: 'at least one number required'),
+  ]);
+  final emailValidator = MultiValidator([
+    RequiredValidator(errorText: 'email is required'),
+    EmailValidator(errorText: 'enter a valid email address'),
+  ]);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +38,7 @@ class SignUpPage extends StatelessWidget {
         children: [
           const CredentialsHeader(heading: "Sign Up"),
           Form(
-            key: const Key("login-page"),
+            key: _formkey,
             child: Padding(
               padding: EdgeInsets.symmetric(
                 vertical: 0.0,
@@ -28,15 +47,29 @@ class SignUpPage extends StatelessWidget {
               child: Column(
                 children: [
                   TextFormField(
+                    validator: emailValidator,
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
                       hintText: "Email",
                     ),
                   ),
                   SizedBox(height: size.height * 0.02),
                   TextFormField(
+                    validator: passwordValidator,
+                    controller: _passwordController1,
                     obscureText: true,
                     decoration: const InputDecoration(
-                      hintText: "Password",
+                      hintText: "New Password",
+                    ),
+                  ),
+                  SizedBox(height: size.height * 0.02),
+                  TextFormField(
+                    validator: passwordValidator,
+                    controller: _passwordController2,
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      hintText: "New Password",
                     ),
                   ),
                   SizedBox(height: size.height * 0.02),

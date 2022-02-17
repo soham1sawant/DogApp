@@ -10,6 +10,9 @@ class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
 
   final _formkey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
 
   final passwordValidator = MultiValidator([
     RequiredValidator(errorText: 'password is required'),
@@ -27,64 +30,63 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    Orientation orientation = MediaQuery.of(context).orientation;
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const CredentialsHeader(heading: "Log In"),
-            Form(
-              key: _formkey,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: 0.0,
-                  horizontal: size.width * 0.065,
-                ),
-                child: Column(
-                  children: [
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        hintText: "Email",
-                      ),
-                      validator: emailValidator,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const CredentialsHeader(heading: "Log In"),
+          Form(
+            key: _formkey,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                vertical: 0.0,
+                horizontal: size.width * 0.065,
+              ),
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: const InputDecoration(
+                      hintText: "Email",
                     ),
-                    SizedBox(height: size.height * 0.02),
-                    TextFormField(
-                      validator: passwordValidator,
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                        hintText: "Password",
-                      ),
+                    validator: emailValidator,
+                  ),
+                  SizedBox(height: size.height * 0.02),
+                  TextFormField(
+                    controller: _passwordController,
+                    validator: passwordValidator,
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      hintText: "Password",
                     ),
-                    SizedBox(height: size.height * 0.02),
-                    AuthenticationButton(
-                      size: size,
-                      text: "LOG IN",
-                      onTapAction: () {
-                        if (_formkey.currentState!.validate()) {
-                          Navigator.pushNamed(context, "/home");
-                          log("Pushed /home");
-                        }
-                      },
-                    ),
-                    SizedBox(height: size.height * 0.02),
-                    AuthenticationButton(
-                      size: size,
-                      text: "Sign Up",
-                      onTapAction: () {
-                        Navigator.pushNamed(context, "/signup");
-                          log("Pushed /signup");
-      
-                      },
-                    ),
-                  ],
-                ),
+                  ),
+                  SizedBox(height: size.height * 0.02),
+                  AuthenticationButton(
+                    size: size,
+                    text: "LOG IN",
+                    onTapAction: () {
+                      if (_formkey.currentState!.validate()) {
+                        Navigator.pushNamed(context, "/home");
+                        log("Pushed /home");
+                      }
+                    },
+                  ),
+                  SizedBox(height: size.height * 0.02),
+                  AuthenticationButton(
+                    size: size,
+                    text: "Sign Up",
+                    onTapAction: () {
+                      Navigator.pushNamed(context, "/signup");
+                      log("Pushed /signup");
+                    },
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

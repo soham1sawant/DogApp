@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dog_app/app.dart';
 import 'package:dog_app/data/models/breeds/breeds_model.dart';
-import 'package:dog_app/data/repositories/dog_repository.dart';
+import 'package:dog_app/data/repositories/repository.dart';
 import 'package:dog_app/presentation/pages/favourite_page/favourites_page.dart';
 import 'package:dog_app/presentation/pages/home_page/home_page.dart';
 import 'package:flutter/material.dart';
@@ -11,11 +11,11 @@ import 'package:mocktail/mocktail.dart';
 
 import 'helpers/hydrated_bloc.dart';
 
-class MockDogRepository extends Mock implements DogRepository {}
+class MockDogRepository extends Mock implements Repository {}
 
 void main() {
   group("App", () {
-    late DogRepository dogRepository;
+    late Repository dogRepository;
 
     const String mockString = '''
     [

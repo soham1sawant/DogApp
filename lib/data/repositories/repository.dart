@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:dog_app/data/data_providers/dog_data_provider.dart';
 import 'package:dog_app/data/models/breeds/breeds_model.dart';
 
-class DogRepository {
+class Repository {
   final DogDataProvider _dogDataProvider = DogDataProvider();
   List<BreedsModel> favouriteBreeds = [];
 

@@ -5,13 +5,13 @@ import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:dog_app/data/models/breeds/breeds_model.dart';
-import 'package:dog_app/data/repositories/dog_repository.dart';
+import 'package:dog_app/data/repositories/repository.dart';
 
 part 'favourites_event.dart';
 part 'favourites_state.dart';
 
 class FavouritesBloc extends HydratedBloc<FavouritesEvent, FavouritesState> {
-  final DogRepository dogDataRepository;
+  final Repository dogDataRepository;
 
   FavouritesBloc({required this.dogDataRepository})
       : super(FavouritesLoading()) {

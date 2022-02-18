@@ -2,16 +2,16 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dog_app/bloc/dog_breeds/dogbreeds_bloc.dart';
 import 'package:dog_app/data/models/breeds/breeds_model.dart';
 import 'package:dog_app/data/models/breeds_catalog.dart';
-import 'package:dog_app/data/repositories/dog_repository.dart';
+import 'package:dog_app/data/repositories/repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockDogRepository extends Mock implements DogRepository {}
+class MockDogRepository extends Mock implements Repository {}
 
 void main() {
   group("DogBreedsBloc", () {
     List<BreedsModel> mockDogsList = [];
-    late DogRepository dogRepository;
+    late Repository dogRepository;
 
     setUp(() async {
       dogRepository = MockDogRepository();

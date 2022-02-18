@@ -46,6 +46,8 @@ dependencies:
   hydrated_bloc: ^8.0.0
   path_provider: ^2.0.9
   form_field_validator: ^1.1.0
+  firebase_core: ^1.12.0
+  firebase_auth: ^3.3.7
   
 
 dev_dependencies:

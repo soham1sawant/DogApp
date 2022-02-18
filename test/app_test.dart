@@ -5,6 +5,7 @@ import 'package:dog_app/data/models/breeds/breeds_model.dart';
 import 'package:dog_app/data/repositories/repository.dart';
 import 'package:dog_app/presentation/pages/favourite_page/favourites_page.dart';
 import 'package:dog_app/presentation/pages/home_page/home_page.dart';
+import 'package:dog_app/presentation/pages/login_page/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -79,34 +80,9 @@ void main() {
       when(dogRepository.getDogData).thenAnswer((_) async => mockBreeds);
     });
 
-    testWidgets("renders HomePage (initial route)", (tester) async {
+    testWidgets("renders LoginPage (initial route)", (tester) async {
       await tester.pumpWidget(const App());
-      expect(find.byType(HomePage), findsOneWidget);
+      expect(find.byType(LoginPage), findsOneWidget);
     });
-
-    testWidgets(
-      "can navigate back and forth"
-      "between HomePage and FavouritesPage",
-      (tester) async {
-        await mockHydratedStorage(() async => {
-              await tester.pumpWidget(
-                const App(),
-              ),
-            });
-
-        await tester.tap(find.byKey(const ValueKey("to-favourites-page")));
-        await tester.pumpAndSettle();
-
-        expect(find.byType(FavouritesPage), findsOneWidget);
-        expect(find.byType(HomePage), findsNothing);
-
-        final NavigatorState navigator = tester.state(find.byType(Navigator));
-        navigator.pop();
-        await tester.pumpAndSettle();
-
-        expect(find.byType(HomePage), findsOneWidget);
-        expect(find.byType(FavouritesPage), findsNothing);
-      },
-    );
   });
 }

@@ -3,13 +3,13 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dog_app/bloc/favourites/favourites_bloc.dart';
 import 'package:dog_app/data/models/breeds/breeds_model.dart';
 import 'package:dog_app/data/models/favourites_list.dart';
-import 'package:dog_app/data/repositories/repository.dart';
+import 'package:dog_app/data/repositories/dog_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../helpers/hydrated_bloc.dart';
 
-class MockDogRepository extends Mock implements Repository {}
+class MockDogRepository extends Mock implements DogRepository {}
 
 void main() {
   group("FavouritesBloc", () {
@@ -130,7 +130,7 @@ void main() {
     final mockRemoveJson = jsonDecode(mockRemoveString);
     final BreedsModel mockBreedToRemove = BreedsModel.fromJsom(mockRemoveJson);
 
-    late Repository dogRepository;
+    late DogRepository dogRepository;
 
     setUp(() {
       dogRepository = MockDogRepository();

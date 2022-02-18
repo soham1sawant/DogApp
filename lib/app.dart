@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'bloc/dog_breeds/dogbreeds_bloc.dart';
 import 'bloc/favourites/favourites_bloc.dart';
-import 'data/repositories/repository.dart';
+import 'data/repositories/dog_repository.dart';
 import 'presentation/pages/favourite_page/favourites_page.dart';
 import 'presentation/pages/home_page/home_page.dart';
 import 'presentation/themes.dart';
@@ -16,17 +16,17 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider(
-      create: (context) => Repository(),
+      create: (context) => DogRepository(),
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
             create: (context) => DogBreedsBloc(
-                repository: RepositoryProvider.of<Repository>(context))
+                repository: RepositoryProvider.of<DogRepository>(context))
               ..add(DogBreedsRequest()),
           ),
           BlocProvider(
             create: (context) => FavouritesBloc(
-                repository: RepositoryProvider.of<Repository>(context))
+                repository: RepositoryProvider.of<DogRepository>(context))
               ..add(FavouritesStarted()),
           ),
         ],

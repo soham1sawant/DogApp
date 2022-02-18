@@ -11,35 +11,38 @@ import 'presentation/pages/home_page/home_page.dart';
 import 'presentation/themes.dart';
 
 class App extends StatelessWidget {
-  const App({Key? key, required this.dogDataRepository}) : super(key: key);
-
-  final Repository dogDataRepository;
+  const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-            create: (context) =>
-                DogBreedsBloc(dogDataRepository: dogDataRepository)
-                  ..add(DogBreedsRequest())),
-        BlocProvider(
-            create: (context) =>
-                FavouritesBloc(dogDataRepository: dogDataRepository)
-                  ..add(FavouritesStarted())),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        themeMode: ThemeMode.light,
-        theme: MyTheme.lightTheme(context),
-        darkTheme: MyTheme.darkTheme(context),
-        initialRoute: '/',
-        routes: {
-          '/': (context) => LoginPage(),
-          '/signup': (context) => SignUpPage(),
-          '/home': (context) => const HomePage(),
-          '/favourites': (context) => const FavouritesPage(),
-        },
+    return RepositoryProvider(
+      create: (context) => Repository(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => DogBreedsBloc(
+                repository: RepositoryProvider.of<Repository>(context))
+              ..add(DogBreedsRequest()),
+          ),
+          BlocProvider(
+            create: (context) => FavouritesBloc(
+                repository: RepositoryProvider.of<Repository>(context))
+              ..add(FavouritesStarted()),
+          ),
+        ],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          themeMode: ThemeMode.light,
+          theme: MyTheme.lightTheme(context),
+          darkTheme: MyTheme.darkTheme(context),
+          initialRoute: '/',
+          routes: {
+            '/': (context) => LoginPage(),
+            '/signup': (context) => SignUpPage(),
+            '/home': (context) => const HomePage(),
+            '/favourites': (context) => const FavouritesPage(),
+          },
+        ),
       ),
     );
   }

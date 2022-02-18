@@ -80,7 +80,7 @@ void main() {
     });
 
     testWidgets("renders HomePage (initial route)", (tester) async {
-      await tester.pumpWidget(App(dogDataRepository: dogRepository));
+      await tester.pumpWidget(const App());
       expect(find.byType(HomePage), findsOneWidget);
     });
 
@@ -90,7 +90,7 @@ void main() {
       (tester) async {
         await mockHydratedStorage(() async => {
               await tester.pumpWidget(
-                App(dogDataRepository: dogRepository),
+                const App(),
               ),
             });
 

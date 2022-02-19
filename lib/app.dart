@@ -1,6 +1,5 @@
 import 'package:dog_app/bloc/authentication/auth_bloc.dart';
 import 'package:dog_app/data/repositories/auth_repository.dart';
-import 'package:dog_app/presentation/pages/login_page/login_page.dart';
 import 'package:dog_app/presentation/pages/sign_up_page/sign_up_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +9,7 @@ import 'bloc/favourites/favourites_bloc.dart';
 import 'data/repositories/dog_repository.dart';
 import 'presentation/pages/favourite_page/favourites_page.dart';
 import 'presentation/pages/home_page/home_page.dart';
+import 'presentation/pages/sign_in_page/sign_in_page.dart';
 import 'presentation/themes.dart';
 
 class App extends StatelessWidget {
@@ -46,7 +46,7 @@ class App extends StatelessWidget {
           darkTheme: MyTheme.darkTheme(context),
           initialRoute: '/',
           routes: {
-            '/': (context) => LoginPage(),
+            '/': (context) => SignInPage(),
             '/signup': (context) => SignUpPage(),
             '/home': (context) => const HomePage(),
             '/favourites': (context) => const FavouritesPage(),

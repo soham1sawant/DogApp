@@ -3,14 +3,9 @@ import 'dart:convert';
 import 'package:dog_app/app.dart';
 import 'package:dog_app/data/models/breeds/breeds_model.dart';
 import 'package:dog_app/data/repositories/dog_repository.dart';
-import 'package:dog_app/presentation/pages/favourite_page/favourites_page.dart';
-import 'package:dog_app/presentation/pages/home_page/home_page.dart';
-import 'package:dog_app/presentation/pages/login_page/login_page.dart';
-import 'package:flutter/material.dart';
+import 'package:dog_app/presentation/pages/sign_in_page/sign_in_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-
-import 'helpers/hydrated_bloc.dart';
 
 class MockDogRepository extends Mock implements DogRepository {}
 
@@ -82,7 +77,7 @@ void main() {
 
     testWidgets("renders LoginPage (initial route)", (tester) async {
       await tester.pumpWidget(const App());
-      expect(find.byType(LoginPage), findsOneWidget);
+      expect(find.byType(SignInPage), findsOneWidget);
     });
   });
 }

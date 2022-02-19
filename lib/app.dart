@@ -1,3 +1,5 @@
+import 'package:dog_app/bloc/authentication/auth_bloc.dart';
+import 'package:dog_app/data/repositories/auth_repository.dart';
 import 'package:dog_app/presentation/pages/login_page/login_page.dart';
 import 'package:dog_app/presentation/pages/sign_up_page/sign_up_page.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +17,11 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RepositoryProvider(
-      create: (context) => DogRepository(),
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<DogRepository>(create: (context) => DogRepository()),
+        RepositoryProvider<AuthRepository>(create: (context) => AuthRepository()),
+      ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
@@ -29,6 +34,10 @@ class App extends StatelessWidget {
                 repository: RepositoryProvider.of<DogRepository>(context))
               ..add(FavouritesStarted()),
           ),
+          BlocProvider(
+              create: (context) => AuthBloc(
+                  authRepository:
+                      RepositoryProvider.of<AuthRepository>(context))),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

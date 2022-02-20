@@ -1,6 +1,7 @@
 import 'package:dog_app/bloc/authentication/auth_bloc.dart';
 import 'package:dog_app/data/repositories/auth_repository.dart';
 import 'package:dog_app/presentation/pages/sign_up_page/sign_up_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,7 +21,8 @@ class App extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<DogRepository>(create: (context) => DogRepository()),
-        RepositoryProvider<AuthRepository>(create: (context) => AuthRepository()),
+        RepositoryProvider<AuthRepository>(
+            create: (context) => AuthRepository()),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -44,13 +46,22 @@ class App extends StatelessWidget {
           themeMode: ThemeMode.light,
           theme: MyTheme.lightTheme(context),
           darkTheme: MyTheme.darkTheme(context),
-          initialRoute: '/',
           routes: {
-            '/': (context) => SignInPage(),
+            '/signin': (context) => SignInPage(),
             '/signup': (context) => SignUpPage(),
             '/home': (context) => const HomePage(),
             '/favourites': (context) => const FavouritesPage(),
           },
+          home: StreamBuilder<User?>(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return const HomePage();
+              } else {
+                return SignInPage();
+              }
+            },
+          ),
         ),
       ),
     );

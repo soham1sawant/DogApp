@@ -106,7 +106,9 @@ class SignInPage extends StatelessWidget {
             ),
           );
         } else if (state is LoadingState) {
-          return const Center(child: CircularProgressIndicator());
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
         }
         return Container();
       },

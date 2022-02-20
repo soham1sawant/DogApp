@@ -115,7 +115,7 @@ class SignUpPage extends StatelessWidget {
                               size: size,
                               text: "Log In",
                               onTapAction: () {
-                                Navigator.pushReplacementNamed(context, '/');
+                                Navigator.pushReplacementNamed(context, '/signin');
                                 log("pushed /");
                               },
                             ),

@@ -2,6 +2,7 @@ import 'package:dog_app/bloc/authentication/auth_bloc.dart';
 import 'package:dog_app/bloc/dog_breeds/dogbreeds_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../widgets/main_header.dart';
 import '../../widgets/main_list.dart';
 

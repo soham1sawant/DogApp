@@ -3,13 +3,9 @@ import 'dart:convert';
 import 'package:dog_app/app.dart';
 import 'package:dog_app/data/models/breeds/breeds_model.dart';
 import 'package:dog_app/data/repositories/dog_repository.dart';
-import 'package:dog_app/presentation/pages/favourite_page/favourites_page.dart';
-import 'package:dog_app/presentation/pages/home_page/home_page.dart';
-import 'package:flutter/material.dart';
+import 'package:dog_app/presentation/pages/sign_in_page/sign_in_page.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-
-import 'helpers/hydrated_bloc.dart';
 
 class MockDogRepository extends Mock implements DogRepository {}
 
@@ -79,34 +75,9 @@ void main() {
       when(dogRepository.getDogData).thenAnswer((_) async => mockBreeds);
     });
 
-    testWidgets("renders HomePage (initial route)", (tester) async {
-      await tester.pumpWidget(App(dogDataRepository: dogRepository));
-      expect(find.byType(HomePage), findsOneWidget);
+    testWidgets("renders LoginPage (initial route)", (tester) async {
+      await tester.pumpWidget(const App());
+      expect(find.byType(SignInPage), findsOneWidget);
     });
-
-    testWidgets(
-      "can navigate back and forth"
-      "between HomePage and FavouritesPage",
-      (tester) async {
-        await mockHydratedStorage(() async => {
-              await tester.pumpWidget(
-                App(dogDataRepository: dogRepository),
-              ),
-            });
-
-        await tester.tap(find.byKey(const ValueKey("to-favourites-page")));
-        await tester.pumpAndSettle();
-
-        expect(find.byType(FavouritesPage), findsOneWidget);
-        expect(find.byType(HomePage), findsNothing);
-
-        final NavigatorState navigator = tester.state(find.byType(Navigator));
-        navigator.pop();
-        await tester.pumpAndSettle();
-
-        expect(find.byType(HomePage), findsOneWidget);
-        expect(find.byType(FavouritesPage), findsNothing);
-      },
-    );
   });
 }

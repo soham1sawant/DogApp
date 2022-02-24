@@ -24,4 +24,6 @@ class DogRepository {
   void addBreedToFavourites(BreedsModel breed) => favouriteBreeds.add(breed);
 
   void removeBreedFromFavourites(BreedsModel breed) => favouriteBreeds.remove(breed);
+
+
 }

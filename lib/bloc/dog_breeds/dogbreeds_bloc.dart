@@ -9,15 +9,15 @@ part 'dogbreeds_event.dart';
 part 'dogbreeds_state.dart';
 
 class DogBreedsBloc extends Bloc<DogBreedsEvent, DogBreedsState> {
-  final DogRepository dogDataRepository;
+  final DogRepository repository;
 
-  DogBreedsBloc({required this.dogDataRepository}) : super(DogBreedsLoadInProgress()) {
+  DogBreedsBloc({required this.repository}) : super(DogBreedsLoadInProgress()) {
     on<DogBreedsEvent>((event, emit) async {
       if (event is DogBreedsRequest) {
         emit(DogBreedsLoadInProgress());
 
         try {
-          final dogDataResponse = await dogDataRepository.getDogData();
+          final dogDataResponse = await repository.getDogData();
           emit(DogBreedsLoadSuccess(BreedsCatalog(dogDataResponse)));
         } catch (_) {
           emit(DogBreedsLoadFailure());

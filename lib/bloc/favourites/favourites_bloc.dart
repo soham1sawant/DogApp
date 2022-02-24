@@ -11,9 +11,9 @@ part 'favourites_event.dart';
 part 'favourites_state.dart';
 
 class FavouritesBloc extends HydratedBloc<FavouritesEvent, FavouritesState> {
-  final DogRepository dogDataRepository;
+  final DogRepository repository;
 
-  FavouritesBloc({required this.dogDataRepository})
+  FavouritesBloc({required this.repository})
       : super(FavouritesLoading()) {
     on<FavouritesStarted>(_onStarted);
     on<FavouritesAdded>(_onBreedAdded);
@@ -25,7 +25,7 @@ class FavouritesBloc extends HydratedBloc<FavouritesEvent, FavouritesState> {
     emit(FavouritesLoading());
 
     try {
-      final favouriteItems = await dogDataRepository.loadFavourites();
+      final favouriteItems = await repository.loadFavourites();
       emit(FavouritesLoaded(
           favouritesList: FavouritesList(favourites: [...favouriteItems])));
     } catch (_) {
@@ -38,7 +38,7 @@ class FavouritesBloc extends HydratedBloc<FavouritesEvent, FavouritesState> {
 
     if (state is FavouritesLoaded) {
       try {
-        dogDataRepository.addBreedToFavourites(event.breed);
+        repository.addBreedToFavourites(event.breed);
         emit(FavouritesLoaded(
             favouritesList: FavouritesList(favourites: [
           ...state.favouritesList.favourites,
@@ -55,7 +55,7 @@ class FavouritesBloc extends HydratedBloc<FavouritesEvent, FavouritesState> {
 
     if (state is FavouritesLoaded) {
       try {
-        dogDataRepository.removeBreedFromFavourites(event.breed);
+        repository.removeBreedFromFavourites(event.breed);
         emit(FavouritesLoaded(
             favouritesList: FavouritesList(
                 favourites: [...state.favouritesList.favourites]
@@ -70,7 +70,7 @@ class FavouritesBloc extends HydratedBloc<FavouritesEvent, FavouritesState> {
   FavouritesState? fromJson(Map<String, dynamic> json) {
     try {
       final storedFavouriteBreeds = FavouritesLoaded.fromMap(json);
-      dogDataRepository.favouriteBreeds =
+      repository.favouriteBreeds =
           storedFavouriteBreeds.favouritesList.favourites;
 
       return FavouritesLoaded(

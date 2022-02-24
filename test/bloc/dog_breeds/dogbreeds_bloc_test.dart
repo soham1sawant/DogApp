@@ -18,7 +18,7 @@ void main() {
     });
 
     test("Initial state is loading", () {
-      expect(DogBreedsBloc(dogDataRepository: dogRepository).state,
+      expect(DogBreedsBloc(repository: dogRepository).state,
           DogBreedsLoadInProgress());
     });
 
@@ -28,7 +28,7 @@ void main() {
       setUp: () {
         when(dogRepository.getDogData).thenAnswer((_) async => mockDogsList);
       },
-      build: () => DogBreedsBloc(dogDataRepository: dogRepository),
+      build: () => DogBreedsBloc(repository: dogRepository),
       act: (bloc) => bloc.add(DogBreedsRequest()),
       expect: () => <DogBreedsState>[
         DogBreedsLoadInProgress(),
@@ -43,7 +43,7 @@ void main() {
       setUp: () {
         when(dogRepository.getDogData).thenThrow(Exception("Error"));
       },
-      build: () => DogBreedsBloc(dogDataRepository: dogRepository),
+      build: () => DogBreedsBloc(repository: dogRepository),
       act: (bloc) => bloc.add(DogBreedsRequest()),
       expect: () => <DogBreedsState>[
         DogBreedsLoadInProgress(),

@@ -1,13 +1,14 @@
 import 'package:dog_app/data/models/breeds/height.dart';
 import 'package:dog_app/data/models/breeds/image.dart';
 import 'package:dog_app/data/models/breeds/weight.dart';
+import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'breeds_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class BreedsModel {
-
+// ignore: must_be_immutable
+class BreedsModel extends Equatable {
   @JsonKey(name: 'bred_for')
   final String? bredFor;
   @JsonKey(name: 'breed_group')
@@ -37,7 +38,24 @@ class BreedsModel {
     this.weight,
   );
 
-  factory BreedsModel.fromJsom(Map<String, dynamic> json) => _$BreedsModelFromJson(json);
+  factory BreedsModel.fromJsom(Map<String, dynamic> json) =>
+      _$BreedsModelFromJson(json);
 
   Map<String, dynamic> toJson() => _$BreedsModelToJson(this);
+
+  @override
+  List<Object?> get props => [
+        bredFor,
+        breedGroup,
+        height,
+        id,
+        image,
+        lifeSpan,
+        name,
+        origin,
+        referenceImageId,
+        temperament,
+        weight,
+        countryCode,
+      ];
 }

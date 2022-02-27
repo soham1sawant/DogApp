@@ -43,9 +43,9 @@ class Description extends StatelessWidget {
 }
 
 class SubDescription extends StatelessWidget {
-  final first;
-  final second;
-  final unit;
+  final String? first;
+  final String? second;
+  final String? unit;
 
   const SubDescription({Key? key, this.first, this.second, this.unit}) : super(key: key);
 
@@ -60,7 +60,7 @@ class SubDescription extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            first,
+            first!,
             style: TextStyle(
               fontSize: orientation == Orientation.portrait
                   ? size.height * 0.032
@@ -73,7 +73,7 @@ class SubDescription extends StatelessWidget {
           if (second != null)
             Expanded(
               child: Text(
-                second + unit,
+                second! + unit!,
                 style: TextStyle(
                   fontSize: orientation == Orientation.portrait
                       ? size.height * 0.032

@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/favourites/favourites_bloc.dart';
 
 class MainHeader extends StatelessWidget {
-  final header;
-  final icon;
+  final String header;
+  final bool icon;
 
   const MainHeader({Key? key, required this.header, required this.icon})
       : super(key: key);

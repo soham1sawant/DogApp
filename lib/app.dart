@@ -1,9 +1,9 @@
 import 'package:dog_app/bloc/authentication/auth_bloc.dart';
 import 'package:dog_app/data/repositories/auth_repository.dart';
 import 'package:dog_app/presentation/pages/sign_up_page/sign_up_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'bloc/dog_breeds/dogbreeds_bloc.dart';
 import 'bloc/favourites/favourites_bloc.dart';

@@ -25,8 +25,6 @@ class FavouritesLoaded extends FavouritesState {
     );
   }
 
-  String toJson() => json.encode(toMap());
-
   factory FavouritesLoaded.fromJson(String source) => FavouritesLoaded.fromMap(json.decode(source));
 
   @override

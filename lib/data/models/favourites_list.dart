@@ -21,7 +21,6 @@ class FavouritesList extends Equatable {
     );
   }
 
-  String toJson() => json.encode(toMap());
 
   factory FavouritesList.fromJson(String source) => FavouritesList.fromMap(json.decode(source));
 

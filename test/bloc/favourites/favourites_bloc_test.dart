@@ -71,7 +71,6 @@ void main() {
         .map<BreedsModel>((item) => BreedsModel.fromJsom(item))
         .toList();
 
-   
     //loading and creating the breed to add
     const String mockAddString = '''
     {
@@ -137,8 +136,10 @@ void main() {
     });
 
     test("Initial state is FavouritesLoading", () {
-      expect(FavouritesBloc(repository: dogRepository).state,
-          FavouritesLoading());
+      expect(
+        FavouritesBloc(repository: dogRepository).state,
+        FavouritesLoading(),
+      );
     });
 
     blocTest<FavouritesBloc, FavouritesState>(
@@ -147,7 +148,8 @@ void main() {
       setUp: () {
         when(dogRepository.loadFavourites).thenAnswer((_) async => []);
       },
-      build: () => mockHydratedStorage(() => FavouritesBloc(repository: dogRepository)),
+      build: () =>
+          mockHydratedStorage(() => FavouritesBloc(repository: dogRepository)),
       act: (bloc) => bloc.add(FavouritesStarted()),
       expect: () => <FavouritesState>[
         FavouritesLoading(),
@@ -158,11 +160,12 @@ void main() {
 
     blocTest<FavouritesBloc, FavouritesState>(
       "emits [FavouritesLoading, FavouritesLoadingError]"
-      "when favourites is loaded successfullly",
+      "when favourites is not loaded successfullly",
       setUp: () {
         when(dogRepository.loadFavourites).thenThrow(Exception("Error"));
       },
-      build: () => mockHydratedStorage(() => FavouritesBloc(repository: dogRepository)),
+      build: () =>
+          mockHydratedStorage(() => FavouritesBloc(repository: dogRepository)),
       act: (bloc) => bloc.add(FavouritesStarted()),
       expect: () =>
           <FavouritesState>[FavouritesLoading(), FavouritesLoadingError()],
@@ -176,7 +179,8 @@ void main() {
           return <BreedsModel>[];
         });
       },
-      build: () => mockHydratedStorage(() => FavouritesBloc(repository: dogRepository)),
+      build: () =>
+          mockHydratedStorage(() => FavouritesBloc(repository: dogRepository)),
       act: (bloc) => bloc.add(FavouritesAdded(mockBreedToAdd)),
       expect: () => <FavouritesState>[],
     );
@@ -187,7 +191,8 @@ void main() {
         when(() => dogRepository.addBreedToFavourites(mockBreedToAdd))
             .thenAnswer((_) async {});
       },
-      build: () => mockHydratedStorage(() => FavouritesBloc(repository: dogRepository)),
+      build: () =>
+          mockHydratedStorage(() => FavouritesBloc(repository: dogRepository)),
       seed: () => FavouritesLoaded(
           favouritesList: FavouritesList(favourites: mockFavouriteBreeds)),
       act: (bloc) => bloc.add(FavouritesAdded(mockBreedToAdd)),
@@ -209,7 +214,8 @@ void main() {
         when(() => dogRepository.addBreedToFavourites(mockBreedToAdd))
             .thenThrow(Exception("Error"));
       },
-      build: () => mockHydratedStorage(() => FavouritesBloc(repository: dogRepository)),
+      build: () =>
+          mockHydratedStorage(() => FavouritesBloc(repository: dogRepository)),
       seed: () => FavouritesLoaded(
           favouritesList: FavouritesList(favourites: mockFavouriteBreeds)),
       act: (bloc) => bloc.add(FavouritesAdded(mockBreedToAdd)),
@@ -226,14 +232,15 @@ void main() {
         when(() => dogRepository.removeBreedFromFavourites(mockBreedToRemove))
             .thenAnswer((_) async {});
       },
-      build: () => mockHydratedStorage(() => FavouritesBloc(repository: dogRepository)),
+      build: () =>
+          mockHydratedStorage(() => FavouritesBloc(repository: dogRepository)),
       seed: () => FavouritesLoaded(
           favouritesList: FavouritesList(favourites: mockFavouriteBreeds)),
       act: (bloc) => bloc.add(FavouritesRemoved(mockBreedToRemove)),
       expect: () => <FavouritesState>[
         FavouritesLoaded(
-          favouritesList:
-              FavouritesList(favourites: [...mockFavouriteBreeds]..remove(mockBreedToRemove)),
+          favouritesList: FavouritesList(
+              favourites: [...mockFavouriteBreeds]..remove(mockBreedToRemove)),
         )
       ],
       verify: (_) {
@@ -248,7 +255,8 @@ void main() {
         when(() => dogRepository.removeBreedFromFavourites(mockBreedToRemove))
             .thenThrow(Exception("Error"));
       },
-      build: () => mockHydratedStorage(() => FavouritesBloc(repository: dogRepository)),
+      build: () =>
+          mockHydratedStorage(() => FavouritesBloc(repository: dogRepository)),
       seed: () => FavouritesLoaded(
           favouritesList: FavouritesList(favourites: mockFavouriteBreeds)),
       act: (bloc) => bloc.add(FavouritesRemoved(mockBreedToRemove)),

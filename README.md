@@ -11,36 +11,16 @@ An app all about dogs built using Flutter.
 ## Screenshots
 
 1. Login Page
-<img
-  src="/screenshots/1.png"
-  alt="Login Page"
-  title="Login Page"
-  style="display: inline-block; margin: 0 auto; max-width: 50px">
+<img src="/screenshots/1.png" width="100" height="100">
 
 2. SignUp Page
-<img
-  src="/screenshots/2.png"
-  alt="SignUp Page"
-  title="SignUp Page"
-  style="display: inline-block; margin: 0 auto; max-width: 50px">
+<img src="/screenshots/2.png" width="100" height="100">
 
 3. Home Page
-<img
-  src="/screenshots/3.png"
-  alt="Home Page"
-  title="Home Page"
-  style="display: inline-block; margin: 0 auto; max-width: 50px">
+<img src="/screenshots/3.png" width="100" height="100">
 
 4. Home Detail Page
-<img
-  src="/screenshots/4.png"
-  alt="Home Detail Page"
-  title="Home Detail Page"
-  style="display: inline-block; margin: 0 auto; max-width: 50px">
+<img src="/screenshots/4.png" width="100" height="100">
 
 5. Favourites Page
-<img
-  src="/screenshots/5.png"
-  alt="Favourites Page"
-  title="Favourites Page"
-  style="display: inline-block; margin: 0 auto; max-width: 50px">
+<img src="/screenshots/5.png" width="100" height="100">

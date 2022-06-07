@@ -10,5 +10,5 @@ An app all about dogs built using Flutter.
 
 ## Screenshots
 
-<img src="/screenshots/1.png" height="400"> <img src="/screenshots/1.png" height="400"> <img src="/screenshots/3.png" height="400">
+<img src="/screenshots/1.png" height="400"> <img src="/screenshots/2.png" height="400"> <img src="/screenshots/3.png" height="400">
 <img src="/screenshots/4.png" height="400"> <img src="/screenshots/5.png" height="400">

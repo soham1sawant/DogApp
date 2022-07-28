@@ -47,7 +47,7 @@ void main() {
       act: (bloc) => bloc.add(const SignInRequested("", "")),
       expect: () => <AuthState>[
         LoadingState(),
-        const AuthErrorState("Error"),
+        AuthErrorState("Error"),
         UnAuthenticatedState()
       ],
       verify: (_) {
@@ -83,7 +83,7 @@ void main() {
       act: (bloc) => bloc.add(const SignUpRequested("", "")),
       expect: () => <AuthState>[
         LoadingState(),
-        const AuthErrorState("Error"),
+        AuthErrorState("Error"),
         UnAuthenticatedState()
       ],
       verify: (_) {
@@ -115,7 +115,7 @@ void main() {
       build: () => AuthBloc(authRepository: authRepository),
       seed: () => AuthenticatedState(),
       act: (bloc) => bloc.add(const SignOutRequested()),
-      expect: () => <AuthState>[LoadingState(), const SignOutErrorState("Error"), AuthenticatedState()],
+      expect: () => <AuthState>[LoadingState(), SignOutErrorState("Error"), AuthenticatedState()],
       verify: (_) {
         verify(() => authRepository.signOut()).called(1);
       },

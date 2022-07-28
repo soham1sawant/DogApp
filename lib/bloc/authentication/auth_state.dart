@@ -1,7 +1,6 @@
 part of 'auth_bloc.dart';
 
-abstract class AuthState extends Equatable {
-  const AuthState();
+class AuthState extends Equatable {
 
   @override
   List<Object> get props => [];
@@ -25,7 +24,7 @@ class UnAuthenticatedState extends AuthState {
 class AuthErrorState extends AuthState {
   final String error;
 
-  const AuthErrorState(this.error);
+  AuthErrorState(this.error);
 
   @override
   List<Object> get props => [error];
@@ -34,7 +33,7 @@ class AuthErrorState extends AuthState {
 class SignOutErrorState extends AuthState {
   final String error;
 
-  const SignOutErrorState(this.error);
+  SignOutErrorState(this.error);
 
 
   @override

@@ -3,6 +3,12 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group("AuthState", () {
+
+    group("AuthState", () {
+      test('supports value comparison', () {
+        expect(AuthState(), AuthState());
+      });
+    });
     group("LoadingState", () {
       test('supports value comparison', () {
         expect(LoadingState(), LoadingState());
@@ -23,13 +29,13 @@ void main() {
 
     group("AuthErrorState", () {
       test('supports value comparison', () {
-        expect(const AuthErrorState(" "), const AuthErrorState(" "));
+        expect(AuthErrorState(" "), AuthErrorState(" "));
       });
     });
 
     group("SignOutErrorState", () {
       test('supports value comparison', () {
-        expect(const SignOutErrorState(" "), const SignOutErrorState(" "));
+        expect(SignOutErrorState(" "), SignOutErrorState(" "));
       });
     });
   });

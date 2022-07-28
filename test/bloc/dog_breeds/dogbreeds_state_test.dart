@@ -5,6 +5,12 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group("DogBreedsState", () {
+
+    group("DogBreedsState", () {
+      test("supports value comparison", () {
+        expect(DogBreedsState(), DogBreedsState());
+      });
+    });
     group("DogBreedsLoadInProgress", () {
       test("supports value comparison", () {
         expect(DogBreedsLoadInProgress(), DogBreedsLoadInProgress());

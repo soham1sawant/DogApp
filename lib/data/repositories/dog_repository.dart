@@ -8,8 +8,8 @@ class DogRepository {
   List<BreedsModel> favouriteBreeds = [];
 
   Future<List<BreedsModel>> getDogData() async {
-    final http.Response _rawDogData = await _dogDataProvider.getRawDogData();
-    final json = jsonDecode(_rawDogData.body) as List;
+    final http.Response rawDogData = await _dogDataProvider.getRawDogData();
+    final json = jsonDecode(rawDogData.body) as List;
     final List<BreedsModel> breeds = List.from(json)
         .map<BreedsModel>((item) => BreedsModel.fromJsom(item))
         .toList();
@@ -18,12 +18,12 @@ class DogRepository {
   }
 
   Future<List<BreedsModel>> loadFavourites() {
-    return Future.delayed(const Duration(milliseconds: 800), () => favouriteBreeds);
+    return Future.delayed(
+        const Duration(milliseconds: 800), () => favouriteBreeds);
   }
 
   void addBreedToFavourites(BreedsModel breed) => favouriteBreeds.add(breed);
 
-  void removeBreedFromFavourites(BreedsModel breed) => favouriteBreeds.remove(breed);
-
-
+  void removeBreedFromFavourites(BreedsModel breed) =>
+      favouriteBreeds.remove(breed);
 }

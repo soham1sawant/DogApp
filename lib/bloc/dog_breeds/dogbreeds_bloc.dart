@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:dog_app/data/models/breeds_catalog.dart';
 import 'package:dog_app/data/repositories/dog_repository.dart';

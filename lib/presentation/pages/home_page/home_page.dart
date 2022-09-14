@@ -67,11 +67,11 @@ class HomePage extends StatelessWidget {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.logout),
           backgroundColor: Theme.of(context).primaryColor,
           onPressed: () {
             BlocProvider.of<AuthBloc>(context).add(const SignOutRequested());
           },
+          child: const Icon(Icons.logout),
         ),
       ),
     );

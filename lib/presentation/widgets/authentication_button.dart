@@ -17,14 +17,6 @@ class AuthenticationButton extends StatelessWidget {
     return GestureDetector(
       onTap: () => onTapAction(),
       child: Container(
-        child: Center(
-            child: Text(
-          text,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).focusColor,
-          ),
-        )),
         height: size.height * 0.08,
         width: double.infinity,
         decoration: BoxDecoration(
@@ -33,6 +25,14 @@ class AuthenticationButton extends StatelessWidget {
             size.height * 0.045,
           )),
         ),
+        child: Center(
+            child: Text(
+          text,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).focusColor,
+          ),
+        )),
       ),
     );
   }

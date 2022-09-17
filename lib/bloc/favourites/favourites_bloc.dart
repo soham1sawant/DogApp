@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dog_app/data/models/favourites_list.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/foundation.dart';
 import 'package:dog_app/data/models/breeds/breeds_model.dart';
 import 'package:dog_app/data/repositories/dog_repository.dart';
 
@@ -13,8 +13,7 @@ part 'favourites_state.dart';
 class FavouritesBloc extends HydratedBloc<FavouritesEvent, FavouritesState> {
   final DogRepository repository;
 
-  FavouritesBloc({required this.repository})
-      : super(FavouritesLoading()) {
+  FavouritesBloc({required this.repository}) : super(FavouritesLoading()) {
     on<FavouritesStarted>(_onStarted);
     on<FavouritesAdded>(_onBreedAdded);
     on<FavouritesRemoved>(_onBreedRemoved);

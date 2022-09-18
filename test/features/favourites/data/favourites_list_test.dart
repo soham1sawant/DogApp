@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:dog_app/data/models/breeds/breeds_model.dart';
-import 'package:dog_app/features/dogbreeds/models/breeds_catalog.dart';
+import 'package:dog_app/features/dogbreeds/models/breeds/breeds_model.dart';
+import 'package:dog_app/features/favourites/models/favourites_list.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group("BreedsCatalog", () {
+  group("FavouritesList", () {
     const String mockString = '''
     [
     {
@@ -59,12 +59,13 @@ void main() {
       }
     ]''';
     final mockJson = jsonDecode(mockString) as List;
-    final List<BreedsModel> mockBreeds = List.from(mockJson)
+    final List<BreedsModel> mockFavouriteBreeds = List.from(mockJson)
         .map<BreedsModel>((item) => BreedsModel.fromJsom(item))
         .toList();
 
     test("supports value comparison", () {
-      expect(BreedsCatalog(mockBreeds), BreedsCatalog(mockBreeds));
+      expect(FavouritesList(favourites: mockFavouriteBreeds),
+          FavouritesList(favourites: mockFavouriteBreeds));
     });
   });
 }

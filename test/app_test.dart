@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:dog_app/data/models/breeds/breeds_model.dart';
 import 'package:dog_app/features/dogbreeds/data/dog_repository.dart';
+import 'package:dog_app/features/dogbreeds/models/breeds/breeds_model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

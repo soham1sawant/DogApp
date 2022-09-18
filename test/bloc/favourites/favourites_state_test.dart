@@ -1,5 +1,5 @@
-import 'package:dog_app/bloc/favourites/favourites_bloc.dart';
-import 'package:dog_app/data/models/favourites_list.dart';
+import 'package:dog_app/features/favourites/bloc/favourites_bloc.dart';
+import 'package:dog_app/features/favourites/models/favourites_list.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 class FakeFavouritesList extends Fake implements FavouritesList {}

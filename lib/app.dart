@@ -1,17 +1,17 @@
-import 'package:dog_app/bloc/authentication/auth_bloc.dart';
-import 'package:dog_app/data/repositories/auth_repository.dart';
-import 'package:dog_app/presentation/pages/sign_up_page/sign_up_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'bloc/dog_breeds/dogbreeds_bloc.dart';
-import 'bloc/favourites/favourites_bloc.dart';
-import 'data/repositories/dog_repository.dart';
-import 'presentation/pages/favourite_page/favourites_page.dart';
-import 'presentation/pages/home_page/home_page.dart';
-import 'presentation/pages/sign_in_page/sign_in_page.dart';
-import 'presentation/themes.dart';
+import 'core/styles/themes.dart';
+import 'features/authentication/bloc/auth_bloc.dart';
+import 'features/authentication/data/auth_repository.dart';
+import 'features/authentication/ui/sign_up_page.dart';
+import 'features/dogbreeds/bloc/dogbreeds_bloc.dart';
+import 'features/favourites/bloc/favourites_bloc.dart';
+import 'features/dogbreeds/data/dog_repository.dart';
+import 'features/favourites/ui/favourites_page.dart';
+import 'features/dogbreeds/ui/home_page.dart';
+import 'features/authentication/ui/sign_in_page.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);

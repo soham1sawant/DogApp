@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dog_app/bloc/dog_breeds/dogbreeds_bloc.dart';
-import 'package:dog_app/bloc/favourites/favourites_bloc.dart';
+import 'package:dog_app/features/dogbreeds/bloc/dogbreeds_bloc.dart';
+import 'package:dog_app/features/favourites/bloc/favourites_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';

@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:dog_app/bloc/favourites/favourites_bloc.dart';
+import 'package:dog_app/features/favourites/bloc/favourites_bloc.dart';
 import 'package:dog_app/data/models/breeds/breeds_model.dart';
-import 'package:dog_app/data/models/favourites_list.dart';
-import 'package:dog_app/presentation/pages/favourite_page/favourites_page.dart';
+import 'package:dog_app/features/favourites/models/favourites_list.dart';
+import 'package:dog_app/features/favourites/ui/favourites_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

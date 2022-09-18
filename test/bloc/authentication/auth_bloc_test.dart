@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dog_app/bloc/authentication/auth_bloc.dart';
-import 'package:dog_app/data/repositories/auth_repository.dart';
+import 'package:dog_app/features/authentication/bloc/auth_bloc.dart';
+import 'package:dog_app/features/authentication/data/auth_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

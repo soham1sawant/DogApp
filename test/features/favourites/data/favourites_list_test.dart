@@ -1,16 +1,11 @@
 import 'dart:convert';
 
-import 'package:dog_app/features/dogbreeds/data/dog_repository.dart';
 import 'package:dog_app/features/dogbreeds/models/breeds/breeds_model.dart';
+import 'package:dog_app/features/favourites/models/favourites_list.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
-
-class MockDogRepository extends Mock implements DogRepository {}
 
 void main() {
-  group("App", () {
-    late DogRepository dogRepository;
-
+  group("FavouritesList", () {
     const String mockString = '''
     [
     {
@@ -64,13 +59,13 @@ void main() {
       }
     ]''';
     final mockJson = jsonDecode(mockString) as List;
-    final List<BreedsModel> mockBreeds = List.from(mockJson)
+    final List<BreedsModel> mockFavouriteBreeds = List.from(mockJson)
         .map<BreedsModel>((item) => BreedsModel.fromJsom(item))
         .toList();
 
-    setUp(() {
-      dogRepository = MockDogRepository();
-      when(dogRepository.getDogData).thenAnswer((_) async => mockBreeds);
+    test("supports value comparison", () {
+      expect(FavouritesList(favourites: mockFavouriteBreeds),
+          FavouritesList(favourites: mockFavouriteBreeds));
     });
   });
 }

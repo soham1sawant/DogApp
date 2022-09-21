@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
-import 'package:dog_app/features/dogbreeds/models/breeds_catalog.dart';
-import 'package:dog_app/features/dogbreeds/data/dog_repository.dart';
+import '../data/dog_repository.dart';
+import '../models/breeds_catalog.dart';
 
 part 'dogbreeds_event.dart';
 part 'dogbreeds_state.dart';

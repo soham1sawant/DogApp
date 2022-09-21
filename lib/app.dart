@@ -5,13 +5,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'core/styles/themes.dart';
 import 'features/authentication/bloc/auth_bloc.dart';
 import 'features/authentication/data/auth_repository.dart';
+import 'features/authentication/ui/sign_in_page.dart';
 import 'features/authentication/ui/sign_up_page.dart';
 import 'features/dogbreeds/bloc/dogbreeds_bloc.dart';
-import 'features/favourites/bloc/favourites_bloc.dart';
 import 'features/dogbreeds/data/dog_repository.dart';
-import 'features/favourites/ui/favourites_page.dart';
 import 'features/dogbreeds/ui/home_page.dart';
-import 'features/authentication/ui/sign_in_page.dart';
+import 'features/favourites/bloc/favourites_bloc.dart';
+import 'features/favourites/ui/favourites_page.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);

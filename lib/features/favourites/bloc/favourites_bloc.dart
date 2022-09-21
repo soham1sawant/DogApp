@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:dog_app/features/favourites/models/favourites_list.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:flutter/foundation.dart';
-import 'package:dog_app/features/dogbreeds/data/dog_repository.dart';
 
+import '../../dogbreeds/data/dog_repository.dart';
 import '../../dogbreeds/models/breeds/breeds_model.dart';
+import '../models/favourites_list.dart';
 
 part 'favourites_event.dart';
 part 'favourites_state.dart';

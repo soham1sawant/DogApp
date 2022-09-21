@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:dog_app/features/dogbreeds/data/dog_data_provider.dart';
 
 import '../models/breeds/breeds_model.dart';
+import 'dog_data_provider.dart';
 
 class DogRepository {
   final DogDataProvider _dogDataProvider = DogDataProvider();

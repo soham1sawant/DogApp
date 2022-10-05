@@ -1,14 +1,16 @@
-# DogApp
+# dog_app
 
-An app all about dogs built using Flutter.
+A new Flutter project.
 
-## Features
-1. Login/Signup functionality.
-2. View all the available Dog breeds.
-3. View a dog breed. You can gain more information by reading interresting facts about the breed.
-4. Like your favourite dog breeds.
+## Getting Started
 
-## Screenshots
+This project is a starting point for a Flutter application.
 
-<img src="/screenshots/1.png" height="400"> <img src="/screenshots/2.png" height="400"> <img src="/screenshots/3.png" height="400">
-<img src="/screenshots/4.png" height="400"> <img src="/screenshots/5.png" height="400">
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.

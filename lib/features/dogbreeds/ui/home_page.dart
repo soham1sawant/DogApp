@@ -11,19 +11,14 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    Orientation orientation = MediaQuery.of(context).orientation;
 
     return Scaffold(
       backgroundColor: Theme.of(context).canvasColor,
       body: SafeArea(
         child: Container(
           padding: EdgeInsets.symmetric(
-            horizontal: orientation == Orientation.portrait
-                ? size.height * 0.032
-                : size.height * 0.05,
-            vertical: orientation == Orientation.portrait
-                ? size.width * 0.03
-                : size.width * 0.015,
+            horizontal: size.height * 0.032,
+            vertical: size.width * 0.03,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

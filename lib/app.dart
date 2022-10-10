@@ -40,7 +40,7 @@ class App extends StatelessWidget {
             '/home': (context) => const HomePage(),
             '/favourites': (context) => const FavouritesPage(),
           },
-          home: HomePage(),
+          home: const HomePage(),
         ),
       ),
     );

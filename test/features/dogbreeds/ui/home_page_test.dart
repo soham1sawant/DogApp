@@ -47,6 +47,25 @@ void main() {
       expect(find.byType(ListView), findsOneWidget);
     });
 
+    testWidgets('Testing scrolling', (tester) async {
+      when(() => dogBreedsBloc.state)
+          .thenReturn(DogBreedsLoadSuccess(BreedsCatalog(breeds)));
+      when(() => favouritesBloc.state).thenReturn(FavouritesLoading());
+
+      await tester.pumpApp(
+        dogBreedsBloc: dogBreedsBloc,
+        favouritesBloc: favouritesBloc,
+        child: const HomePage(),
+      );
+
+      expect(find.text('Affenpinscher'), findsOneWidget);
+
+      await tester.fling(find.byType(ListView), const Offset(0, -200), 3000);
+      await tester.pumpAndSettle();
+      expect(find.text('Affenpinscher'), findsNothing);
+      
+    });
+
     testWidgets('Tests if Error Icons shows up', (tester) async {
       when(() => dogBreedsBloc.state).thenReturn(DogBreedsLoadFailure());
       when(() => favouritesBloc.state).thenReturn(FavouritesLoading());
@@ -58,7 +77,6 @@ void main() {
       );
 
       expect(find.byIcon(Icons.error), findsOneWidget);
-
     });
   });
 }

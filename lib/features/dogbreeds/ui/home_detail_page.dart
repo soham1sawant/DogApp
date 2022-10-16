@@ -5,7 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../favourites/bloc/favourites_bloc.dart';
 import '../models/breeds/breeds_model.dart';
-import '../../../core/widgets/description.dart';
+import 'description.dart';
 
 
 class HomeDetailPage extends StatelessWidget {
@@ -16,7 +16,6 @@ class HomeDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    Orientation orientation = MediaQuery.of(context).orientation;
     bool containsBreed = false;
 
     return Scaffold(
@@ -28,9 +27,7 @@ class HomeDetailPage extends StatelessWidget {
           style: TextStyle(
             color: Theme.of(context).primaryColor,
             fontWeight: FontWeight.bold,
-            fontSize: orientation == Orientation.portrait
-                ? size.height * 0.04
-                : size.height * 0.06,
+            fontSize: size.height * 0.04,
             fontFamily: GoogleFonts.poppins().fontFamily,
           ),
         ),

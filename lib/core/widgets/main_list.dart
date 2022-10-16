@@ -20,7 +20,6 @@ class MainList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    Orientation orientation = MediaQuery.of(context).orientation;
 
     return Scrollbar(
       interactive: true,
@@ -37,7 +36,6 @@ class MainList extends StatelessWidget {
               ),
             ),
             child: Container(
-              key: Key(breeds[index].id.toString()),
               padding: (isFavouritesPage)
                   ? const EdgeInsets.all(0)
                   : EdgeInsets.fromLTRB(
@@ -56,9 +54,7 @@ class MainList extends StatelessWidget {
                       maxLines: 1,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: orientation == Orientation.portrait
-                            ? size.height * 0.032
-                            : size.height * 0.055,
+                        fontSize: size.height * 0.032,
                       ),
                     ),
                   ),
@@ -67,9 +63,7 @@ class MainList extends StatelessWidget {
                       key: Key("remove-${breeds[index].name}"),
                       icon: const Icon(Icons.cancel_outlined),
                       color: Theme.of(context).primaryColor,
-                      iconSize: orientation == Orientation.portrait
-                          ? size.height * 0.035
-                          : size.height * 0.055,
+                      iconSize: size.height * 0.035,
                       onPressed: () {
                         context
                             .read<FavouritesBloc>()

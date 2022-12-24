@@ -10,7 +10,7 @@ void main() async {
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
   HydratedBlocOverrides.runZoned(
-    () => runApp(const App()),
+    () => runApp(App()),
     storage: storage,
     blocObserver: SimpleBlocObserver(),
   );

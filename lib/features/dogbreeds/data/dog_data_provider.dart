@@ -8,7 +8,7 @@ class DogDataProvider {
   Future<http.Response> getRawDogData() async {
     http.Response response = await http.get(
         Uri.parse("https://api.thedogapi.com/v1/breeds"),
-        headers: {HttpHeaders.authorizationHeader: myApiKey});
+        headers: {HttpHeaders.authorizationHeader: '$API_KEY'});
 
     return response;
   }

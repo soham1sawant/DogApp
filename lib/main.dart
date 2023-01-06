@@ -12,6 +12,6 @@ void main() async {
 
   Bloc.observer = SimpleBlocObserver();
   HydratedBloc.storage = storage;
-  () => runApp(App());
+  runApp(App());
   
 }

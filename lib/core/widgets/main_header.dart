@@ -1,21 +1,18 @@
+import 'package:dog_app/features/favourites/ui/widgets/badge_icon.dart';
+import 'package:dog_app/features/favourites/bloc/favourites_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:badges/badges.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../features/favourites/bloc/favourites_bloc.dart';
-
-
 class MainHeader extends StatelessWidget {
+
+  const MainHeader({super.key, required this.header, required this.icon});
   final String header;
   final bool icon;
 
-  const MainHeader({Key? key, required this.header, required this.icon})
-      : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    Orientation orientation = MediaQuery.of(context).orientation;
+    final size = MediaQuery.of(context).size;
+    final orientation = MediaQuery.of(context).orientation;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -34,25 +31,9 @@ class MainHeader extends StatelessWidget {
           BlocBuilder<FavouritesBloc, FavouritesState>(
             builder: (context, state) {
               if (state is FavouritesLoaded) {
-                return Badge(
-                  badgeContent: Text(
-                    state.favouritesList.favourites.length.toString(),
-                    style: TextStyle(color: Theme.of(context).primaryColor),
-                  ),
-                  badgeColor: Theme.of(context).focusColor,
-                  position: BadgePosition.topEnd(top: 0, end: 0),
-                  animationType: BadgeAnimationType.fade,
-                  showBadge: state.favouritesList.favourites.isEmpty ? false : true,
-                  child: IconButton(
-                    icon: const Icon(Icons.favorite),
-                    color: Theme.of(context).primaryColor,
-                    iconSize: orientation == Orientation.portrait
-                        ? size.height * 0.05
-                        : size.height * 0.075,
-                    onPressed: () =>
-                        Navigator.of(context).pushNamed("/favourites"),
-                  ),
-                );
+                return BadgeIcon(list: state.favouritesList.favourites);
+              } else if (state is FavouritesLoadingError) {
+                return const Center(child: Icon(Icons.error_outline));
               } else {
                 return const Center(child: Icon(Icons.error_outline));
               }

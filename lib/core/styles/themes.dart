@@ -17,7 +17,7 @@ class MyTheme {
         buttonTheme: ButtonThemeData(buttonColor: darkBluishColor),
         appBarTheme: const AppBarTheme(
           color: Colors.white,
-          elevation: 0.0,
+          elevation: 0,
           iconTheme: IconThemeData(color: Colors.black),
         ),
       );
@@ -32,7 +32,7 @@ class MyTheme {
         buttonTheme: ButtonThemeData(buttonColor: lightBluishColor),
         appBarTheme: const AppBarTheme(
           color: Colors.black,
-          elevation: 0.0,
+          elevation: 0,
           iconTheme: IconThemeData(color: Colors.white),
         ),
       );

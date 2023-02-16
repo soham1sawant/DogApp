@@ -1,50 +1,69 @@
+import 'package:authentication_repo/authentication_repo.dart';
+import 'package:dog_app/core/styles/themes.dart';
+import 'package:dog_app/features/authentication/bloc/auth_bloc.dart';
+import 'package:dog_app/features/authentication/ui/sign_in_page.dart';
+import 'package:dog_app/features/dogbreeds/bloc/dogbreeds_bloc.dart';
+import 'package:dog_app/features/dogbreeds/ui/home_page.dart';
+import 'package:dog_app/features/favourites/bloc/favourites_bloc.dart';
+import 'package:dog_app/features/favourites/data/favaourites_repository.dart';
+import 'package:dogbreeds_api/dogbreeds_api.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'core/styles/themes.dart';
-import 'features/dogbreeds/bloc/dogbreeds_bloc.dart';
-import 'features/dogbreeds/data/dog_repository.dart';
-import 'features/dogbreeds/ui/home_page.dart';
-import 'features/favourites/bloc/favourites_bloc.dart';
-import 'features/favourites/ui/favourites_page.dart';
-
 class App extends StatelessWidget {
-  App({Key? key}) : super(key: key);
-
-  final brightness = SchedulerBinding.instance.window.platformBrightness;
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-  bool isDarkMode = brightness == Brightness.dark;
-
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider<DogRepository>(create: (context) => DogRepository()),
+        RepositoryProvider<DogbreedsApiClient>(
+          create: (context) => DogbreedsApiClient(),
+        ),
+        RepositoryProvider<FavouritesRepository>(
+          create: (context) => FavouritesRepository(),
+        ),
+        RepositoryProvider<AuthenticationRepo>(
+          create: (context) => AuthenticationRepo(),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
             create: (context) => DogBreedsBloc(
-                repository: RepositoryProvider.of<DogRepository>(context))
-              ..add(DogBreedsRequest()),
+              RepositoryProvider.of<DogbreedsApiClient>(context),
+            )..add(DogBreedsRequest()),
           ),
           BlocProvider(
             create: (context) => FavouritesBloc(
-                repository: RepositoryProvider.of<DogRepository>(context))
-              ..add(FavouritesStarted()),
+              favouritesRepository:
+                  RepositoryProvider.of<FavouritesRepository>(context),
+            )..add(FavouritesStarted()),
+          ),
+          BlocProvider(
+            create: (context) => AuthBloc(
+              authRepo: RepositoryProvider.of<AuthenticationRepo>(context),
+            )..add(const CheckAuthEvent()),
           ),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
+          themeMode: ThemeMode.light,
           theme: MyTheme.lightTheme(context),
           darkTheme: MyTheme.darkTheme(context),
-          routes: {
-            '/home': (context) => const HomePage(),
-            '/favourites': (context) => const FavouritesPage(),
-          },
-          home: const HomePage(),
+          home: BlocBuilder<AuthBloc, AuthState>(
+            builder: (context, state) {
+              if (state is LoadingState) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is AuthenticatedState) {
+                return const HomePage();
+              } else if (state is UnAuthenticatedState) {
+                return SignInPage();
+              } else {
+                return SignInPage();
+              }
+            },
+          ),
         ),
       ),
     );

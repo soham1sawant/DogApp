@@ -1,43 +1,44 @@
+import 'package:dog_app/features/dogbreeds/ui/home_detail_page.dart';
+import 'package:dog_app/features/favourites/bloc/favourites_bloc.dart';
+import 'package:dogbreeds_api/dogbreeds_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../features/dogbreeds/models/breeds/breeds_model.dart';
-import '../../features/dogbreeds/ui/home_detail_page.dart';
-import '../../features/favourites/bloc/favourites_bloc.dart';
 
 class MainList extends StatelessWidget {
+
+  const MainList({
+    super.key,
+    required this.breeds,
+    required this.removeButton,
+    required this.isFavouritesPage,
+  });
   final List<BreedsModel> breeds;
   final bool removeButton;
   final bool isFavouritesPage;
 
-  const MainList({
-    Key? key,
-    required this.breeds,
-    required this.removeButton,
-    required this.isFavouritesPage,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
+    final orientation = MediaQuery.of(context).orientation;
 
     return Scrollbar(
       interactive: true,
       child: ListView.builder(
-        scrollDirection: Axis.vertical,
         shrinkWrap: true,
         itemCount: breeds.length,
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () => Navigator.push(
               context,
-              MaterialPageRoute(
+              MaterialPageRoute<HomeDetailPage>(
                 builder: (context) => HomeDetailPage(theBreed: breeds[index]),
               ),
             ),
             child: Container(
-              padding: (isFavouritesPage)
-                  ? const EdgeInsets.all(0)
+              key: Key(breeds[index].id.toString()),
+              padding: isFavouritesPage
+                  ? EdgeInsets.zero
                   : EdgeInsets.fromLTRB(
                       0,
                       size.height * 0.004,
@@ -54,16 +55,20 @@ class MainList extends StatelessWidget {
                       maxLines: 1,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: size.height * 0.032,
+                        fontSize: orientation == Orientation.portrait
+                            ? size.height * 0.032
+                            : size.height * 0.055,
                       ),
                     ),
                   ),
                   if (removeButton)
                     IconButton(
-                      key: Key("remove-${breeds[index].name}"),
+                      key: Key('remove-${breeds[index].name}'),
                       icon: const Icon(Icons.cancel_outlined),
                       color: Theme.of(context).primaryColor,
-                      iconSize: size.height * 0.035,
+                      iconSize: orientation == Orientation.portrait
+                          ? size.height * 0.035
+                          : size.height * 0.055,
                       onPressed: () {
                         context
                             .read<FavouritesBloc>()
@@ -71,7 +76,7 @@ class MainList extends StatelessWidget {
 
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text("Removed from Favourites"),
+                            content: Text('Removed from Favourites'),
                             duration: Duration(milliseconds: 900),
                           ),
                         );

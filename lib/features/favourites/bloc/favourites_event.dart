@@ -11,18 +11,18 @@ class FavouritesStarted extends FavouritesEvent {
 }
 
 class FavouritesAdded extends FavouritesEvent {
-  final BreedsModel breed;
 
   const FavouritesAdded(this.breed);
+  final BreedsModel breed;
 
   @override
   List<Object> get props => [breed];
 }
 
 class FavouritesRemoved extends FavouritesEvent {
-  final BreedsModel breed;
 
   const FavouritesRemoved(this.breed);
+  final BreedsModel breed;
 
   @override
   List<Object> get props => [breed];

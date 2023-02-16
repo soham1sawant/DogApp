@@ -1,10 +1,7 @@
 part of 'dogbreeds_bloc.dart';
 
 @immutable
-class DogBreedsState extends Equatable {
-  @override
-  List<Object> get props => [];
-}
+abstract class DogBreedsState extends Equatable {}
 
 class DogBreedsLoadInProgress extends DogBreedsState {
   @override
@@ -12,9 +9,9 @@ class DogBreedsLoadInProgress extends DogBreedsState {
 }
 
 class DogBreedsLoadSuccess extends DogBreedsState {
-  final BreedsCatalog breedsCatalog;
 
   DogBreedsLoadSuccess(this.breedsCatalog);
+  final BreedsCatalog breedsCatalog;
 
   @override
   List<Object> get props => [breedsCatalog];

@@ -1,269 +1,151 @@
-import 'dart:convert';
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dog_app/features/dogbreeds/models/breeds/breeds_model.dart';
 import 'package:dog_app/features/favourites/bloc/favourites_bloc.dart';
-import 'package:dog_app/features/favourites/models/favourites_list.dart';
-import 'package:dog_app/features/dogbreeds/data/dog_repository.dart';
+import 'package:dog_app/features/favourites/data/favaourites_repository.dart';
+import 'package:dog_app/features/favourites/data/favourites_list.dart';
+import 'package:dogbreeds_api/dogbreeds_api.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../helpers/hydrated_bloc.dart';
+import '../../../helpers/mock_lists.dart';
 
-class MockDogRepository extends Mock implements DogRepository {}
+class MockFavouritesRepository extends Mock implements FavouritesRepository {}
 
 void main() {
-  group("FavouritesBloc", () {
-    // loading and creating the mock favourite breeds
-    const String mockString = '''
-    [
-    {
-        "weight": {
-          "imperial": "6 - 13",
-          "metric": "3 - 6"
-        },
-        "height": {
-          "imperial": "9 - 11.5",
-          "metric": "23 - 29"
-        },
-        "id": 1,
-        "name": "Affenpinscher",
-        "bred_for": "Small rodent hunting, lapdog",
-        "breed_group": "Toy",
-        "life_span": "10 - 12 years",
-        "temperament": "Stubborn, Curious, Playful, Adventurous, Active, Fun-loving",
-        "origin": "Germany, France",
-        "reference_image_id": "BJa4kxc4X",
-        "image": {
-          "id": "BJa4kxc4X",
-          "width": 1600,
-          "height": 1199,
-          "url": "https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg"
-        }
-      },
-      {
-        "weight": {
-          "imperial": "50 - 60",
-          "metric": "23 - 27"
-        },
-        "height": {
-          "imperial": "25 - 27",
-          "metric": "64 - 69"
-        },
-        "id": 2,
-        "name": "Afghan Hound",
-        "country_code": "AG",
-        "bred_for": "Coursing and hunting",
-        "breed_group": "Hound",
-        "life_span": "10 - 13 years",
-        "temperament": "Aloof, Clownish, Dignified, Independent, Happy",
-        "origin": "Afghanistan, Iran, Pakistan",
-        "reference_image_id": "hMyT4CDXR",
-        "image": {
-          "id": "hMyT4CDXR",
-          "width": 606,
-          "height": 380,
-          "url": "https://cdn2.thedogapi.com/images/hMyT4CDXR.jpg"
-        }
-      }
-    ]''';
-    final mockJson = jsonDecode(mockString) as List;
-    final List<BreedsModel> mockFavouriteBreeds = List.from(mockJson)
-        .map<BreedsModel>((item) => BreedsModel.fromJsom(item))
-        .toList();
+  group('FavouritesBloc', () {
 
-    //loading and creating the breed to add
-    const String mockAddString = '''
-    {
-    "weight": {
-      "imperial": "38 - 50",
-      "metric": "17 - 23"
-    },
-    "height": {
-      "imperial": "23 - 26",
-      "metric": "58 - 66"
-    },
-    "id": 8,
-    "name": "Alaskan Husky",
-    "bred_for": "Sled pulling",
-    "breed_group": "Mixed",
-    "life_span": "10 - 13 years",
-    "temperament": "Friendly, Energetic, Loyal, Gentle, Confident",
-    "reference_image_id": "-HgpNnGXl",
-    "image": {
-      "id": "-HgpNnGXl",
-      "width": 500,
-      "height": 500,
-      "url": "https://cdn2.thedogapi.com/images/-HgpNnGXl.jpg"
-    }
-    }''';
-    final mockAddJson = jsonDecode(mockAddString);
-    final BreedsModel mockBreedToAdd = BreedsModel.fromJsom(mockAddJson);
+    
 
-    //loading and creating the breed to remove
-    const String mockRemoveString = '''
-    {
-    "weight": {
-      "imperial": "50 - 60",
-      "metric": "23 - 27"
-    },
-    "height": {
-      "imperial": "25 - 27",
-      "metric": "64 - 69"
-    },
-    "id": 2,
-    "name": "Afghan Hound",
-    "country_code": "AG",
-    "bred_for": "Coursing and hunting",
-    "breed_group": "Hound",
-    "life_span": "10 - 13 years",
-    "temperament": "Aloof, Clownish, Dignified, Independent, Happy",
-    "origin": "Afghanistan, Iran, Pakistan",
-    "reference_image_id": "hMyT4CDXR",
-    "image": {
-      "id": "hMyT4CDXR",
-      "width": 606,
-      "height": 380,
-      "url": "https://cdn2.thedogapi.com/images/hMyT4CDXR.jpg"
-    }
-    }''';
-    final mockRemoveJson = jsonDecode(mockRemoveString);
-    final BreedsModel mockBreedToRemove = BreedsModel.fromJsom(mockRemoveJson);
-
-    late DogRepository dogRepository;
+    late FavouritesRepository favouritesRepository;
 
     setUp(() {
-      dogRepository = MockDogRepository();
+      favouritesRepository = MockFavouritesRepository();
     });
 
-    test("Initial state is FavouritesLoading", () {
+    test('Initial state is FavouritesLoading', () {
       expect(
-        FavouritesBloc(repository: dogRepository).state,
+        FavouritesBloc(favouritesRepository: favouritesRepository).state,
         FavouritesLoading(),
       );
     });
 
     blocTest<FavouritesBloc, FavouritesState>(
-      "emits [FavouritesLoading, FavouritesLoaded]"
-      "when favourites is loaded successfullly",
+      'emits [FavouritesLoading, FavouritesLoaded] '
+      'when favourites is loaded successfullly',
       setUp: () {
-        when(dogRepository.loadFavourites).thenAnswer((_) async => []);
+        when(favouritesRepository.loadFavourites).thenAnswer((_) async => []);
       },
-      build: () =>
-          mockHydratedStorage(() => FavouritesBloc(repository: dogRepository)),
+      build: () => FavouritesBloc(favouritesRepository: favouritesRepository),
       act: (bloc) => bloc.add(FavouritesStarted()),
       expect: () => <FavouritesState>[
         FavouritesLoading(),
-        FavouritesLoaded(favouritesList: const FavouritesList(favourites: []))
+        FavouritesLoaded(favouritesList: const FavouritesList()),
       ],
-      verify: (_) => verify(dogRepository.loadFavourites).called(1),
+      verify: (_) => verify(favouritesRepository.loadFavourites).called(1),
     );
 
     blocTest<FavouritesBloc, FavouritesState>(
-      "emits [FavouritesLoading, FavouritesLoadingError]"
-      "when favourites is not loaded successfullly",
+      'emits [FavouritesLoading, FavouritesLoadingError] '
+      'when favourites is not loaded successfullly',
       setUp: () {
-        when(dogRepository.loadFavourites).thenThrow(Exception("Error"));
+        when(favouritesRepository.loadFavourites).thenThrow(Exception('Error'));
       },
-      build: () =>
-          mockHydratedStorage(() => FavouritesBloc(repository: dogRepository)),
+      build: () => FavouritesBloc(favouritesRepository: favouritesRepository),
       act: (bloc) => bloc.add(FavouritesStarted()),
       expect: () =>
           <FavouritesState>[FavouritesLoading(), FavouritesLoadingError()],
-      verify: (_) => verify(dogRepository.loadFavourites).called(1),
+      verify: (_) => verify(favouritesRepository.loadFavourites).called(1),
     );
 
     blocTest<FavouritesBloc, FavouritesState>(
-      "emits [] when favourites is not loaded and breed is added",
+      'emits [] when favourites is not loaded and breed is added',
       setUp: () {
-        when(dogRepository.loadFavourites).thenAnswer((_) async {
+        when(favouritesRepository.loadFavourites).thenAnswer((_) async {
           return <BreedsModel>[];
         });
       },
-      build: () =>
-          mockHydratedStorage(() => FavouritesBloc(repository: dogRepository)),
+      build: () => FavouritesBloc(favouritesRepository: favouritesRepository),
       act: (bloc) => bloc.add(FavouritesAdded(mockBreedToAdd)),
       expect: () => <FavouritesState>[],
     );
 
     blocTest<FavouritesBloc, FavouritesState>(
-      "emits [FavouritesLoaded] when breed is added successfully",
+      'emits [FavouritesLoaded] when breed is added successfully',
       setUp: () {
-        when(() => dogRepository.addBreedToFavourites(mockBreedToAdd))
+        when(() => favouritesRepository.addBreedToFavourites(mockBreedToAdd))
             .thenAnswer((_) async {});
       },
-      build: () =>
-          mockHydratedStorage(() => FavouritesBloc(repository: dogRepository)),
+      build: () => FavouritesBloc(favouritesRepository: favouritesRepository),
       seed: () => FavouritesLoaded(
-          favouritesList: FavouritesList(favourites: mockFavouriteBreeds)),
+          favouritesList: FavouritesList(favourites: mockFavouriteBreeds),),
       act: (bloc) => bloc.add(FavouritesAdded(mockBreedToAdd)),
       expect: () => <FavouritesState>[
         FavouritesLoaded(
           favouritesList: FavouritesList(
-              favourites: [...mockFavouriteBreeds, mockBreedToAdd]),
+              favourites: [...mockFavouriteBreeds, mockBreedToAdd],),
         )
       ],
       verify: (_) {
-        verify(() => dogRepository.addBreedToFavourites(mockBreedToAdd))
+        verify(() => favouritesRepository.addBreedToFavourites(mockBreedToAdd))
             .called(1);
       },
     );
 
     blocTest<FavouritesBloc, FavouritesState>(
-      "emits [FavouritesLoadingError] when breed is not added successfully",
+      'emits [FavouritesLoadingError] when breed is not added successfully',
       setUp: () {
-        when(() => dogRepository.addBreedToFavourites(mockBreedToAdd))
-            .thenThrow(Exception("Error"));
+        when(() => favouritesRepository.addBreedToFavourites(mockBreedToAdd))
+            .thenThrow(Exception('Error'));
       },
-      build: () =>
-          mockHydratedStorage(() => FavouritesBloc(repository: dogRepository)),
+      build: () => FavouritesBloc(favouritesRepository: favouritesRepository),
       seed: () => FavouritesLoaded(
-          favouritesList: FavouritesList(favourites: mockFavouriteBreeds)),
+          favouritesList: FavouritesList(favourites: mockFavouriteBreeds),),
       act: (bloc) => bloc.add(FavouritesAdded(mockBreedToAdd)),
       expect: () => <FavouritesState>[FavouritesLoadingError()],
       verify: (_) {
-        verify(() => dogRepository.addBreedToFavourites(mockBreedToAdd))
+        verify(() => favouritesRepository.addBreedToFavourites(mockBreedToAdd))
             .called(1);
       },
     );
 
     blocTest<FavouritesBloc, FavouritesState>(
-      "emits [FavouritesLoaded] when breed is removed successfully",
+      'emits [FavouritesLoaded] when breed is removed successfully',
       setUp: () {
-        when(() => dogRepository.removeBreedFromFavourites(mockBreedToRemove))
-            .thenAnswer((_) async {});
+        when(() => favouritesRepository.removeBreedFromFavourites(
+            mockBreedToRemove,),).thenAnswer((_) async {});
       },
-      build: () =>
-          mockHydratedStorage(() => FavouritesBloc(repository: dogRepository)),
+      build: () => FavouritesBloc(favouritesRepository: favouritesRepository),
       seed: () => FavouritesLoaded(
-          favouritesList: FavouritesList(favourites: mockFavouriteBreeds)),
+        favouritesList: FavouritesList(favourites: mockFavouriteBreeds),
+      ),
       act: (bloc) => bloc.add(FavouritesRemoved(mockBreedToRemove)),
       expect: () => <FavouritesState>[
         FavouritesLoaded(
           favouritesList: FavouritesList(
-              favourites: [...mockFavouriteBreeds]..remove(mockBreedToRemove)),
+            favourites: [...mockFavouriteBreeds]..remove(mockBreedToRemove),
+          ),
         )
       ],
       verify: (_) {
-        verify(() => dogRepository.removeBreedFromFavourites(mockBreedToRemove))
-            .called(1);
+        verify(() => favouritesRepository
+            .removeBreedFromFavourites(mockBreedToRemove),).called(1);
       },
     );
 
     blocTest<FavouritesBloc, FavouritesState>(
-      "emits [FavouritesLoadingError] when item is not removed successfully",
+      'emits [FavouritesLoadingError] when item is not removed successfully',
       setUp: () {
-        when(() => dogRepository.removeBreedFromFavourites(mockBreedToRemove))
-            .thenThrow(Exception("Error"));
+        when(() => favouritesRepository.removeBreedFromFavourites(
+            mockBreedToRemove,),).thenThrow(Exception('Error'));
       },
-      build: () =>
-          mockHydratedStorage(() => FavouritesBloc(repository: dogRepository)),
+      build: () => FavouritesBloc(favouritesRepository: favouritesRepository),
       seed: () => FavouritesLoaded(
-          favouritesList: FavouritesList(favourites: mockFavouriteBreeds)),
+        favouritesList: FavouritesList(favourites: mockFavouriteBreeds),
+      ),
       act: (bloc) => bloc.add(FavouritesRemoved(mockBreedToRemove)),
       expect: () => <FavouritesState>[FavouritesLoadingError()],
       verify: (_) {
-        verify(() => dogRepository.removeBreedFromFavourites(mockBreedToRemove))
-            .called(1);
+        verify(() => favouritesRepository
+            .removeBreedFromFavourites(mockBreedToRemove),).called(1);
       },
     );
   });

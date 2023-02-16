@@ -1,22 +1,19 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dog_app/core/widgets/description.dart';
+import 'package:dog_app/features/favourites/bloc/favourites_bloc.dart';
+import 'package:dogbreeds_api/dogbreeds_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-
-import '../../favourites/bloc/favourites_bloc.dart';
-import '../models/breeds/breeds_model.dart';
-import 'description.dart';
-
 
 class HomeDetailPage extends StatelessWidget {
+  const HomeDetailPage({super.key, required this.theBreed});
   final BreedsModel theBreed;
-
-  const HomeDetailPage({Key? key, required this.theBreed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    bool containsBreed = false;
+    final size = MediaQuery.of(context).size;
+    var containsBreed = false;
 
     return Scaffold(
       appBar: AppBar(
@@ -42,9 +39,16 @@ class HomeDetailPage extends StatelessWidget {
             } else if (state is FavouritesLoaded) {
               if (state.favouritesList.favourites.contains(theBreed)) {
                 containsBreed = true;
-                return const Icon(Icons.favorite, color: Colors.red);
+                return const Icon(
+                  Icons.favorite,
+                  key: Key('liked_heart'),
+                  color: Colors.red,
+                );
               } else {
-                return const Icon(Icons.favorite_border_outlined);
+                return const Icon(
+                  Icons.favorite_border_outlined,
+                  key: Key('unliked_heart'),
+                );
               }
             } else if (state is FavouritesLoadingError) {
               return const Icon(Icons.error_outline);
@@ -59,7 +63,7 @@ class HomeDetailPage extends StatelessWidget {
 
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text("Removed from Favourites"),
+                content: Text('Removed from Favourites'),
                 duration: Duration(milliseconds: 900),
               ),
             );
@@ -68,7 +72,7 @@ class HomeDetailPage extends StatelessWidget {
 
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text("Added to Favourites"),
+                content: Text('Added to Favourites'),
                 duration: Duration(milliseconds: 900),
               ),
             );
@@ -81,9 +85,9 @@ class HomeDetailPage extends StatelessWidget {
 
 class VerticalView extends StatelessWidget {
   const VerticalView({
-    Key? key,
+    super.key,
     required this.theBreed,
-  }) : super(key: key);
+  });
 
   final BreedsModel theBreed;
 
@@ -93,12 +97,9 @@ class VerticalView extends StatelessWidget {
       children: [
         Expanded(
           flex: 2,
-          child: Container(
+          child: ColoredBox(
             color: Theme.of(context).canvasColor,
-            child: CachedNetworkImage(
-              imageUrl: theBreed.image.url,
-              errorWidget: (context, url, error) => const Icon(Icons.error),
-            ),
+            child: CachedNetworkImage(imageUrl: theBreed.image.url),
           ),
         ),
         Expanded(

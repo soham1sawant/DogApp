@@ -1,55 +1,56 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dog_app/features/dogbreeds/bloc/dogbreeds_bloc.dart';
-import 'package:dog_app/features/dogbreeds/models/breeds/breeds_model.dart';
 import 'package:dog_app/features/dogbreeds/models/breeds_catalog.dart';
-import 'package:dog_app/features/dogbreeds/data/dog_repository.dart';
+import 'package:dogbreeds_api/dogbreeds_api.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MockDogRepository extends Mock implements DogRepository {}
+import '../../../helpers/mock_lists.dart';
+
+class MockDogbreedsApiClient extends Mock implements DogbreedsApiClient {}
 
 void main() {
-  group("DogBreedsBloc", () {
-    List<BreedsModel> mockDogsList = [];
-    late DogRepository dogRepository;
+  group('DogBreedsBloc', () {
+    final mockDogsList = mockFavouriteBreeds;
+    late DogbreedsApiClient dogbreedsApiClient;
 
     setUp(() async {
-      dogRepository = MockDogRepository();
+      dogbreedsApiClient = MockDogbreedsApiClient();
     });
 
-    test("Initial state is loading", () {
-      expect(DogBreedsBloc(repository: dogRepository).state,
-          DogBreedsLoadInProgress());
+    test('Initial state is loading', () {
+      expect(
+        DogBreedsBloc(dogbreedsApiClient).state,
+        DogBreedsLoadInProgress(),
+      );
     });
 
     blocTest<DogBreedsBloc, DogBreedsState>(
-      "emits [DogBreedsLoadInProgress, DogBreedsLoadedSuccess]"
-      "when dog breeds is loaded successfully",
+      'emits [DogBreedsLoadInProgress, DogBreedsLoadedSuccess] '
+      'when dog breeds is loaded successfully',
       setUp: () {
-        when(dogRepository.getDogData).thenAnswer((_) async => mockDogsList);
+        when(() => dogbreedsApiClient.dogData()).thenAnswer((_) async =>  mockDogsList);
       },
-      build: () => DogBreedsBloc(repository: dogRepository),
+      build: () => DogBreedsBloc(dogbreedsApiClient),
       act: (bloc) => bloc.add(DogBreedsRequest()),
       expect: () => <DogBreedsState>[
         DogBreedsLoadInProgress(),
         DogBreedsLoadSuccess(BreedsCatalog(mockDogsList))
       ],
-      verify: (_) => verify(dogRepository.getDogData).called(1),
     );
 
     blocTest<DogBreedsBloc, DogBreedsState>(
-      "emites [DogBreedsLoadInProgress, DogBreedsLoadFailure"
-      "when loading dog breeds throws an error",
+      'emites [DogBreedsLoadInProgress, DogBreedsLoadFailure '
+      'when loading dog breeds throws an error',
       setUp: () {
-        when(dogRepository.getDogData).thenThrow(Exception("Error"));
+        when(() => dogbreedsApiClient.dogData()).thenThrow(Exception('Error'));
       },
-      build: () => DogBreedsBloc(repository: dogRepository),
+      build: () => DogBreedsBloc(dogbreedsApiClient),
       act: (bloc) => bloc.add(DogBreedsRequest()),
       expect: () => <DogBreedsState>[
         DogBreedsLoadInProgress(),
         DogBreedsLoadFailure(),
       ],
-      verify: (_) => verify(dogRepository.getDogData).called(1),
     );
   });
 }

@@ -1,0 +1,14 @@
+name: authentication_repo
+description: A repository for firebase authentication
+version: 1.0.0+1
+publish_to: none
+
+environment:
+   sdk: ">=2.19.0 <3.0.0"
+
+dependencies:
+  equatable: ^2.0.5
+  firebase_auth: ^4.2.6
+  firebase_core: ^2.5.0
+
+dev_dependencies:

@@ -9,6 +9,8 @@
 .history
 .svn/
 /lib/core/auth/secrets.dart
+/lib/firebase_options.dart
+/packages/dogbreeds_api/lib/auth/secrets.dart
 
 # IntelliJ related
 *.iml

@@ -4,15 +4,13 @@ import 'package:dog_app/features/favourites/ui/widgets/badge_icon.dart';
 import 'package:dog_app/core/widgets/main_list.dart';
 import 'package:dog_app/features/authentication/bloc/auth_bloc.dart';
 import 'package:dog_app/features/dogbreeds/bloc/dogbreeds_bloc.dart';
-import 'package:dog_app/features/dogbreeds/models/breeds_catalog.dart';
 import 'package:dog_app/features/dogbreeds/ui/home_page.dart';
 import 'package:dog_app/features/favourites/bloc/favourites_bloc.dart';
-import 'package:dog_app/features/favourites/data/favourites_list.dart';
+import 'package:favourites_repo/favourites_repo.dart';
 import 'package:dogbreeds_api/dogbreeds_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-
 import '../../../helpers/helper.dart';
 
 void main() {

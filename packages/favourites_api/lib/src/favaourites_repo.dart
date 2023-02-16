@@ -1,7 +1,9 @@
-import 'package:dog_app/features/favourites/data/favourites_data_provider.dart';
+import 'favourites_data_provider.dart';
 import 'package:dogbreeds_api/dogbreeds_api.dart';
 
-class FavouritesRepository {
+// TODO: add exception !!
+
+class FavouritesRepo {
   final FavouritesDataProvider _favouritesDataProvider =
       FavouritesDataProvider();
   final DogbreedsApiClient _dogbreedsApiClient = DogbreedsApiClient();

@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:dog_app/features/dogbreeds/models/breeds_catalog.dart';
 import 'package:dogbreeds_api/dogbreeds_api.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';

@@ -5,10 +5,11 @@ import 'package:dog_app/features/authentication/ui/sign_in_page.dart';
 import 'package:dog_app/features/dogbreeds/bloc/dogbreeds_bloc.dart';
 import 'package:dog_app/features/dogbreeds/ui/home_page.dart';
 import 'package:dog_app/features/favourites/bloc/favourites_bloc.dart';
-import 'package:dog_app/features/favourites/data/favaourites_repository.dart';
 import 'package:dogbreeds_api/dogbreeds_api.dart';
+import 'package:favourites_repo/favourites_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -20,8 +21,8 @@ class App extends StatelessWidget {
         RepositoryProvider<DogbreedsApiClient>(
           create: (context) => DogbreedsApiClient(),
         ),
-        RepositoryProvider<FavouritesRepository>(
-          create: (context) => FavouritesRepository(),
+        RepositoryProvider<FavouritesRepo>(
+          create: (context) => FavouritesRepo(),
         ),
         RepositoryProvider<AuthenticationRepo>(
           create: (context) => AuthenticationRepo(),
@@ -37,7 +38,7 @@ class App extends StatelessWidget {
           BlocProvider(
             create: (context) => FavouritesBloc(
               favouritesRepository:
-                  RepositoryProvider.of<FavouritesRepository>(context),
+                  RepositoryProvider.of<FavouritesRepo>(context),
             )..add(FavouritesStarted()),
           ),
           BlocProvider(

@@ -1,5 +1,5 @@
 import 'package:dog_app/features/favourites/bloc/favourites_bloc.dart';
-import 'package:dog_app/features/favourites/data/favourites_list.dart';
+import 'package:favourites_repo/favourites_repo.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

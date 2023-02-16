@@ -1,8 +1,9 @@
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dog_app/features/favourites/models/favourites_model.dart';
+import 'models/favourites_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class FavouritesDataProvider {
   final firebaseUser = FirebaseAuth.instance.currentUser;
@@ -18,7 +19,7 @@ class FavouritesDataProvider {
   Future<List<String>> getFromFireStore() async {
     final userRef = db.collection('favourites').doc(firebaseUser?.uid);
 
-    final DocumentSnapshot<Map<String, dynamic>> docSnapshot;
+    final docSnapshot;
     
     try {
       await db.disableNetwork();
@@ -39,16 +40,6 @@ class FavouritesDataProvider {
       log(e.toString());
     }
 
-    // if (docSnapshot.exists && (docSnapshot.data() != null)) {
-    //   final data = FavouritesModel.fromJson(docSnapshot.data());
-
-    //   return data.likes;
-    // } else {
-    //   final favouritesModel = FavouritesModel(likes: []);
-    //   await userRef.set(favouritesModel.toJson());
-
-    //   return <String>[];
-    // }
     return <String>[];
   }
 }

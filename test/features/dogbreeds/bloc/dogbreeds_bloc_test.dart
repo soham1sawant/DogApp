@@ -1,6 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dog_app/features/dogbreeds/bloc/dogbreeds_bloc.dart';
-import 'package:dog_app/features/dogbreeds/models/breeds_catalog.dart';
 import 'package:dogbreeds_api/dogbreeds_api.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

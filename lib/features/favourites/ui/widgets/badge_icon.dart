@@ -11,7 +11,6 @@ class BadgeIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final orientation = MediaQuery.of(context).orientation;
 
     return badges.Badge(
       badgeContent: Text(
@@ -28,9 +27,7 @@ class BadgeIcon extends StatelessWidget {
         key: const Key('to-favourites-page'),
         icon: const Icon(Icons.favorite),
         color: Theme.of(context).primaryColor,
-        iconSize: orientation == Orientation.portrait
-            ? size.height * 0.05
-            : size.height * 0.075,
+        iconSize: size.height * 0.05,
         onPressed: () => Navigator.of(context).push(
           MaterialPageRoute<FavouritesPage>(
             builder: (context) => const FavouritesPage(),

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dog_app/features/favourites/bloc/favourites_bloc.dart';
-import 'package:dog_app/features/favourites/data/favourites_list.dart';
+import 'package:favourites_repo/favourites_repo.dart';
 import 'package:dog_app/features/favourites/ui/favourites_page.dart';
 import 'package:dogbreeds_api/dogbreeds_api.dart';
 import 'package:flutter/material.dart';

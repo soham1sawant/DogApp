@@ -3,6 +3,10 @@ import 'package:dogbreeds_api/dogbreeds_api.dart';
 
 // TODO: add exception !!
 
+class GetFromFirestoreException implements Exception {}
+
+class WriteToFirestoreException implements Exception {}
+
 class FavouritesRepo {
   final FavouritesDataProvider _favouritesDataProvider =
       FavouritesDataProvider();
@@ -18,7 +22,11 @@ class FavouritesRepo {
 
     // execute getFromFireStore() from data provider
     // update firestoreList to this data
-    firestoreList = await _favouritesDataProvider.getFromFireStore();
+    try {
+      firestoreList = await _favouritesDataProvider.getFromFireStore();
+    } on Exception {
+      throw GetFromFirestoreException();
+    }
 
     // run a for loop to match the name of dog from firestoreList
     //and breedsList.if true, add too favouritesList
@@ -40,7 +48,11 @@ class FavouritesRepo {
       firestoreList.add(breed.name);
 
       // execute writeToFirestore(firestoreList)
-      await _favouritesDataProvider.writeToFireStore(firestoreList);
+      try {
+        await _favouritesDataProvider.writeToFireStore(firestoreList);
+      } on Exception {
+        throw WriteToFirestoreException();
+      }
     }
   }
 
@@ -54,7 +66,11 @@ class FavouritesRepo {
       firestoreList.remove(breed.name);
 
       // execute writeToFirestore(firestoreList)
-      await _favouritesDataProvider.writeToFireStore(firestoreList);
+      try {
+        await _favouritesDataProvider.writeToFireStore(firestoreList);
+      } on Exception {
+        throw WriteToFirestoreException();
+      }
     }
   }
 }

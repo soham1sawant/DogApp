@@ -1,4 +1,3 @@
-
 import 'package:dog_app/core/widgets/authentication_button.dart';
 import 'package:dog_app/core/widgets/credentials_header.dart';
 import 'package:dog_app/features/authentication/bloc/auth_bloc.dart';
@@ -45,11 +44,13 @@ class SignInPage extends StatelessWidget {
             MaterialPageRoute<HomePage>(builder: (context) => const HomePage()),
           );
         } else if (state is AuthErrorState) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(const SnackBar(content: Text('Error, try again.')));
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(state.error),
+          )); //
         } else if (state is SignOutErrorState) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(const SnackBar(content: Text('Error, try again.')));
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(state.error),
+          ));
         }
       },
       builder: (context, state) {

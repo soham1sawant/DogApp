@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:dogbreeds_api/auth/secrets.dart';
 import 'package:http/http.dart' as http;
 
 import 'models/breeds_model.dart';
@@ -35,7 +34,6 @@ class DogbreedsApiClient {
     try {
       response = await _httpClient.get(
         uri,
-        headers: {'authorization': myApiKey},
       );
     } on Exception {
       throw HttpException();

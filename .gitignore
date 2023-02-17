@@ -8,16 +8,13 @@
 .buildlog/
 .history
 .svn/
-/lib/core/auth/secrets.dart
 /lib/firebase_options.dart
-/packages/dogbreeds_api/lib/auth/secrets.dart
 
 # IntelliJ related
 *.iml
 *.ipr
 *.iws
 .idea/
-lib/core/auth/secrets.dart
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
 # is commented out by default.

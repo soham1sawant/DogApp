@@ -15,6 +15,10 @@ void loadSignInPageCheck() {
 void main() {
   late AuthBloc authBloc;
 
+  setUpAll(() {
+    registerFallbackValue(FakeRoute());
+  });
+
   setUp(() {
     authBloc = MockAuthBloc();
   });

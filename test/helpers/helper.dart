@@ -5,6 +5,11 @@ import 'package:dog_app/features/favourites/bloc/favourites_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+
+class MockNavigatorObserver extends Mock implements NavigatorObserver {}
+
+class FakeRoute extends Fake implements Route {}
 
 class MockDogBreedsBloc extends MockBloc<DogBreedsEvent, DogBreedsState>
     implements DogBreedsBloc {}

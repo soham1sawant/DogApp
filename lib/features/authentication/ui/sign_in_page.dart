@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dog_app/core/widgets/authentication_button.dart';
 import 'package:dog_app/core/widgets/credentials_header.dart';
 import 'package:dog_app/features/authentication/bloc/auth_bloc.dart';
@@ -35,6 +37,10 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
+    log(size.height.toString());
+    log(size.width.toString());
+
 
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {

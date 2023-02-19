@@ -15,10 +15,6 @@ void loadSignInPageCheck() {
 void main() {
   late AuthBloc authBloc;
 
-  setUpAll(() {
-    registerFallbackValue(FakeRoute());
-  });
-
   setUp(() {
     authBloc = MockAuthBloc();
   });
@@ -34,6 +30,7 @@ void main() {
 
       loadSignInPageCheck();
     });
+
 
     testWidgets(
       'clicked SIGN IN Button when text fields are empty',

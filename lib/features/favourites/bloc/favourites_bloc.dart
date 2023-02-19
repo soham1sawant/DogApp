@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:favourites_repo/favourites_repo.dart';
+import 'package:favourites_api/favourites_api.dart';
 import 'package:dogbreeds_api/dogbreeds_api.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
@@ -14,7 +14,7 @@ class FavouritesBloc extends Bloc<FavouritesEvent, FavouritesState> {
     on<FavouritesAdded>(_onBreedAdded);
     on<FavouritesRemoved>(_onBreedRemoved);
   }
-  final FavouritesRepo favouritesRepository;
+  final FavouritesApi favouritesRepository;
 
   Future<void> _onStarted(
     FavouritesStarted event,

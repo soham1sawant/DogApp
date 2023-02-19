@@ -7,7 +7,7 @@ class GetFromFirestoreException implements Exception {}
 
 class WriteToFirestoreException implements Exception {}
 
-class FavouritesRepo {
+class FavouritesApi {
   final FavouritesDataProvider _favouritesDataProvider =
       FavouritesDataProvider();
   final DogbreedsApiClient _dogbreedsApiClient = DogbreedsApiClient();

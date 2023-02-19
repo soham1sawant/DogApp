@@ -31,7 +31,6 @@ void main() {
       loadSignInPageCheck();
     });
 
-
     testWidgets(
       'clicked SIGN IN Button when text fields are empty',
       (tester) async {

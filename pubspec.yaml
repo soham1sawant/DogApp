@@ -45,7 +45,7 @@ dependencies:
     path: packages/authentication_repo
   dogbreeds_api:
     path: packages/dogbreeds_api
-  favourites_repo:
+  favourites_api:
     path: packages/favourites_api
   google_fonts: ^4.0.3
   cached_network_image: ^3.2.3

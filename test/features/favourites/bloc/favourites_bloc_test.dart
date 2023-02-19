@@ -1,20 +1,18 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dog_app/features/favourites/bloc/favourites_bloc.dart';
 import 'package:dogbreeds_api/dogbreeds_api.dart';
-import 'package:favourites_repo/favourites_repo.dart';
+import 'package:favourites_api/favourites_api.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../helpers/mock_lists.dart';
 
-class MockFavouritesRepository extends Mock implements FavouritesRepo {}
+class MockFavouritesRepository extends Mock implements FavouritesApi {}
 
 void main() {
   group('FavouritesBloc', () {
 
-    
-
-    late FavouritesRepo favouritesRepository;
+    late FavouritesApi favouritesRepository;
 
     setUp(() {
       favouritesRepository = MockFavouritesRepository();

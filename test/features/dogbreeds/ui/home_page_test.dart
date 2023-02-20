@@ -132,6 +132,9 @@ void main() {
       );
 
       expect(find.byType(MainList), findsOneWidget);
+      expect(find.byKey(const Key('breed0')), findsOneWidget);
+      expect(find.byKey(const Key('breed1')), findsOneWidget);
+
     });
 
     testWidgets('renders BadgeIcon when Favourites breeds is loaded',

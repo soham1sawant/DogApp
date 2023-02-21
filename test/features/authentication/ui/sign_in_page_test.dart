@@ -12,6 +12,39 @@ void loadSignInPageCheck() {
   expect(find.byKey(const Key('sign_up_page_button')), findsOneWidget);
 }
 
+void clickSignInButtonWhenFieldsEmpty(tester) async {
+  await tester.tap(find.byKey(const Key('log_in_button')));
+  await tester.pumpAndSettle();
+  expect(find.text('email is required'), findsOneWidget);
+  expect(find.text('password is required'), findsOneWidget);
+}
+
+void clickSignInButtonWithWrongFields(tester) async {
+  await tester.enterText(
+    find.byKey(const Key('login_email_field')),
+    'soham45@',
+  );
+  await tester.enterText(
+    find.byKey(const Key('login_password_field')),
+    'Smashup',
+  );
+  await tester.tap(find.byKey(const Key('log_in_button')));
+  await tester.pumpAndSettle();
+
+  expect(
+    find.text('enter a valid email address'),
+    findsOneWidget,
+  );
+  expect(
+    find.text('password must be at least 8 digits long'),
+    findsOneWidget,
+  );
+}
+
+void clickSignInButtonWithCorrectFields(tester) async {
+  
+}
+
 void main() {
   late AuthBloc authBloc;
 
@@ -41,10 +74,7 @@ void main() {
           child: SignInPage(),
         );
 
-        await tester.tap(find.byKey(const Key('log_in_button')));
-        await tester.pumpAndSettle();
-        expect(find.text('email is required'), findsOneWidget);
-        expect(find.text('password is required'), findsOneWidget);
+        clickSignInButtonWhenFieldsEmpty(tester);
       },
     );
 
@@ -58,24 +88,7 @@ void main() {
           child: SignInPage(),
         );
 
-        await tester.enterText(
-          find.byKey(const Key('login_email_field')),
-          'soham45@',
-        );
-        await tester.enterText(
-          find.byKey(const Key('login_password_field')),
-          'Smashup',
-        );
-        await tester.tap(find.byKey(const Key('log_in_button')));
-        await tester.pumpAndSettle();
-        expect(
-          find.text('enter a valid email address'),
-          findsOneWidget,
-        );
-        expect(
-          find.text('password must be at least 8 digits long'),
-          findsOneWidget,
-        );
+        clickSignInButtonWithWrongFields(tester);
       },
     );
 

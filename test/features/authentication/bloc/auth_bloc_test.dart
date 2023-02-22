@@ -127,11 +127,11 @@ void main() {
       },
     );
 
-    blocTest<AuthBloc, AuthState>(
-      'emits [MyState] when MyEvent is added.',
-      build: () => AuthBloc(authRepo: authRepository),
-      act: (bloc) => bloc.add(MyEvent),
-      expect: () => const <AuthState>[MyState],
-    );
+    // blocTest<AuthBloc, AuthState>(
+    //   'emits [MyState] when MyEvent is added.',
+    //   build: () => AuthBloc(authRepo: authRepository),
+    //   act: (bloc) => bloc.add(MyEvent),
+    //   expect: () => const <AuthState>[MyState],
+    // );
   });
 }

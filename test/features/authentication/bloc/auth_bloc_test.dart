@@ -126,5 +126,12 @@ void main() {
         verify(() => authRepository.signOut()).called(1);
       },
     );
+
+    blocTest<AuthBloc, AuthState>(
+      'emits [MyState] when MyEvent is added.',
+      build: () => AuthBloc(authRepo: authRepository),
+      act: (bloc) => bloc.add(MyEvent),
+      expect: () => const <AuthState>[MyState],
+    );
   });
 }

@@ -76,6 +76,14 @@ class LogOutFailure implements Exception {
   ]);
 }
 
+class UserDeleteFailure implements Exception {
+  final String message;
+
+  const UserDeleteFailure([
+    this.message = 'Try again after Log In.',
+  ]);
+}
+
 class AuthenticationRepo {
   final firebase_auth.FirebaseAuth _firebaseAuth;
 
@@ -118,6 +126,14 @@ class AuthenticationRepo {
       await _firebaseAuth.signOut();
     } catch (_) {
       throw LogOutFailure();
+    }
+  }
+
+  Future<void> deleteUser() async {
+    try {
+      await _firebaseAuth.currentUser?.delete();
+    } catch (_) {
+      throw UserDeleteFailure();
     }
   }
 }

@@ -7,6 +7,8 @@ class GetFromFirestoreException implements Exception {}
 
 class WriteToFirestoreException implements Exception {}
 
+class DeleteUserException implements Exception {}
+
 class FavouritesApi {
   final FavouritesDataProvider _favouritesDataProvider =
       FavouritesDataProvider();
@@ -73,4 +75,6 @@ class FavouritesApi {
       }
     }
   }
+
+  Future<void> deleteUserFromFirestore() async {}
 }

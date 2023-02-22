@@ -31,5 +31,11 @@ void main() {
         expect(const SignOutRequested(), const SignOutRequested());
       });
     });
+
+    group('DeleteUserRequested', () {
+      test('supports value comparison', () {
+        expect(const DeleteUserRequested(), const DeleteUserRequested());
+      });
+    });
   });
 }

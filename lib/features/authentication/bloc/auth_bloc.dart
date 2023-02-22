@@ -51,7 +51,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       }
     });
 
-
     on<SignOutRequested>((event, emit) async {
       emit(LoadingState());
       try {
@@ -61,6 +60,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(SignOutErrorState(e.message));
         emit(AuthenticatedState());
       }
+    });
+
+    on<DeleteUserRequested>((event, emit) async {
+      emit(LoadingState());
+
+      
     });
   }
 }

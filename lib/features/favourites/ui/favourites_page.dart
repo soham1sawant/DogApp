@@ -22,7 +22,11 @@ class FavouritesPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const MainHeader(header: 'Favourites', icon: false),
+              const MainHeader(
+                header: 'Favourites',
+                favIcon: false,
+                settingsIcon: false,
+              ),
               BlocBuilder<FavouritesBloc, FavouritesState>(
                 builder: (context, state) {
                   if (state is FavouritesLoading) {

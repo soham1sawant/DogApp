@@ -97,6 +97,7 @@ void main() {
       );
 
       expect(find.byType(HomePage), findsOneWidget);
+      expect(find.byKey(const Key('to-settings-page')), findsOneWidget);
     });
   });
 
@@ -115,6 +116,8 @@ void main() {
       );
 
       expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      expect(find.byKey(const Key('to-settings-page')), findsOneWidget);
+
     });
 
     testWidgets('renders MainList when dog breeds is loaded with 2 breeds',
@@ -132,9 +135,9 @@ void main() {
       );
 
       expect(find.byType(MainList), findsOneWidget);
+      expect(find.byKey(const Key('to-settings-page')), findsOneWidget);
       expect(find.byKey(const Key('breed0')), findsOneWidget);
       expect(find.byKey(const Key('breed1')), findsOneWidget);
-
     });
 
     testWidgets('renders BadgeIcon when Favourites breeds is loaded',
@@ -155,6 +158,7 @@ void main() {
       );
 
       expect(find.byType(BadgeIcon), findsOneWidget);
+      expect(find.byKey(const Key('to-settings-page')), findsOneWidget);
     });
 
     testWidgets('renders Error Icon when dog breeds fail to load',
@@ -171,6 +175,7 @@ void main() {
       );
 
       expect(find.byIcon(Icons.error), findsOneWidget);
+      expect(find.byKey(const Key('to-settings-page')), findsOneWidget);
     });
   });
 

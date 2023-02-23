@@ -35,7 +35,11 @@ class HomePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const MainHeader(header: 'Dog App', icon: true),
+                const MainHeader(
+                  header: 'Dog App',
+                  favIcon: true,
+                  settingsIcon: true,
+                ),
                 BlocBuilder<DogBreedsBloc, DogBreedsState>(
                   builder: (context, state) {
                     if (state is DogBreedsLoadInProgress) {

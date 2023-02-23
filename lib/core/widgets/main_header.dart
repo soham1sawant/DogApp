@@ -31,30 +31,35 @@ class MainHeader extends StatelessWidget {
           ),
           textScaleFactor: size.height * 0.0045,
         ),
-        if (favIcon)
-          BlocBuilder<FavouritesBloc, FavouritesState>(
-            builder: (context, state) {
-              if (state is FavouritesLoaded) {
-                return BadgeIcon(list: state.favouritesList.favourites);
-              } else if (state is FavouritesLoadingError) {
-                return const Center(child: Icon(Icons.error_outline));
-              } else {
-                return const Center(child: Icon(Icons.error_outline));
-              }
-            },
-          ),
-        if (settingsIcon)
-          IconButton(
-            key: const Key('to-settings-page'),
-            icon: const Icon(Icons.settings),
-            color: Theme.of(context).primaryColor,
-            iconSize: size.height * 0.05,
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute<SettingsPage>(
-                builder: (context) => const SettingsPage(),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            if (favIcon)
+              BlocBuilder<FavouritesBloc, FavouritesState>(
+                builder: (context, state) {
+                  if (state is FavouritesLoaded) {
+                    return BadgeIcon(list: state.favouritesList.favourites);
+                  } else if (state is FavouritesLoadingError) {
+                    return const Center(child: Icon(Icons.error_outline));
+                  } else {
+                    return const Center(child: Icon(Icons.error_outline));
+                  }
+                },
               ),
-            ),
-          )
+            if (settingsIcon)
+              IconButton(
+                key: const Key('to-settings-page'),
+                icon: const Icon(Icons.settings),
+                color: Theme.of(context).primaryColor,
+                iconSize: size.height * 0.05,
+                onPressed: () => Navigator.of(context).push(
+                  MaterialPageRoute<SettingsPage>(
+                    builder: (context) => const SettingsPage(),
+                  ),
+                ),
+              )
+          ],
+        ),
       ],
     );
   }

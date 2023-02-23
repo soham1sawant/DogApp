@@ -63,9 +63,7 @@ class SubDescription extends StatelessWidget {
           Text(
             first!,
             style: TextStyle(
-              fontSize: orientation == Orientation.portrait
-                  ? size.height * 0.032
-                  : size.height * 0.05,
+              fontSize: size.height * 0.032,
               fontWeight: FontWeight.bold,
               color: Theme.of(context).primaryColor,
               fontFamily: GoogleFonts.poppins().fontFamily,
@@ -76,9 +74,7 @@ class SubDescription extends StatelessWidget {
               child: Text(
                 second! + unit!,
                 style: TextStyle(
-                  fontSize: orientation == Orientation.portrait
-                      ? size.height * 0.032
-                      : size.height * 0.05,
+                  fontSize: size.height * 0.032,
                   color: Theme.of(context).primaryColor,
                   fontFamily: GoogleFonts.poppins().fontFamily,
                 ),
@@ -88,9 +84,7 @@ class SubDescription extends StatelessWidget {
             Text(
               '-',
               style: TextStyle(
-                fontSize: orientation == Orientation.portrait
-                    ? size.height * 0.032
-                    : size.height * 0.05,
+                fontSize: size.height * 0.032,
               ),
             ),
         ],

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dog_app/features/favourites/bloc/favourites_bloc.dart';
+import 'package:dog_app/features/favourites/ui/widgets/badge_icon.dart';
 import 'package:favourites_api/favourites_api.dart';
 import 'package:dog_app/features/favourites/ui/favourites_page.dart';
 import 'package:dogbreeds_api/dogbreeds_api.dart';
@@ -85,6 +86,8 @@ void main() {
       );
 
       expect(find.byType(FavouritesPage), findsOneWidget);
+      expect(find.byType(BadgeIcon), findsNothing);
+      expect(find.byKey(const Key('to-settings-page')), findsNothing);
     });
   });
 

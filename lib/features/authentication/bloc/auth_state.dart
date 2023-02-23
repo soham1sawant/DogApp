@@ -21,7 +21,6 @@ class UnAuthenticatedState extends AuthState {
 }
 
 class AuthErrorState extends AuthState {
-
   AuthErrorState(this.error);
   final String error;
 
@@ -30,10 +29,18 @@ class AuthErrorState extends AuthState {
 }
 
 class SignOutErrorState extends AuthState {
-
   SignOutErrorState(this.error);
   final String error;
 
   @override
+  List<Object> get props => [error];
+}
+
+class UserDeleteErrorState extends AuthState {
+  final String error;
+
+  UserDeleteErrorState(this.error);
+
+   @override
   List<Object> get props => [error];
 }

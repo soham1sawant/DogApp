@@ -65,7 +65,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<DeleteUserRequested>((event, emit) async {
       emit(LoadingState());
 
-      
+      try {
+        await authRepo.deleteUser();
+        emit(UnAuthenticatedState());
+      } on UserDeleteFailure catch (e) {
+        emit(UserDeleteErrorState(e.message));
+        emit(AuthenticatedState());
+      }
     });
   }
 }

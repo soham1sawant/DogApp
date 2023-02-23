@@ -110,7 +110,7 @@ void main() {
 
     blocTest<AuthBloc, AuthState>(
       'emits [SignOutErrorState, AuthenticatedState] '
-      'when user is not signed out',
+      'when error is thrown while signing out',
       setUp: () {
         when(() => authRepository.signOut()).thenThrow(const LogOutFailure());
       },
@@ -127,11 +127,39 @@ void main() {
       },
     );
 
-    // blocTest<AuthBloc, AuthState>(
-    //   'emits [MyState] when MyEvent is added.',
-    //   build: () => AuthBloc(authRepo: authRepository),
-    //   act: (bloc) => bloc.add(MyEvent),
-    //   expect: () => const <AuthState>[MyState],
-    // );
+    blocTest<AuthBloc, AuthState>(
+      'emits [LoadingState, UnAuthenticatedState]'
+      'when user is deleted successfully',
+      setUp: () {
+        when(() => authRepository.deleteUser()).thenAnswer((_) async {});
+      },
+      build: () => AuthBloc(authRepo: authRepository),
+      seed: AuthenticatedState.new,
+      act: (bloc) => bloc.add(const DeleteUserRequested()),
+      expect: () => <AuthState>[LoadingState(), UnAuthenticatedState()],
+      verify: (_) {
+        verify(() => authRepository.deleteUser()).called(1);
+      },
+    );
+
+    blocTest<AuthBloc, AuthState>(
+      'emits [UserDeleteErrorState, AuthenticatedState]'
+      'when error is thrown while deleting user',
+      setUp: () {
+        when(() => authRepository.deleteUser())
+            .thenThrow(const UserDeleteFailure());
+      },
+      build: () => AuthBloc(authRepo: authRepository),
+      seed: AuthenticatedState.new,
+      act: (bloc) => bloc.add(const DeleteUserRequested()),
+      expect: () => <AuthState>[
+        LoadingState(),
+        UserDeleteErrorState('Try again after Log In.'),
+        AuthenticatedState(),
+      ],
+      verify: (_) {
+        verify(() => authRepository.deleteUser()).called(1);
+      },
+    );
   });
 }

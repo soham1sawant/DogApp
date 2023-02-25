@@ -34,5 +34,11 @@ class SignOutRequested extends AuthEvent {
 }
 
 class DeleteUserRequested extends AuthEvent {
-  const DeleteUserRequested();
+  const DeleteUserRequested(this.email, this.password);
+
+  final String email;
+  final String password;
+
+  @override
+  List<Object> get props => [email, password];
 }

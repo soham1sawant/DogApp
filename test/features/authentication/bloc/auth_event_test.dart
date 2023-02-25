@@ -34,7 +34,7 @@ void main() {
 
     group('DeleteUserRequested', () {
       test('supports value comparison', () {
-        expect(const DeleteUserRequested(), const DeleteUserRequested());
+        expect(const DeleteUserRequested(' ', ' '), const DeleteUserRequested(' ', ' '));
       });
     });
   });

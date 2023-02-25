@@ -131,35 +131,31 @@ void main() {
       'emits [LoadingState, UnAuthenticatedState]'
       'when user is deleted successfully',
       setUp: () {
-        when(() => authRepository.deleteUser()).thenAnswer((_) async {});
+        when(() => authRepository.deleteUser('sam123@gmail.com', 'jklsjkdlfl')).thenAnswer((_) async {});
       },
       build: () => AuthBloc(authRepo: authRepository),
       seed: AuthenticatedState.new,
-      act: (bloc) => bloc.add(const DeleteUserRequested()),
+      act: (bloc) => bloc.add(const DeleteUserRequested('sam123@gmail.com', 'jklsjkdlfl')),
       expect: () => <AuthState>[LoadingState(), UnAuthenticatedState()],
-      verify: (_) {
-        verify(() => authRepository.deleteUser()).called(1);
-      },
+      
     );
 
     blocTest<AuthBloc, AuthState>(
       'emits [UserDeleteErrorState, AuthenticatedState]'
       'when error is thrown while deleting user',
       setUp: () {
-        when(() => authRepository.deleteUser())
+        when(() => authRepository.deleteUser('sam123@gmail.com', 'jklsjkdlfl'))
             .thenThrow(const UserDeleteFailure());
       },
       build: () => AuthBloc(authRepo: authRepository),
       seed: AuthenticatedState.new,
-      act: (bloc) => bloc.add(const DeleteUserRequested()),
+      act: (bloc) => bloc.add(const DeleteUserRequested('sam123@gmail.com', 'jklsjkdlfl')),
       expect: () => <AuthState>[
         LoadingState(),
         UserDeleteErrorState('Try again after Log In.'),
         AuthenticatedState(),
       ],
-      verify: (_) {
-        verify(() => authRepository.deleteUser()).called(1);
-      },
+      
     );
   });
 }

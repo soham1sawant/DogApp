@@ -52,10 +52,13 @@ class SignInPage extends StatelessWidget {
         } else if (state is AuthErrorState) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(state.error),
+            duration: const Duration(seconds: 3),
           )); //
         } else if (state is SignOutErrorState) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             content: Text(state.error),
+            duration: const Duration(seconds: 3),
+
           ));
         }
       },

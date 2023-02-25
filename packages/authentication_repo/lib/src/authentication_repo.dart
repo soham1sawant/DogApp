@@ -129,10 +129,15 @@ class AuthenticationRepo {
     }
   }
 
-  Future<void> deleteUser() async {
+  Future<void> deleteUser(String email, String password) async {
+    AuthCredential authCredential = EmailAuthProvider.credential(email: email, password: password);
+
     try {
+      await _firebaseAuth.currentUser
+          ?.reauthenticateWithCredential(authCredential);
       await _firebaseAuth.currentUser?.delete();
-    } catch (_) {
+    } catch (e) {
+      print(e.toString());
       throw UserDeleteFailure();
     }
   }

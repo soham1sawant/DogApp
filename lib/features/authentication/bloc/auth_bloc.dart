@@ -48,6 +48,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       } on LogInWithEmailAndPasswordFailure catch (e) {
         emit(AuthErrorState(e.message));
         emit(UnAuthenticatedState());
+      } catch(_) {
+        emit(AuthErrorState('An unknown exception occured'));
+        emit(UnAuthenticatedState());
       }
     });
 

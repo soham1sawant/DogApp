@@ -28,6 +28,7 @@ void clickSignInButtonWithWrongFields(tester) async {
     find.byKey(const Key('login_password_field')),
     'Smashup',
   );
+
   await tester.tap(find.byKey(const Key('log_in_button')));
   await tester.pumpAndSettle();
 

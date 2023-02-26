@@ -1,3 +1,4 @@
+import 'package:favourites_api/favourites_api.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -86,6 +87,7 @@ class UserDeleteFailure implements Exception {
 
 class AuthenticationRepo {
   final firebase_auth.FirebaseAuth _firebaseAuth;
+  FavouritesDataProvider _favouritesDataProvider = FavouritesDataProvider();
 
   AuthenticationRepo({
     firebase_auth.FirebaseAuth? firebaseAuth,
@@ -130,9 +132,12 @@ class AuthenticationRepo {
   }
 
   Future<void> deleteUser(String email, String password) async {
-    AuthCredential authCredential = EmailAuthProvider.credential(email: email, password: password);
+    AuthCredential authCredential =
+        EmailAuthProvider.credential(email: email, password: password);
 
     try {
+      _favouritesDataProvider.deleteUserFromFireStore();
+      
       await _firebaseAuth.currentUser
           ?.reauthenticateWithCredential(authCredential);
       await _firebaseAuth.currentUser?.delete();

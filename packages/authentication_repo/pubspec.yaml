@@ -10,5 +10,7 @@ dependencies:
   equatable: ^2.0.5
   firebase_auth: ^4.2.6
   firebase_core: ^2.5.0
+  favourites_api:
+    path: ../favourites_api
 
 dev_dependencies:

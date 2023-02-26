@@ -76,5 +76,11 @@ class FavouritesApi {
     }
   }
 
-  Future<void> deleteUserFromFirestore() async {}
+  Future<void> deleteUserFromFirestore() async {
+    try {
+      await _favouritesDataProvider.deleteUserFromFireStore();
+    } on Exception {
+      throw DeleteUserException();
+    }
+  }
 }

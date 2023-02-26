@@ -4,7 +4,6 @@ import 'models/favourites_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 class FavouritesDataProvider {
   final firebaseUser = FirebaseAuth.instance.currentUser;
   final db = FirebaseFirestore.instance;
@@ -20,10 +19,8 @@ class FavouritesDataProvider {
     final userRef = db.collection('favourites').doc(firebaseUser?.uid);
 
     final docSnapshot;
-    
+
     try {
-      await db.disableNetwork();
-      await db.enableNetwork();
       docSnapshot = await userRef.get();
 
       if (docSnapshot.exists && (docSnapshot.data() != null)) {
@@ -41,5 +38,10 @@ class FavouritesDataProvider {
     }
 
     return <String>[];
+  }
+
+  Future<void> deleteUserFromFireStore() async {
+    await writeToFireStore(<String>[]);
+    await db.collection('favourites').doc(firebaseUser?.uid).delete();
   }
 }

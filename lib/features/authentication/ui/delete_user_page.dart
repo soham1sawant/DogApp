@@ -48,7 +48,7 @@ class DeleteUserPage extends StatelessWidget {
               child: Column(
                 children: [
                   TextFormField(
-                    key: const Key('login_email_field'),
+                    key: const Key('login_email_field_deletepage'),
                     controller: _emailController,
                     keyboardType: TextInputType.emailAddress,
                     decoration: const InputDecoration(
@@ -58,7 +58,7 @@ class DeleteUserPage extends StatelessWidget {
                   ),
                   SizedBox(height: size.height * 0.02),
                   TextFormField(
-                    key: const Key('login_password_field'),
+                    key: const Key('login_password_field_deletepage'),
                     controller: _passwordController,
                     validator: passwordValidator,
                     obscureText: true,
@@ -68,13 +68,13 @@ class DeleteUserPage extends StatelessWidget {
                   ),
                   SizedBox(height: size.height * 0.02),
                   InkWell(
-                    key: const Key('log_in_button'),
+                    key: const Key('delete_user_confirm_button'),
                     child: const AuthenticationButton(text: 'CONFIRM'),
                     onTap: () => _deleteUserWithEmailAndPassword(context),
                   ),
                   SizedBox(height: size.height * 0.02),
                   InkWell(
-                    key: const Key('sign_up_page_button'),
+                    key: const Key('cancel_button_delete_page'),
                     onTap: () {
                       // Navigator.push(
                       //   context,

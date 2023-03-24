@@ -51,7 +51,10 @@ class HomeDetailPage extends StatelessWidget {
                 );
               }
             } else if (state is FavouritesLoadingError) {
-              return const Icon(Icons.error_outline);
+              return const Icon(
+                Icons.error_outline,
+                key: Key('FAB_error_outline'),
+              );
             } else {
               return const Icon(Icons.error_outline);
             }

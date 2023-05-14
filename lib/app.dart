@@ -8,6 +8,7 @@ import 'package:dog_app/features/favourites/bloc/favourites_bloc.dart';
 import 'package:dogbreeds_api/dogbreeds_api.dart';
 import 'package:favourites_api/favourites_api.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class App extends StatelessWidget {
@@ -15,6 +16,10 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var brightness =
+        SchedulerBinding.instance.platformDispatcher.platformBrightness;
+    bool isDarkMode = brightness == Brightness.dark;
+
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<DogbreedsApiClient>(
@@ -48,7 +53,7 @@ class App extends StatelessWidget {
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          themeMode: ThemeMode.light,
+          themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
           theme: MyTheme.lightTheme(context),
           darkTheme: MyTheme.darkTheme(context),
           home: BlocBuilder<AuthBloc, AuthState>(

@@ -18,6 +18,15 @@ class DogBreedsBloc extends Bloc<DogBreedsEvent, DogBreedsState> {
         } catch (e) {
           emit(DogBreedsLoadFailure());
         }
+      } else if (event is DogBreedImageUrlRequest) {
+        emit(DogBreedImageUrlLoadInProgress());
+
+        try {
+          final breedUrl = await dogbreedsApiClient.getImageUrl(event.imageId);
+          emit(DogBreedImageUrlLoadSuccess(breedUrl));
+        } catch (e) {
+          emit(DogBreedImageUrlFailure());
+        }
       }
     });
   }

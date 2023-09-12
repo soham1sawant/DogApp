@@ -102,7 +102,7 @@ class VerticalView extends StatelessWidget {
           flex: 2,
           child: ColoredBox(
             color: Theme.of(context).canvasColor,
-            child: CachedNetworkImage(imageUrl: theBreed.image.url),
+            //child: CachedNetworkImage(imageUrl: theBreed.image.url), // TODO : remove comment
           ),
         ),
         Expanded(

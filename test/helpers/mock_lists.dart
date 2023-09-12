@@ -1,5 +1,5 @@
 // loading and creating the mock favourite breeds
-    import 'dart:convert';
+import 'dart:convert';
 
 import 'package:dogbreeds_api/dogbreeds_api.dart';
 
@@ -55,15 +55,15 @@ const mockString = '''
         }
       }
     ]''';
-    final mockJson = jsonDecode(mockString) as List;
-    final mockFavouriteBreeds = mockJson
-        .map<BreedsModel>(
-          (item) => BreedsModel.fromJsom(item as Map<String, dynamic>),
-        )
-        .toList();
+final mockJson = jsonDecode(mockString) as List;
+final mockFavouriteBreeds = mockJson
+    .map<BreedsModel>(
+      (item) => BreedsModel.fromJsom(item as Map<String, dynamic>),
+    )
+    .toList();
 
-  //loading and creating the breed to add
-    const mockAddString = '''
+//loading and creating the breed to add
+const mockAddString = '''
     {
     "weight": {
       "imperial": "38 - 50",
@@ -87,11 +87,11 @@ const mockString = '''
       "url": "https://cdn2.thedogapi.com/images/-HgpNnGXl.jpg"
     }
     }''';
-    final mockAddJson = jsonDecode(mockAddString) as Map<String, dynamic>;
-    final mockBreedToAdd = BreedsModel.fromJsom(mockAddJson);
+final mockAddJson = jsonDecode(mockAddString) as Map<String, dynamic>;
+final mockBreedToAdd = BreedsModel.fromJsom(mockAddJson);
 
-    //loading and creating the breed to remove
-    const mockRemoveString = '''
+//loading and creating the breed to remove
+const mockRemoveString = '''
     {
     "weight": {
       "imperial": "50 - 60",
@@ -117,5 +117,7 @@ const mockString = '''
       "url": "https://cdn2.thedogapi.com/images/hMyT4CDXR.jpg"
     }
     }''';
-    final mockRemoveJson = jsonDecode(mockRemoveString) as Map<String, dynamic>;
-    final mockBreedToRemove = BreedsModel.fromJsom(mockRemoveJson);
+final mockRemoveJson = jsonDecode(mockRemoveString) as Map<String, dynamic>;
+final mockBreedToRemove = BreedsModel.fromJsom(mockRemoveJson);
+
+final mockImageUrl = ImagePath('');

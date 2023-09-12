@@ -12,16 +12,15 @@ BreedsModel _$BreedsModelFromJson(Map<String, dynamic> json) => BreedsModel(
           ? null
           : Height.fromJson(json['height'] as Map<String, dynamic>),
       json['id'] as int,
-      Image.fromJson(json['image'] as Map<String, dynamic>),
       json['lifeSpan'] as String?,
       json['name'] as String,
       json['origin'] as String?,
       json['temperament'] as String?,
-      Height.fromJson(json['weight'] as Map<String, dynamic>),
-    )
-      ..breedGroup = json['breed_group'] as String?
-      ..referenceImageId = json['reference_image_id'] as String?
-      ..countryCode = json['country_code'] as String?;
+      Weight.fromJson(json['weight'] as Map<String, dynamic>),
+      json['breed_group'] as String?,
+      json['reference_image_id'] as String?,
+      json['country_code'] as String?,
+    );
 
 Map<String, dynamic> _$BreedsModelToJson(BreedsModel instance) =>
     <String, dynamic>{
@@ -29,7 +28,6 @@ Map<String, dynamic> _$BreedsModelToJson(BreedsModel instance) =>
       'breed_group': instance.breedGroup,
       'height': instance.height?.toJson(),
       'id': instance.id,
-      'image': instance.image.toJson(),
       'lifeSpan': instance.lifeSpan,
       'name': instance.name,
       'origin': instance.origin,

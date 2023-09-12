@@ -18,7 +18,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     var brightness =
         SchedulerBinding.instance.platformDispatcher.platformBrightness;
-    bool isDarkMode = brightness == Brightness.dark;
+    bool isDarkMode = brightness == Brightness.light;
 
     return MultiRepositoryProvider(
       providers: [

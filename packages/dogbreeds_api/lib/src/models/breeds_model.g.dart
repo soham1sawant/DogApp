@@ -18,7 +18,7 @@ BreedsModel _$BreedsModelFromJson(Map<String, dynamic> json) => BreedsModel(
       json['temperament'] as String?,
       Weight.fromJson(json['weight'] as Map<String, dynamic>),
       json['breed_group'] as String?,
-      json['reference_image_id'] as String?,
+      json['reference_image_id'] as String,
       json['country_code'] as String?,
     );
 

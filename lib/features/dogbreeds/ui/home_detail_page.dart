@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dog_app/core/widgets/description.dart';
+import 'package:dog_app/features/dogbreeds/bloc/dogbreeds_bloc.dart';
 import 'package:dog_app/features/favourites/bloc/favourites_bloc.dart';
 import 'package:dogbreeds_api/dogbreeds_api.dart';
 import 'package:flutter/material.dart';
@@ -102,7 +103,7 @@ class VerticalView extends StatelessWidget {
           flex: 2,
           child: ColoredBox(
             color: Theme.of(context).canvasColor,
-            //child: CachedNetworkImage(imageUrl: theBreed.image.url), // TODO : remove comment
+            //child: CachedNetworkImage(imageUrl: state.image.url),
           ),
         ),
         Expanded(

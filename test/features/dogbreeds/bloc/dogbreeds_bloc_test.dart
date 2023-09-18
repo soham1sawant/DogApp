@@ -52,35 +52,5 @@ void main() {
         DogBreedsLoadFailure(),
       ],
     );
-
-    blocTest<DogBreedsBloc, DogBreedsState>(
-      'emites [DogBreedImageUrlLoadInProgress, DogBreedImageUrlLoadSuccess'
-      'when loading dog breed url is loaded',
-      setUp: () {
-        when(() => dogbreedsApiClient.getImageUrl(''))
-            .thenAnswer((_) async => mockImageUrl);
-      },
-      build: () => DogBreedsBloc(dogbreedsApiClient),
-      act: (bloc) => bloc.add(DogBreedImageUrlRequest(imageId: '')),
-      expect: () => <DogBreedsState>[
-        DogBreedImageUrlLoadInProgress(),
-        DogBreedImageUrlLoadSuccess(mockImageUrl),
-      ],
-    );
-
-    blocTest<DogBreedsBloc, DogBreedsState>(
-      'emites [DogBreedImageUrlLoadInProgress, DogBreedImageUrlFailure'
-      'when loading dog breed url is not loaded',
-      setUp: () {
-        when(() => dogbreedsApiClient.getImageUrl(''))
-            .thenThrow(Exception('Error'));
-      },
-      build: () => DogBreedsBloc(dogbreedsApiClient),
-      act: (bloc) => bloc.add(DogBreedImageUrlRequest(imageId: '')),
-      expect: () => <DogBreedsState>[
-        DogBreedImageUrlLoadInProgress(),
-        DogBreedImageUrlFailure(),
-      ],
-    );
   });
 }

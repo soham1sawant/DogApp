@@ -1,8 +1,6 @@
 import 'favourites_data_provider.dart';
 import 'package:dogbreeds_api/dogbreeds_api.dart';
 
-// TODO: add exception !!
-
 class GetFromFirestoreException implements Exception {}
 
 class WriteToFirestoreException implements Exception {}

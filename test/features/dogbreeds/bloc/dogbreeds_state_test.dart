@@ -25,29 +25,5 @@ void main() {
         expect(DogBreedsLoadFailure(), DogBreedsLoadFailure());
       });
     });
-
-    group('DogBreedImageUrlLoadInProgress', () {
-      test('supports value comparison', () {
-        expect(
-            DogBreedImageUrlLoadInProgress(), DogBreedImageUrlLoadInProgress());
-      });
-    });
-
-    group('DogBreedImageUrlLoadSuccess', () {
-      test('supports value comparison', () {
-        final imagePath = ImagePath('');
-
-        expect(
-          DogBreedImageUrlLoadSuccess(imagePath),
-          DogBreedImageUrlLoadSuccess(imagePath),
-        );
-      });
-    });
-
-    group('DogBreedImageUrlFailure', () {
-      test('supports value comparison', () {
-        expect(DogBreedImageUrlFailure(), DogBreedImageUrlFailure());
-      });
-    });
   });
 }

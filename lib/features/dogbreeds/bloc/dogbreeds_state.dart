@@ -20,22 +20,3 @@ class DogBreedsLoadFailure extends DogBreedsState {
   @override
   List<Object> get props => [];
 }
-
-class DogBreedImageUrlLoadInProgress extends DogBreedsState {
-  @override
-  List<Object> get props => [];
-}
-
-class DogBreedImageUrlLoadSuccess extends DogBreedsState {
-  final ImagePath image;
-
-  DogBreedImageUrlLoadSuccess(this.image);
-
-  @override
-  List<Object> get props => [];
-}
-
-class DogBreedImageUrlFailure extends DogBreedsState {
-  @override
-  List<Object> get props => [];
-}

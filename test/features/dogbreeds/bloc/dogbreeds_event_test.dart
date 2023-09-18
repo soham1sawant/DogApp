@@ -9,11 +9,6 @@ void main() {
       });
     });
 
-    group('DogBreedImageUrlRequest', () {
-      test('supports value comparison', () {
-        expect(DogBreedImageUrlRequest(imageId: ''),
-            DogBreedImageUrlRequest(imageId: ''));
-      });
-    });
+    
   });
 }

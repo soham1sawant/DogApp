@@ -54,7 +54,6 @@ class SubDescription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final orientation = MediaQuery.of(context).orientation;
 
     return Padding(
       padding: EdgeInsets.all(size.height * 0.02),

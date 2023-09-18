@@ -36,7 +36,7 @@ class BreedsModel extends Equatable {
   final String name;
   final String? origin;
   @JsonKey(name: 'reference_image_id')
-  final String? referenceImageId;
+  final String referenceImageId;
   final String? temperament;
   final Weight weight;
   @JsonKey(name: 'country_code')
